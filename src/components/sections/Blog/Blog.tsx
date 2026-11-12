@@ -15,20 +15,20 @@ const categories = [
 const articles = [
   {
     date: "26 Out, 2026",
-    category: "Gestão financeira",
-    title: "Como estruturar o fluxo de caixa para crescer com previsibilidade",
+    category: "Crédito",
+    title: "Securitização de recebíveis: o que é e quando faz sentido para a sua empresa",
     variant: "workspace",
   },
   {
     date: "18 Out, 2026",
-    category: "Crédito",
-    title: "Quando o crédito pode acelerar os próximos passos do seu negócio",
+    category: "Câmbio",
+    title: "Operações de câmbio para empresas: o que considerar antes de fechar",
     variant: "documents",
   },
   {
     date: "09 Out, 2026",
     category: "Investimentos",
-    title: "O que analisar antes de diversificar a estratégia de investimentos",
+    title: "O que avaliar antes de investir em operações de securitização",
     variant: "analytics",
   },
 ];

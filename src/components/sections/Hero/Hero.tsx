@@ -1,4 +1,5 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
+import dtiLogo from "../../../../public/images/logos/dti_240x80.png";
 import { SpecialistContactButton } from "../../contact/SpecialistContact";
 import { Navbar } from "../../layout/Navbar";
 import { siteContent } from "../../../data/home";
@@ -8,7 +9,7 @@ type CustomerLogo = {
   name: string;
   label?: string;
   style: string;
-  src?: string;
+  src?: string | StaticImageData;
 };
 
 const customerLogos: CustomerLogo[] = [
@@ -20,9 +21,9 @@ const customerLogos: CustomerLogo[] = [
   },
   {
     name: "DTI",
-    label: "DTI",
+    label: "Banco DTI",
     style: "dti",
-    src: "/images/logos/dti_240x80.png",
+    src: dtiLogo,
   },
   {
     name: "CRDC",

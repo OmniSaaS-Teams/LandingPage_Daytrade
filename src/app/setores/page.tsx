@@ -19,9 +19,9 @@ const sectors = [
       "Planejamento e crédito para acompanhar cada ciclo, do plantio à expansão do negócio.",
     tone: "mint",
     solutions: [
-      { title: "Custeio da produção", description: "Capital para insumos, operação e compromissos da safra." },
-      { title: "Planejamento financeiro", description: "Organize o caixa e os recebíveis conforme o calendário do campo." },
-      { title: "Expansão do negócio", description: "Invista em tecnologia, equipamentos e novas oportunidades." },
+      { title: "Custeio da produção", description: "Antecipe recebíveis da safra e tenha capital para insumos, sementes e operação no momento certo." },
+      { title: "Planejamento financeiro", description: "Alinhe entradas e saídas ao calendário do campo e reduza o descompasso entre gastos e recebimentos." },
+      { title: "Expansão do negócio", description: "Financie máquinas, tecnologia e novas áreas com uma estrutura de crédito pensada para o agro." },
     ],
   },
   {
@@ -32,9 +32,9 @@ const sectors = [
       "Soluções financeiras para manter a operação em movimento e preparar os próximos investimentos.",
     tone: "blue",
     solutions: [
-      { title: "Capital de giro", description: "Recursos para compras, fornecedores e ciclos produtivos." },
-      { title: "Máquinas e expansão", description: "Modernize equipamentos e amplie sua capacidade de produção." },
-      { title: "Gestão de caixa", description: "Organize recebíveis e prioridades com mais previsibilidade." },
+      { title: "Capital de giro", description: "Recursos para matéria-prima, folha de pagamento e custos fixos, sem travar a produção." },
+      { title: "Máquinas e expansão", description: "Transforme duplicatas e vendas a prazo em caixa e ganhe previsibilidade no fluxo financeiro." },
+      { title: "Gestão de caixa", description: "Financie máquinas, automação e ampliação da capacidade com crédito estruturado para a indústria." },
     ],
   },
   {
@@ -45,9 +45,9 @@ const sectors = [
       "Crédito e planejamento alinhados ao cronograma, do canteiro ao próximo projeto.",
     tone: "lavender",
     solutions: [
-      { title: "Financiamento de obras", description: "Capital para fornecedores, equipes e etapas do projeto." },
-      { title: "Antecipação de recebíveis", description: "Organize entradas e compromissos para dar continuidade à obra." },
-      { title: "Novos projetos", description: "Estruture os recursos para crescer com mais segurança." },
+      { title: "Financiamento de obras", description: "Capital para materiais, mão de obra e etapas do cronograma, sem deixar a obra desacelerar." },
+      { title: "Antecipação de recebíveis", description: "Antecipe as parcelas das unidades vendidas e libere caixa para a próxima etapa do projeto." },
+      { title: "Novos projetos", description: "Financie terrenos, lançamentos e a próxima fase do negócio com crédito estruturado para o setor." },
     ],
   },
 ];

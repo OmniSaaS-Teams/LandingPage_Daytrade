@@ -22,7 +22,7 @@
 }
 
 .titleStrong {
-  color: #003e8f;
+  color: #00008b;
   font-weight: 600;
 }
 
@@ -43,7 +43,7 @@
 
 .metricValue {
   margin: 0 0 4px;
-  color: #003e8f;
+  color: #00008b;
   font-size: clamp(23px, 1.9vw, 30px);
   font-weight: 600;
   letter-spacing: -0.045em;

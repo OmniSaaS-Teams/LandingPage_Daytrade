@@ -121,13 +121,13 @@
 }
 
 .previousButton:hover {
-  background: #003e8f;
+  background: #00008b;
   color: #ffffff;
   transform: translateX(-3px);
 }
 
 .nextButton:hover {
-  background: #003e8f;
+  background: #00008b;
   color: #ffffff;
   transform: translateX(3px);
 }

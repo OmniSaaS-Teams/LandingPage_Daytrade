@@ -106,7 +106,7 @@
   bottom: 0;
   left: 12px;
   width: 2px;
-  background-color: #003e8f;
+  background-color: #00008b;
 }
 
 .step {
@@ -132,7 +132,7 @@
   height: 34px;
 
   border-radius: 50%;
-  background: #003e8f;
+  background: #00008b;
   color: #ffffff;
 
   font-size: 16px;
@@ -202,7 +202,7 @@
   padding: 10px 18px;
   border: 0;
   border-radius: 8px;
-  background: #003e8f;
+  background: #00008b;
   color: #ffffff;
   cursor: pointer;
   font-family: inherit;
@@ -219,7 +219,7 @@
 }
 
 .specialistButton:focus-visible {
-  outline: 2px solid #003e8f;
+  outline: 2px solid #00008b;
   outline-offset: 4px;
 }
 

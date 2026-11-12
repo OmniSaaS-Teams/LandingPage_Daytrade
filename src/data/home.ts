@@ -25,7 +25,7 @@ export const siteContent = {
     complianceHref: "/security",
     title: "Crédito Inteligente.",
     description:
-      "The world's most ambitious dealmakers, founders and finance teams trust Papermark to host their data rooms and share confidential documents.",
+      "Estruturamos soluções de crédito sob medida para empresas que buscam capital com agilidade, segurança e condições competitivas, do primeiro contato à liberação dos recursos.",
     cta: "Fale com um especialista",
     ctaHref: "/login",
     ctaNote: "**Sujeito à análise de crédito",

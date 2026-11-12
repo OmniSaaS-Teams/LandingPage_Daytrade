@@ -287,7 +287,7 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
             }`}
           >
             <div
-              className="w-[min(760px,calc(100vw-7rem))] rounded-lg border border-black/10 bg-white p-8 text-zinc-950 shadow-2xl shadow-black/25"
+              className="w-[min(760px,calc(100vw-7rem))] rounded-2xl border-l-4 border-[#a8cf45] bg-zinc-50 p-8 text-zinc-950 shadow-2xl shadow-black/25"
               aria-label={`Menu ${menuKey}`}
             >
               <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] gap-12">

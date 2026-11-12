@@ -222,6 +222,19 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
           : navLinkClass
         : mobileNavLinkClass;
 
+    if ("href" in item && item.href) {
+      return (
+        <Link
+          href={item.href}
+          className={linkClass}
+          aria-current={pathname === item.href ? "page" : undefined}
+          onClick={showNavigationFeedback}
+        >
+          {item.label}
+        </Link>
+      );
+    }
+
     if (item.type === "menu" && variant === "desktop") {
       const menuKey = item.label === "Setores" ? "Setores" : "DayTrade";
       const isMenuOpen = openDesktopMenu === menuKey;
@@ -643,9 +656,9 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
   );
 }
 const navLinkClass =
-  "group inline-flex h-7 w-max items-center justify-center rounded-md bg-transparent px-2 py-1 text-left text-[10px] font-light text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-white/10 data-[state=open]:bg-white/10";
+  "group inline-flex h-7 w-max items-center justify-center rounded-md bg-transparent px-2 py-1 text-left text-base font-normal text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-white/10 data-[state=open]:bg-white/10";
 const lightNavLinkClass =
-  "group inline-flex h-7 w-max items-center justify-center rounded-md bg-transparent px-2 py-1 text-left text-[10px] font-light text-zinc-950 transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-black/5 data-[state=open]:bg-black/5";
+  "group inline-flex h-7 w-max items-center justify-center rounded-md bg-transparent px-2 py-1 text-left text-base font-normal text-zinc-950 transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-black/5 data-[state=open]:bg-black/5";
 const desktopDropdownItemClass =
   "inline-flex w-fit items-center rounded-md px-1 py-0.5 text-left text-lg font-normal text-zinc-950 transition-colors hover:bg-zinc-100 hover:text-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950";
 const mobileNavLinkClass =

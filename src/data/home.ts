@@ -1,3 +1,5 @@
+import heroImage from "../../public/images/hero-office.png";
+
 export const siteContent = {
   brand: {
     name: "DayTrade",
@@ -10,7 +12,7 @@ export const siteContent = {
   },
   navigation: [
     { label: "DayTrade", type: "menu" },
-    { label: "Portfólio", type: "demo" },
+    { label: "Portfólio", type: "link", href: "/portfolio" },
     { label: "Investimento", type: "demo" },
     { label: "Setores", type: "menu" },
     { label: "Carreira", type: "demo" },
@@ -31,7 +33,7 @@ export const siteContent = {
     ctaNote: "**Sujeito à análise de crédito",
     trusted: "Atendimento em Sorocaba e Região.",
     image: {
-      src: "/images/hero-office.png",
+      src: heroImage,
       alt: "",
     },
   },

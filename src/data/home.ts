@@ -13,7 +13,7 @@ export const siteContent = {
   navigation: [
     { label: "DayTrade", type: "menu" },
     { label: "Portfólio", type: "link", href: "/portfolio" },
-    { label: "Investimento", type: "demo" },
+    { label: "Investidor", type: "link", href: "/investidor" },
     { label: "Setores", type: "menu" },
     { label: "Carreira", type: "link", href: "/carreira" },
     { label: "Blog", type: "demo" },

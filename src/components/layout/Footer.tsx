@@ -10,7 +10,7 @@ const navigationGroups = [
       { label: "Crédito", href: "/portfolio#credito" },
       { label: "Câmbio", href: "/portfolio#cambio" },
       { label: "BPO Financeiro", href: "/portfolio#bpo-financeiro" },
-      { label: "Investimentos", href: "/#features" },
+      { label: "Investimentos", href: "/investidor" },
     ],
   },
   {

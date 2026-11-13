@@ -2,6 +2,25 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Página de Carreira e envio de currículos
+
+A página `/carreira` está vinculada ao menu e ao rodapé. Seu formulário envia
+`multipart/form-data` para `POST /api/careers`, com `nome`, `email`, `telefone`,
+`area`, `mensagem` (opcional), `consentimento` e o arquivo `curriculo`.
+
+Configure `N8N_CAREER_WEBHOOK_URL` no servidor com um webhook dedicado ao RH.
+Ele recebe esses campos, `origem` e o anexo binário `curriculo`. Configure no n8n
+o armazenamento/encaminhamento para o RH e as regras de retenção e acesso aos dados.
+Essa rota não reutiliza o webhook comercial de leads nem salva arquivos em `public`.
+Sem a variável, retorna 503 e o formulário informa indisponibilidade, sem confirmar envio.
+
+São aceitos PDF, DOC e DOCX de até 5 MB. O servidor limita o corpo da requisição,
+valida campos, extensão e assinatura inicial do arquivo. Essa verificação não substitui
+antivírus: o fluxo receptor deve inspecionar os anexos antes de abri-los ou distribuí-los.
+O webhook tem timeout de 15 segundos e não recebe tentativas automáticas. A confirmação
+significa que ele aceitou a requisição; não confirma uma candidatura a vaga específica.
+Garanta que a hospedagem aceite uploads multipart desse tamanho ou ajuste o limite.
+
 ### Envio do formulário Seja Cliente
 
 Copie `.env.example` para `.env.local` e configure `N8N_LEAD_WEBHOOK_URL`.

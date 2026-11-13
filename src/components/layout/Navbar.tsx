@@ -36,6 +36,14 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
   const [openDesktopMenu, setOpenDesktopMenu] = useState<
     "DayTrade" | "Setores" | null
   >(null);
+  const [desktopMenuLeft, setDesktopMenuLeft] = useState(0);
+
+  const openMenu = (element: HTMLElement, menu: "DayTrade" | "Setores") => {
+    const { left } = element.getBoundingClientRect();
+    const width = Math.min(760, window.innerWidth - 112);
+    setDesktopMenuLeft(Math.max(56 - left, Math.min(0, window.innerWidth - 56 - left - width)));
+    setOpenDesktopMenu(menu);
+  };
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const clientModalRef = useRef<HTMLDivElement>(null);
@@ -264,9 +272,16 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
       return (
         <div
           className="relative"
-          onMouseEnter={() => setOpenDesktopMenu(menuKey)}
+          onMouseEnter={(event) => openMenu(event.currentTarget, menuKey)}
           onMouseLeave={() => setOpenDesktopMenu(null)}
-          onFocusCapture={() => setOpenDesktopMenu(menuKey)}
+          onFocusCapture={(event) => openMenu(event.currentTarget, menuKey)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              event.currentTarget.querySelector("button")?.focus();
+              setOpenDesktopMenu(null);
+            }
+          }}
           onBlur={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
               setOpenDesktopMenu(null);
@@ -281,22 +296,17 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
             aria-expanded={isMenuOpen}
             aria-haspopup="true"
             onClick={() => setOpenDesktopMenu(menuKey)}
-            onKeyDown={(event) => {
-              if (event.key === "Escape") {
-                setOpenDesktopMenu(null);
-                event.currentTarget.blur();
-              }
-            }}
           >
             {item.label}
             <ChevronDown isOpen={isMenuOpen} />
           </button>
 
           <div
-            className={`absolute left-0 top-full z-50 pt-4 transition duration-150 ${
+            style={{ left: desktopMenuLeft }}
+            className={`absolute top-full z-50 pt-4 transition duration-150 ${
               isMenuOpen
                 ? "visible translate-y-0 opacity-100"
-                : "invisible -translate-y-1 opacity-0"
+                : "hidden -translate-y-1 opacity-0"
             }`}
           >
             <div

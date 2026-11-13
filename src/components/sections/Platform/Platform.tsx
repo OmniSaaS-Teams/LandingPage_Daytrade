@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Features.module.css";
 
 type FeatureIconName = "credit" | "exchange" | "bpo" | "investment";
@@ -8,6 +9,7 @@ const features = [
   {
     id: 1,
     title: "Crédito",
+    href: "/portfolio#credito",
     description:
       "Capital para impulsionar seus negócios e transformar oportunidades em crescimento.",
     className: "cardLarge",
@@ -17,6 +19,7 @@ const features = [
   {
     id: 2,
     title: "Câmbio",
+    href: "/portfolio#cambio",
     description:
       "Conecte seu negócio ao mundo com agilidade e eficiência.",
     className: "cardSmall",
@@ -25,7 +28,8 @@ const features = [
   },
   {
     id: 3,
-    title: "BPO",
+    title: "BPO Financeiro",
+    href: "/portfolio#bpo-financeiro",
     description:
       "Mais controle, menos burocracia e uma gestão financeira eficiente.",
     className: "cardSmall",
@@ -140,7 +144,7 @@ export function Features() {
 
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>
-                  {feature.title}
+                  {"href" in feature && feature.href ? <Link className={styles.creditLink} href={feature.href}>{feature.title}</Link> : feature.title}
                 </h3>
 
                 <p className={styles.cardDescription}>

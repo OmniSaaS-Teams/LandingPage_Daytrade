@@ -7,9 +7,9 @@ const navigationGroups = [
   {
     title: "Soluções",
     links: [
-      { label: "Crédito", href: "/#features" },
-      { label: "Câmbio", href: "/#features" },
-      { label: "BPO", href: "/#features" },
+      { label: "Crédito", href: "/portfolio#credito" },
+      { label: "Câmbio", href: "/portfolio#cambio" },
+      { label: "BPO Financeiro", href: "/portfolio#bpo-financeiro" },
       { label: "Investimentos", href: "/#features" },
     ],
   },
@@ -17,7 +17,7 @@ const navigationGroups = [
     title: "DayTrade",
     links: [
       { label: "Quem somos", href: "/sobre-nos" },
-      { label: "Carreira", href: "/" },
+      { label: "Carreira", href: "/carreira" },
       { label: "Conteúdos", href: "/#blog" },
       { label: "Dúvidas frequentes", href: "/#faq" },
     ],

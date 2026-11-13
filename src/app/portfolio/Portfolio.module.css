@@ -30,6 +30,9 @@
   letter-spacing: -0.04em;
 }
 
+.exclusiveGrid { max-width: 760px; }
+.exclusiveGrid .product h3 { font-size: 24px; letter-spacing: -.035em; }
+
 .heroImage {
   display: block;
   width: 100%;
@@ -47,7 +50,12 @@
 }
 
 .products {
+  scroll-margin-top: 32px;
   padding: 90px 0 100px;
+}
+
+.products + .products {
+  border-top: 1px solid #edf0f2;
 }
 
 .exclusives h2,

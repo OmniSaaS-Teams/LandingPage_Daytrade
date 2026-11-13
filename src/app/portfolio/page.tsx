@@ -13,19 +13,9 @@ export const metadata: Metadata = {
 
 const exclusiveProducts = [
   {
-    title: "Folha Flex",
+    title: "Programa de benefício ao fornecedor",
     description:
-      "Tenha sua folha de pagamento e seu vale garantidos todos os meses.",
-  },
-  {
-    title: "Novo Crédito",
-    description:
-      "Receba recursos para regularizar seu CNPJ nos cartórios com pagamento parcelado.",
-  },
-  {
-    title: "Mãos à Obra",
-    description:
-      "Obtenha recursos para iniciar sua obra com garantias reais dos sócios ou de terceiros, permitindo prazos estendidos para pagamento sem impactar o caixa da empresa.",
+      "Um programa que permite aos fornecedores dos nossos clientes antecipar os valores que têm a receber dessas empresas.",
   },
 ];
 
@@ -81,16 +71,6 @@ const products = [
       "Antecipe seus recebíveis sem a necessidade de sua mercadoria já estar entregue no seu cliente.",
   },
   {
-    title: "CPR",
-    description:
-      "São operações onde a CPR financeira (Cédula do Produtor Rural) é colocada em garantia.",
-  },
-  {
-    title: "Barter",
-    description:
-      "Para clientes do agronegócio que recebem seus pagamentos em mercadoria.",
-  },
-  {
     title: "Intercompany",
     description: "Faça operações entre as empresas do mesmo grupo.",
   },
@@ -102,6 +82,29 @@ const products = [
     title: "Antecipação de Contratos",
     description:
       "Receba à vista os recebíveis futuros de contratos com prazos mais longos.",
+  },
+];
+
+const serviceSections = [
+  {
+    id: "cambio",
+    title: "Câmbio",
+    products: [
+      { title: "Câmbio para importação", description: "Soluções para pagamentos a fornecedores no exterior, de acordo com as necessidades de importação da sua empresa." },
+      { title: "Câmbio para exportação", description: "Conversão de valores recebidos do exterior nas operações de exportação de produtos e serviços." },
+      { title: "Remessas internacionais", description: "Envio e recebimento de recursos internacionais para compromissos e negócios da sua empresa." },
+    ],
+  },
+  {
+    id: "bpo-financeiro",
+    title: "BPO Financeiro",
+    products: [
+      { title: "Contas a pagar", description: "Organização dos compromissos financeiros e da programação de pagamentos para acompanhar os vencimentos da empresa." },
+      { title: "Contas a receber", description: "Acompanhamento dos recebimentos e das cobranças para dar mais clareza às entradas previstas no caixa." },
+      { title: "Conciliação bancária", description: "Conferência das movimentações bancárias com os registros financeiros para identificar diferenças e manter as informações organizadas." },
+      { title: "Fluxo de caixa", description: "Organização das entradas e saídas para apoiar o planejamento financeiro e a visão dos próximos compromissos." },
+      { title: "Relatórios financeiros", description: "Consolidação das informações da rotina financeira para apoiar a análise dos resultados e a tomada de decisão." },
+    ],
   },
 ];
 
@@ -133,11 +136,9 @@ export default function PortfolioPage() {
             aria-labelledby="exclusive-products-title"
           >
             <h2 id="exclusive-products-title">
-              Exclusivos
-              <br />
-              DayTrade
+              Exclusividade da DayTrade
             </h2>
-            <div className={styles.productGrid}>
+            <div className={styles.exclusiveGrid}>
               {exclusiveProducts.map((product) => (
                 <article key={product.title} className={styles.product}>
                   <h3>{product.title}</h3>
@@ -148,10 +149,11 @@ export default function PortfolioPage() {
           </section>
 
           <section
+            id="credito"
             className={styles.products}
-            aria-labelledby="products-title"
+            aria-labelledby="credit-title"
           >
-            <h2 id="products-title">Produtos</h2>
+            <h2 id="credit-title">Crédito</h2>
             <div className={styles.productGrid}>
               {products.map((product) => (
                 <article key={product.title} className={styles.product}>
@@ -161,6 +163,19 @@ export default function PortfolioPage() {
               ))}
             </div>
           </section>
+          {serviceSections.map((section) => (
+            <section key={section.id} id={section.id} className={styles.products} aria-labelledby={`${section.id}-title`}>
+              <h2 id={`${section.id}-title`}>{section.title}</h2>
+              <div className={styles.productGrid}>
+                {section.products.map((product) => (
+                  <article key={product.title} className={styles.product}>
+                    <h3>{product.title}</h3>
+                    <p>{product.description}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       </main>
       <Footer />

@@ -15,7 +15,7 @@ export const siteContent = {
     { label: "Portfólio", type: "link", href: "/portfolio" },
     { label: "Investimento", type: "demo" },
     { label: "Setores", type: "menu" },
-    { label: "Carreira", type: "demo" },
+    { label: "Carreira", type: "link", href: "/carreira" },
     { label: "Blog", type: "demo" },
   ],
   actions: {

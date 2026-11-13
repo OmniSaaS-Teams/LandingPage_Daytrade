@@ -12,9 +12,10 @@ const focusableSelector =
 
 type NavbarProps = {
   variant?: "dark" | "light";
+  background?: "transparent" | "gradient";
 };
 
-export function Navbar({ variant = "dark" }: NavbarProps) {
+export function Navbar({ variant = "dark", background = "transparent" }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -377,7 +378,10 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
   };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
+    <header
+      className="absolute inset-x-0 top-0 z-30"
+      style={background === "gradient" ? { background: "linear-gradient(120deg, #030316 0%, #08083d 55%, #111154 100%)" } : undefined}
+    >
       <nav
         className={`mx-auto flex h-20 w-full max-w-none items-center justify-between px-7 max-[359px]:h-16 max-[359px]:px-3 sm:px-10 lg:h-24 lg:px-14 ${
           isLight ? "text-zinc-950" : "text-white"

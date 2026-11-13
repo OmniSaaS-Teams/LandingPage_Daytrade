@@ -4,6 +4,15 @@ Imagens criadas com a ferramenta nativa ImageGen, a partir dos arquivos de refer
 fornecidos pelo usuário e de `public/images/dti-logo-cta.png`. Não representam capturas
 oficiais do aplicativo nem uma oferta de cartão. As imagens mantêm transparência.
 
+Atualização: a tela do celular foi substituída pela captura azul de login DTI fornecida
+pelo usuário, aplicada à moldura em perspectiva com ImageGen. O novo arquivo é
+`public/images/dti-cta-phone-login.png`; o anterior foi preservado.
+
+Prompt da atualização: inserir a captura azul DTI na tela do mockup de celular,
+preservando o fundo azul, a logo, os textos em português, a moldura metálica,
+os botões laterais, a iluminação e a perspectiva. Remover o dashboard anterior.
+Mostrar o aparelho isolado e completo, com fundo transparente, sem cartão ou painéis.
+
 Fonte de conteúdo e destino do botão: https://www.bancodti.com.br/
 
 Saídas no projeto:

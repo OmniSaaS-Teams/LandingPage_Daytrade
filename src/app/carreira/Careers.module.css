@@ -5,7 +5,7 @@
 .heroCopy { position: relative; z-index: 2; padding-bottom: 80px; }
 .eyebrow { margin: 0 0 23px; color: #647789; font-size: 11px; font-weight: 600; letter-spacing: .16em; line-height: 1.6; }
 .hero h1 { margin: 0; font-family: var(--display); font-size: clamp(50px, 5.4vw, 78px); font-weight: 500; line-height: 1.04; letter-spacing: -.065em; }
-.hero h1 span, .intro h2 span, .application h2 span { color: #137fa5; }
+.hero h1 span, .intro h2 span, .application h2 span { color: #a7ce45; }
 .description { max-width: 430px; margin: 27px 0; color: #6c7786; font-size: 17px; line-height: 1.75; }
 .primaryButton { display: inline-flex; align-items: center; justify-content: space-between; gap: 30px; min-height: 48px; padding: 13px 20px; background: #00213d; color: white; border-radius: 5px; font-size: 14px; text-decoration: none; transition: background .2s; }
 .primaryButton:hover { background: #06456a; }
@@ -30,18 +30,18 @@
 .valuesHeading { margin-bottom: 45px; }
 .valuesGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
 .valuesGrid article { border-top: 1px solid #ccd9e1; padding-top: 25px; }
-.valuesGrid article > span { font-size: 12px; color: #1685a9; }
+.valuesGrid article > span { font-size: 12px; color: #a7ce45; }
 .valuesGrid h3 { margin: 35px 0 15px; font-size: 21px; font-weight: 500; letter-spacing: -.035em; }
 .valuesGrid p { margin: 0; color: #6c7786; font-size: 14px; line-height: 1.8; }
 .belonging { width: min(780px, 88%); margin: 85px auto 0; text-align: center; }
-.asterisk { display: block; color: #147fa5; font-size: 60px; margin-bottom: 25px; line-height: 1; }
+.asterisk { display: block; color: #a7ce45; font-size: 60px; margin-bottom: 25px; line-height: 1; }
 .waveDivider { position: relative; height: 220px; margin: 20px 0; }
 .bottomWaves { width: 100%; height: 100%; }
 .application { width: min(1140px, 88%); margin: 30px auto 110px; display: grid; grid-template-columns: 1fr 1.15fr; gap: 80px; align-items: start; }
 .applicationCopy { padding-top: 25px; }
 .applicationCopy > p:not(.eyebrow) { color: #6c7786; margin-top: 25px; font-size: 16px; line-height: 1.8; max-width: 370px; }
 .applicationNote { margin-top: 40px; border-top: 1px solid #dce4e9; padding-top: 22px; display: flex; align-items: start; gap: 18px; max-width: 360px; }
-.applicationNote > span { color: #1483a8; font-size: 25px; }
+.applicationNote > span { color: #a7ce45; font-size: 25px; }
 .applicationNote p { margin: 0; font-size: 12px; color: #6c7786; line-height: 1.75; }
 .form { padding: 32px; background: #f5f7f9; border: 1px solid #e7ecf0; border-radius: 9px; }
 .form h3 { margin: 0 0 6px; font-size: 23px; font-weight: 500; letter-spacing: -.04em; }
@@ -54,7 +54,7 @@
 .twoColumns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .upload { display: grid; gap: 10px; padding: 20px; border: 1px dashed #a6becd; border-radius: 5px; background: #fff; }
 .uploadHeading { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-.uploadHeading span { color: #137fa5; font-size: 22px; }
+.uploadHeading span { color: #a7ce45; font-size: 22px; }
 .upload small { color: #738392; font-size: 11px; }
 .upload input { max-width: 100%; font-size: 12px; color: #657484; }
 .upload input::file-selector-button { border: 0; background: #eaf1f6; color: #002d50; padding: 9px 12px; margin-right: 10px; border-radius: 4px; cursor: pointer; }

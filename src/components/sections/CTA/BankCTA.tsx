@@ -17,7 +17,7 @@ export function BankCTA() {
         <div className={styles.visual} aria-hidden="true">
           <div className={styles.halo} />
           <div className={styles.orbit} />
-          <div className={styles.phoneLayer}><Image src="/images/dti-cta-phone.png" alt="" width={1024} height={1536} sizes="(max-width: 640px) 72vw, 420px" className={styles.phone} /></div>
+          <div className={styles.phoneLayer}><Image src="/images/dti-cta-phone-login.png" alt="" width={1024} height={1536} sizes="(max-width: 640px) 72vw, 420px" className={styles.phone} /></div>
           <div className={styles.cardLayer}><Image src="/images/dti-cta-card.png" alt="" width={1024} height={1536} sizes="(max-width: 640px) 45vw, 270px" className={styles.card} /></div>
           <div className={styles.payment}>
             <span className={styles.paymentIcon}>↗</span>

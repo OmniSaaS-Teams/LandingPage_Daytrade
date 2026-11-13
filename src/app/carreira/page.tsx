@@ -21,8 +21,8 @@ function CareerWaves({ bottom = false }: { bottom?: boolean }) {
   return (
     <svg className={bottom ? styles.bottomWaves : styles.waves} viewBox="0 0 1440 300" fill="none" preserveAspectRatio="none" aria-hidden="true">
       <path d="M-80 120C200 340 390 30 610 133S980 370 1510 20" stroke="#eaf1f6" strokeWidth="45" />
-      <path d="M-60 210C260 350 390 35 610 130S1040 330 1490 45" stroke="#1c88b6" strokeWidth="4" />
-      <path d="M-60 145C270 340 490 225 760 108S1050 48 1180 213 1310 230 1500 60" stroke="#002d50" strokeWidth="20" />
+      <path d="M-60 210C260 350 390 35 610 130S1040 330 1490 45" stroke="#a7ce45" strokeWidth="4" />
+      <path d="M-60 145C270 340 490 225 760 108S1050 48 1180 213 1310 230 1500 60" stroke="#08083d" strokeWidth="20" />
     </svg>
   );
 }
@@ -30,7 +30,7 @@ function CareerWaves({ bottom = false }: { bottom?: boolean }) {
 export default function CareersPage() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar background="gradient" />
       <main className={styles.page}>
         <section className={styles.hero} aria-labelledby="career-title">
           <div className={styles.heroGrid}>

@@ -4,9 +4,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ### Página do Investidor
 
-A rota `/investidor` adapta a landing page `landpage-investidor` à identidade visual
-do projeto, com links no menu e no rodapé, política de investimento, estrutura,
-garantias, simulador, FAQ e solicitação de apresentação.
+A rota `/investidor` preserva os textos e as seções da landing page
+`landpage-investidor`, incluindo destaques, estrutura, garantias, depoimentos,
+simulador, FAQ e solicitação de apresentação. O conteúdo usa o layout, os estilos,
+as imagens e as animações da referência; apenas a navbar e o rodapé continuam
+sendo os componentes compartilhados do projeto. O CSS original é isolado na página
+para não alterar esses componentes ou as demais rotas.
 
 Os formulários enviam JSON para `POST /api/investor-leads`. A rota valida os dados
 e preserva os campos e as origens da referência (`simulador_investimento` e

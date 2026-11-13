@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
+import { InternalHero } from "../../components/layout/InternalHero";
 import { CallToAction } from "../../components/sections/CTA/cta";
 import styles from "./Sectors.module.css";
 
@@ -55,21 +56,19 @@ const sectors = [
 export default function SectorsPage() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar />
       <main className={styles.page}>
-        <section className={styles.intro} aria-labelledby="sectors-title">
-          <p className={styles.eyebrow}>Setores que movem a economia</p>
-          <h1 id="sectors-title">Agro, Indústria e Construtora.</h1>
-          <p className={styles.introDescription}>
-            Soluções financeiras para planejar, produzir e construir os próximos
-            passos do seu negócio.
-          </p>
-          <nav className={styles.sectorLinks} aria-label="Navegue pelos setores">
-            <a href="#agronegocio">Agro <span aria-hidden="true">↓</span></a>
-            <a href="#industria">Indústria <span aria-hidden="true">↓</span></a>
-            <a href="#construtora">Construtora <span aria-hidden="true">↓</span></a>
-          </nav>
-        </section>
+        <InternalHero
+          id="sectors-title"
+          title="Agro, Indústria e Construtora."
+          description="Soluções financeiras para planejar, produzir e construir os próximos passos do seu negócio."
+          image="/images/portfolio-products.webp"
+          imageAlt="Profissional planejando negócios com uma caneta e um tablet"
+        >
+          <a href="#agronegocio">Agro ↓</a>
+          <a href="#industria">Indústria ↓</a>
+          <a href="#construtora">Construtora ↓</a>
+        </InternalHero>
         {sectors.map((sector, index) => (
           <section
             key={sector.id}

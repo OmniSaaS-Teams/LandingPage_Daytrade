@@ -1,3 +1,4 @@
+import { InternalHero } from "../../components/layout/InternalHero";
 import Link from "next/link";
 import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
 import { CallToAction } from "../../components/sections/CTA/cta";
@@ -22,49 +23,6 @@ const principles = [
       "A proximidade é o que permite acompanhar decisões importantes com consistência ao longo do tempo.",
   },
 ];
-
-function WorkspacePreview() {
-  return (
-    <div className={styles.workspacePreview} aria-hidden="true">
-      <div className={styles.browserBar}>
-        <span className={styles.browserDots} />
-        <span className={styles.browserAddress}>daytrade.com</span>
-        <span className={styles.browserStatus} />
-      </div>
-      <div className={styles.workspaceBody}>
-        <aside className={styles.workspaceSidebar}>
-          <span className={styles.workspaceMark}>D</span>
-          <span />
-          <span />
-          <span />
-          <span />
-        </aside>
-        <div className={styles.workspaceMain}>
-          <div className={styles.workspaceTitleRow}>
-            <span>
-              Visão financeira <i />
-            </span>
-            <b>Atualizar</b>
-          </div>
-          <div className={styles.workspaceMetrics}>
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className={styles.workspaceChart}>
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function DecisionPreview() {
   return (
@@ -106,28 +64,18 @@ function DecisionPreview() {
 export default function AboutPage() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar />
       <main className={styles.page}>
-        <section className={styles.hero} aria-labelledby="about-title">
-          <div className={styles.heroContent}>
-            <p className={styles.heroBadge}>Conheça a DayTrade <span>↗</span></p>
-            <h1 id="about-title">Uma relação mais clara com as finanças do seu negócio.</h1>
-            <p className={styles.heroDescription}>
-              Aproximamos estratégia, contexto e soluções para apoiar empresas em decisões que movimentam o futuro.
-            </p>
-            <div className={styles.heroActions}>
-              <SpecialistContactButton className={styles.primaryAction}>
-                Fale com um especialista
-              </SpecialistContactButton>
-              <a className={styles.secondaryAction} href="#nossa-forma-de-atuar">
-                Conheça nossa forma de atuar
-              </a>
-            </div>
-          </div>
-          <div className={styles.heroVisualWrap}>
-            <WorkspacePreview />
-          </div>
-        </section>
+        <InternalHero
+          id="about-title"
+          title="Sobre nós"
+          description="Aproximamos estratégia, contexto e soluções para apoiar empresas em decisões que movimentam o futuro."
+          image="/images/features/bpo.png"
+          imageAlt="Profissionais colaborando em um ambiente de trabalho"
+        >
+          <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
+          <a href="#nossa-forma-de-atuar">Conheça nossa forma de atuar</a>
+        </InternalHero>
 
         <section className={styles.statement}>
           <div className={styles.narrowContainer}>

@@ -11,7 +11,8 @@
 
 .hero {
   padding: 184px 0 124px;
-  background: #f7f8fa;
+  background: linear-gradient(120deg, #030316 0%, #08083d 55%, #111154 100%);
+  border-bottom: 4px solid #a6ce44;
 }
 
 .heroContent {
@@ -23,7 +24,7 @@
 
 .hero h1 {
   margin: 0;
-  color: #00213d;
+  color: #ffffff;
   font-size: clamp(44px, 4.2vw, 56px);
   font-weight: 400;
   line-height: 1.08;

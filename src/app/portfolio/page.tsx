@@ -111,7 +111,7 @@ const serviceSections = [
 export default function PortfolioPage() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar />
       <main className={styles.page}>
         <section className={styles.hero} aria-labelledby="portfolio-title">
           <div className={`${styles.container} ${styles.heroContent}`}>

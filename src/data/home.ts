@@ -4,10 +4,10 @@ export const siteContent = {
   brand: {
     name: "DayTrade",
     logo: {
-      src: "/images/daytrade-logo-minimalista.png",
-      alt: "Logo DayTrade",
-      width: 160,
-      height: 48,
+      src: "/images/daytrade-logo-home.png",
+      alt: "DayTrade",
+      width: 515,
+      height: 167,
     },
   },
   navigation: [

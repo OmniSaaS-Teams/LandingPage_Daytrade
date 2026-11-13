@@ -1,7 +1,9 @@
+import { InternalHero } from "../../components/layout/InternalHero";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import { CallToAction } from "../../components/sections/CTA/cta";
 import styles from "../setores/industria/Industry.module.css";
+import clientStyles from "./ClientArea.module.css";
 
 const capabilities = [
   "Visão financeira",
@@ -93,33 +95,19 @@ function ClientDashboard() {
 export default function ClientAreaPage() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar />
       <main className={styles.page}>
-        <section className={styles.hero} aria-labelledby="client-area-title">
-          <div className={styles.heroContent}>
-            <div className={styles.certifications} aria-label="Benefícios da área do cliente">
-              <span>Visão em tempo real</span>
-              <span>Documentos organizados</span>
-              <span>Atendimento próximo</span>
-            </div>
-            <p className={styles.eyebrow}>Área do Cliente</p>
-            <h1 id="client-area-title">Tudo o que move seu negócio, em um só lugar.</h1>
-            <p className={styles.heroDescription}>
-              Acompanhe sua relação com a DayTrade de forma simples, com mais contexto para cada conversa, solicitação e próximo passo.
-            </p>
-            <div className={styles.heroActions}>
-              <a className={styles.primaryAction} href="#acessar-area">Acessar minha área <span>→</span></a>
-              <a className={styles.secondaryAction} href="#recursos">Conheça os recursos</a>
-            </div>
-          </div>
-          <div className={styles.trustLine}>
-            <span>Uma experiência mais clara para acompanhar sua operação</span>
-            <div className={styles.trustMarks} aria-label="Recursos da área do cliente">
-              <b>VISÃO</b><b>ORGANIZAÇÃO</b><b>CONTROLE</b><b>PROXIMIDADE</b>
-            </div>
-          </div>
-          <div className={styles.dashboardWrap}><ClientDashboard /></div>
-        </section>
+        <InternalHero
+          id="client-area-title"
+          title="Área do Cliente"
+          description="Acompanhe sua relação com a DayTrade de forma simples, com mais contexto para cada conversa, solicitação e próximo passo."
+          image="/images/portfolio-products.webp"
+          imageAlt="Profissional utilizando um tablet para acompanhar informações"
+        >
+          <a href="#acessar-area">Acessar minha área</a>
+          <a href="#recursos">Conheça os recursos</a>
+        </InternalHero>
+        <div className={clientStyles.preview}><ClientDashboard /></div>
 
         <section className={styles.capabilityStrip} aria-label="Recursos disponíveis">
           <div>{capabilities.concat(capabilities).map((item, index) => <span key={`${item}-${index}`}>{item}</span>)}</div>

@@ -1,3 +1,4 @@
+import { InternalHero } from "../../components/layout/InternalHero";
 import Link from "next/link";
 import { CallToAction } from "../../components/sections/CTA/cta";
 import { Footer } from "../../components/layout/Footer";
@@ -21,49 +22,6 @@ const steps = [
       "Construímos uma relação transparente, com retornos claros sobre cada indicação qualificada.",
   },
 ];
-
-function PartnerPreview() {
-  return (
-    <div className={styles.workspacePreview} aria-hidden="true">
-      <div className={styles.browserBar}>
-        <span className={styles.browserDots} />
-        <span className={styles.browserAddress}>daytrade.com/parceiros</span>
-        <span className={styles.browserStatus} />
-      </div>
-      <div className={styles.workspaceBody}>
-        <aside className={styles.workspaceSidebar}>
-          <span className={styles.workspaceMark}>D</span>
-          <span />
-          <span />
-          <span />
-          <span />
-        </aside>
-        <div className={styles.workspaceMain}>
-          <div className={styles.workspaceTitleRow}>
-            <span>
-              Indicações <i />
-            </span>
-            <b>Nova indicação</b>
-          </div>
-          <div className={styles.workspaceMetrics}>
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className={styles.workspaceChart}>
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function ReferralPreview() {
   const referrals = [
@@ -97,28 +55,18 @@ function ReferralPreview() {
 export default function PartnerPage() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar />
       <main className={styles.page}>
-        <section className={styles.hero} aria-labelledby="partner-title">
-          <div className={styles.heroContent}>
-            <p className={styles.heroBadge}>Programa de parceria <span>↗</span></p>
-            <h1 id="partner-title">Boas conexões podem abrir novos caminhos para empresas.</h1>
-            <p className={styles.heroDescription}>
-              Torne-se um parceiro indicador DayTrade e conecte sua rede a soluções financeiras pensadas para cada momento do negócio.
-            </p>
-            <div className={styles.heroActions}>
-              <Link className={styles.primaryAction} href="/#faq">
-                Quero ser parceiro
-              </Link>
-              <a className={styles.secondaryAction} href="#como-funciona">
-                Entenda como funciona
-              </a>
-            </div>
-          </div>
-          <div className={styles.heroVisualWrap}>
-            <PartnerPreview />
-          </div>
-        </section>
+        <InternalHero
+          id="partner-title"
+          title="Parceiro Indicador"
+          description="Torne-se um parceiro indicador DayTrade e conecte sua rede a soluções financeiras pensadas para cada momento do negócio."
+          image="/images/features/credito-cafe.png"
+          imageAlt="Profissionais conversando sobre novas possibilidades de negócio"
+        >
+          <Link href="/#faq">Quero ser parceiro</Link>
+          <a href="#como-funciona">Entenda como funciona</a>
+        </InternalHero>
 
         <section className={styles.statement}>
           <div className={styles.narrowContainer}>

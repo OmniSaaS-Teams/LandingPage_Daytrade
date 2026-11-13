@@ -24,15 +24,7 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const isLight = variant === "light";
-  const isHomePage = pathname === "/";
-  const headerLogo = isHomePage
-    ? {
-        src: "/images/daytrade-logo-home.png",
-        alt: "DayTrade",
-        width: 515,
-        height: 167,
-      }
-    : siteContent.brand.logo;
+  const headerLogo = siteContent.brand.logo;
   const [openDesktopMenu, setOpenDesktopMenu] = useState<
     "DayTrade" | "Setores" | null
   >(null);
@@ -408,7 +400,7 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
                 alt={headerLogo.alt}
                 width={headerLogo.width}
                 height={headerLogo.height}
-                className={`h-10 w-auto max-w-full max-[359px]:h-8 ${isHomePage || isLight ? "" : "brightness-0 invert"}`}
+                className={`h-10 w-auto max-w-full max-[359px]:h-8 ${isLight ? "brightness-0" : ""}`}
                 fetchPriority="high"
               />
             </div>
@@ -509,7 +501,7 @@ export function Navbar({ variant = "dark" }: NavbarProps) {
                 alt={headerLogo.alt}
                 width={headerLogo.width}
                 height={headerLogo.height}
-                className={`h-10 w-auto ${isHomePage ? "" : "brightness-0 invert"}`}
+                className="h-10 w-auto"
               />
               <button
                 type="button"

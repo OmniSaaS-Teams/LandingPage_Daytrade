@@ -2,6 +2,23 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Página do Investidor
+
+A rota `/investidor` adapta a landing page `landpage-investidor` à identidade visual
+do projeto, com links no menu e no rodapé, política de investimento, estrutura,
+garantias, simulador, FAQ e solicitação de apresentação.
+
+Os formulários enviam JSON para `POST /api/investor-leads`. A rota valida os dados
+e preserva os campos e as origens da referência (`simulador_investimento` e
+`solicitar_apresentacao`). Por padrão, usa o mesmo webhook de staging da referência;
+configure `N8N_INVESTOR_WEBHOOK_URL` para substituir o destino em produção.
+Os testes interceptam as chamadas e não enviam dados ao webhook real.
+
+O simulador utiliza as premissas ilustrativas da referência: CDI fixo hipotético
+de 11,25% a.a. e fatores de 69%, 100% e 120%, com composição anual, sem impostos
+ou taxas. Não consulta taxas atuais. Os dados pessoais não são salvos no navegador.
+O resultado e a confirmação de interesse são exibidos após a aceitação do webhook.
+
 ### Página de Carreira e envio de currículos
 
 A página `/carreira` está vinculada ao menu e ao rodapé. Seu formulário envia

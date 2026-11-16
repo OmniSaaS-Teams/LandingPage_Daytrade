@@ -1,0 +1,113 @@
+{
+  "name": "DayTrade | Recepção universal de payloads",
+  "active": false,
+  "nodes": [
+    {
+      "id": "45c576c6-3b89-4d18-b71e-a85d97665811",
+      "name": "Receber payload",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "1a725ef3-9b9a-428c-a8d8-f305b88f0b92",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "daytrade/entrada",
+        "authentication": "none",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      }
+    },
+    {
+      "id": "a0c809b6-98f6-4c25-8417-134a7dab417e",
+      "name": "Processar payload universal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        300,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const processWebhook = async function processWebhook(item, { executionId, receivedAt, readBinary }) {\n  const input = item.json || {};\n  const headers = input.headers || {};\n  const header = (name) => {\n    const entry = Object.entries(headers).find(([key]) => key.toLowerCase() === name);\n    return entry ? String(entry[1]) : null;\n  };\n  const contentType = header(\"content-type\") || \"\";\n  const mime = contentType.split(\";\")[0].trim().toLowerCase();\n  const multipart = mime === \"multipart/form-data\";\n  const binary = item.binary || {};\n  const warnings = [];\n  let data = input.body === undefined ? null : input.body;\n  let format = multipart ? \"multipart\" : \"desconhecido\";\n  let rawText;\n\n  // Raw Body keeps the original bytes under binary.data. Multipart keeps each\n  // uploaded file separately, including files whose field name happens to be data.\n  const rawBody = !multipart && Object.hasOwn(binary, \"data\");\n  const textual = /^text\\//.test(mime) || /(?:\\/|\\+)(?:json|xml)$/.test(mime)\n    || mime === \"application/x-www-form-urlencoded\";\n  if (rawBody && (textual || !mime || mime === \"application/octet-stream\")) {\n    const buffer = await readBinary(\"data\");\n    const charset = /charset\\s*=\\s*[\"']?([^;\\s\"']+)/i.exec(contentType)?.[1]?.toLowerCase() || \"utf-8\";\n    const encodings = { \"utf-8\": \"utf8\", utf8: \"utf8\", \"utf-16le\": \"utf16le\", utf16le: \"utf16le\", \"iso-8859-1\": \"latin1\", latin1: \"latin1\", ascii: \"ascii\", \"us-ascii\": \"ascii\" };\n    if (Object.hasOwn(encodings, charset)) {\n      const decoded = buffer.toString(encodings[charset]);\n      if (textual || (!decoded.includes(\"\\uFFFD\") && !/[\\x00-\\x08\\x0E-\\x1F]/.test(decoded))) rawText = decoded;\n    } else {\n      warnings.push(\"Charset não interpretado; os bytes originais foram preservados.\");\n    }\n  }\n\n  const jsonMime = /(?:\\/|\\+)json$/.test(mime);\n  const xmlMime = /(?:\\/|\\+)xml$/.test(mime);\n  const formMime = mime === \"application/x-www-form-urlencoded\";\n  if (!multipart) {\n    if (rawText === \"\" && input.body === undefined) {\n      data = null;\n      format = \"vazio\";\n    } else if (formMime) {\n      // Prefer n8n's parsed form: it preserves repeated keys as arrays.\n      if (input.body !== undefined && input.body !== null && typeof input.body === \"object\") {\n        data = input.body;\n      } else if (typeof rawText === \"string\" || typeof input.body === \"string\") {\n        // No URLSearchParams dependency: Code runners expose different globals.\n        const pairs = (rawText ?? input.body).split(\"&\").filter(Boolean);\n        const entries = new Map();\n        const decode = (value) => {\n          try { return decodeURIComponent(value.replace(/\\+/g, \" \")); }\n          catch { warnings.push(\"Escape de formulário inválido; valor preservado.\"); return value; }\n        };\n        for (const pair of pairs) {\n          const separator = pair.indexOf(\"=\");\n          const key = decode(separator < 0 ? pair : pair.slice(0, separator));\n          const value = decode(separator < 0 ? \"\" : pair.slice(separator + 1));\n          if (!entries.has(key)) entries.set(key, value);\n          else entries.set(key, [...(Array.isArray(entries.get(key)) ? entries.get(key) : [entries.get(key)]), value]);\n        }\n        data = Object.fromEntries(entries);\n      }\n      format = \"form-urlencoded\";\n    } else if (xmlMime) {\n      // n8n parses XML before this node; raw bytes remain available in binary.data.\n      data = input.body === undefined ? (rawText ?? null) : input.body;\n      format = \"xml\";\n    } else {\n      const candidate = typeof rawText === \"string\" ? rawText : typeof data === \"string\" ? data : undefined;\n      if (candidate !== undefined && (jsonMime || !mime || mime === \"application/octet-stream\" || mime === \"text/plain\")) {\n        try {\n          data = JSON.parse(candidate.replace(/^\\uFEFF/, \"\"));\n          format = \"json\";\n        } catch {\n          data = candidate;\n          format = \"texto\";\n          if (jsonMime) warnings.push(\"JSON não interpretado; conteúdo mantido como texto.\");\n        }\n      } else if (input.body !== undefined) {\n        format = jsonMime || (data !== null && typeof data === \"object\") ? \"json\" : \"texto\";\n      } else if (rawText !== undefined) {\n        data = rawText;\n        format = \"texto\";\n      } else if (rawBody || Object.keys(binary).length) {\n        format = \"binario\";\n      } else {\n        format = \"vazio\";\n      }\n    }\n  }\n\n  // JSON Pointer paths distinguish dotted keys, slashes, arrays and nested data.\n  // Bounds apply only to the searchable index; data and binary remain complete.\n  const fields = [];\n  const stack = [{ value: data, path: \"\", key: \"\", depth: 0 }];\n  const escape = (key) => String(key).replace(/~/g, \"~0\").replace(/\\//g, \"~1\");\n  let depthWarning = false;\n  while (stack.length) {\n    if (fields.length >= 10000) {\n      warnings.push(\"Índice limitado a 10.000 campos; payload integral preservado em dados.\");\n      break;\n    }\n    const current = stack.pop();\n    const value = current.value;\n    const type = value === null ? \"null\" : Array.isArray(value) ? \"array\" : typeof value;\n    const entries = value !== null && typeof value === \"object\" ? Object.entries(value) : [];\n    if (entries.length && current.depth < 64) {\n      for (let index = entries.length - 1; index >= 0; index--) {\n        const [key, child] = entries[index];\n        stack.push({ value: child, path: `${current.path}/${escape(key)}`, key: Array.isArray(value) ? current.key : key, depth: current.depth + 1 });\n      }\n    } else {\n      fields.push({ caminho: current.path, chave: current.key, tipo: type, valor: value });\n      if (entries.length && !depthWarning) {\n        warnings.push(\"Índice limitado a 64 níveis; estruturas profundas preservadas em dados.\");\n        depthWarning = true;\n      }\n    }\n  }\n\n  // Optional hints, never required fields or a reason to reject an unfamiliar payload.\n  const aliases = {\n    nome: [\"nome\", \"name\", \"fullname\", \"nomecompleto\"],\n    email: [\"email\", \"emailaddress\", \"mail\"],\n    telefone: [\"telefone\", \"phone\", \"phonenumber\", \"celular\", \"mobile\", \"whatsapp\"],\n    documento: [\"cpf\", \"cnpj\", \"documento\", \"document\"],\n    empresa: [\"empresa\", \"company\", \"companyname\", \"razaosocial\"],\n    origem: [\"origem\", \"source\"],\n  };\n  const identified = Object.fromEntries(Object.keys(aliases).map((key) => [key, []]));\n  for (const field of fields) {\n    if (field.tipo !== \"string\" && field.tipo !== \"number\") continue;\n    const key = field.chave.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\").replace(/[^a-zA-Z0-9]/g, \"\").toLowerCase();\n    for (const [name, names] of Object.entries(aliases)) {\n      if (names.includes(key)) identified[name].push({ caminho: field.caminho, valor: field.valor });\n    }\n  }\n  const files = Object.entries(binary).map(([key, file]) => ({\n    campo: key,\n    papel: rawBody && key === \"data\" ? \"corpo_original\" : \"anexo\",\n    nome: file.fileName ?? null,\n    mimeType: file.mimeType ?? null,\n    tamanhoInformado: file.fileSize ?? null,\n  }));\n  const idempotencyKey = header(\"idempotency-key\");\n  const id = idempotencyKey || `n8n:${executionId}`;\n  const json = {\n    versao: 1,\n    recebimento: { id, executionId: String(executionId), recebidoEm: receivedAt, idempotencyKey, contentType: contentType || null, formato: format },\n    dados: data,\n    campos: fields,\n    identificados: identified,\n    arquivos: files,\n    contexto: { headers, query: input.query ?? {}, params: input.params ?? {}, webhookUrl: input.webhookUrl ?? null, executionMode: input.executionMode ?? null },\n    avisos: warnings,\n    resposta: { success: true, id, executionId: String(executionId), formato: format, totalCampos: fields.length, totalAnexos: files.filter((file) => file.papel === \"anexo\").length },\n  };\n  return Object.keys(binary).length ? { json, binary } : { json };\n};\nconst items = $input.all();\nconst result = [];\nfor (let index = 0; index < items.length; index++) {\n  const item = await processWebhook(items[index], {\n    executionId: $execution.id,\n    receivedAt: new Date().toISOString(),\n    readBinary: (key) => this.helpers.getBinaryDataBuffer(index, key),\n  });\n  item.pairedItem = { item: index };\n  result.push(item);\n}\nreturn result;"
+      }
+    },
+    {
+      "id": "22c3ef83-3559-47e1-adc5-458238f82906",
+      "name": "Confirmar processamento",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        620,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.resposta }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "71c587c8-6388-4797-a137-fcfb36d99a65",
+      "name": "Sobre esta etapa",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -280
+      ],
+      "parameters": {
+        "width": 940,
+        "height": 220,
+        "content": "## Entrada universal — etapa 1\nPOST /daytrade/entrada → organizar dados → confirmar HTTP 200.\n\nSem schema obrigatório. Preserva dados, query, parâmetros e binários; gera índice de campos e sugestões por nome de chave. Formatos opacos continuam disponíveis no original.\n\nAs cinco variáveis N8N_*_WEBHOOK_URL podem apontar para a mesma Production URL. Não deduplica nem envia para outros serviços. Ver docs/n8n.md para importação, contrato e limites."
+      }
+    }
+  ],
+  "connections": {
+    "Receber payload": {
+      "main": [
+        [
+          {
+            "node": "Processar payload universal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Processar payload universal": {
+      "main": [
+        [
+          {
+            "node": "Confirmar processamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Sao_Paulo",
+    "saveDataSuccessExecution": "all",
+    "saveDataErrorExecution": "all"
+  },
+  "pinData": {},
+  "tags": []
+}

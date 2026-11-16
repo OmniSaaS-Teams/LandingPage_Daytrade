@@ -92,6 +92,20 @@ Os formulários confirmam sucesso após gravar no SQLite. Quando há webhook con
 a tarefa é criada na mesma transação. Ausência de webhook não impede o cadastro;
 falha de gravação retorna 503. Há limite de cinco envios por identidade em dez minutos.
 
+Clientes, investidores, candidatos, parceiros e contatos de WhatsApp têm rotas
+próprias e classificação no painel. Configure separadamente `N8N_LEAD_WEBHOOK_URL`,
+`N8N_INVESTOR_WEBHOOK_URL`, `N8N_CAREER_WEBHOOK_URL`, `N8N_PARTNER_WEBHOOK_URL` e
+`N8N_CONTACT_WEBHOOK_URL`, somente para os destinos desejados. O arquivo de exemplo
+não ativa encaminhamento a nenhum ambiente real.
+
+Os formulários enviam uma chave de idempotência. Novas tentativas com a mesma chave
+e os mesmos dados retornam o protocolo anterior, evitando cadastros e tarefas
+duplicados após timeout. A migração `003_submission_processing.sql` preserva
+cadastros, anexos e tarefas, e separa os parceiros antigos dos contatos de WhatsApp.
+Faça o backup habitual antes de atualizar; a inicialização aplica a migração antes
+de liberar o health check. O simulador e a montagem das mensagens de WhatsApp são
+processados pelas APIs, sem depender de cálculos ou destinos enviados pelo navegador.
+
 O worker tenta entregar ao n8n até cinco vezes, com espera crescente e timeout de
 15 segundos. O painel permite revisar e reenfileirar falhas. Deduplique o cabeçalho
 Idempotency-Key no receptor: a entrega é pelo menos uma vez e pode se repetir se a

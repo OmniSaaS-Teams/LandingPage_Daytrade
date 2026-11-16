@@ -2,12 +2,14 @@
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { createFormRequest } from "../../lib/form-request";
 import styles from "./Partner.module.css";
 
 export function PartnerForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
   const [error, setError] = useState("");
   const sending = useRef(false);
+  const sendPartner = useRef(createFormRequest());
   const submitButton = useRef<HTMLButtonElement>(null);
   const successDialog = useRef<HTMLDialogElement>(null);
 
@@ -35,14 +37,7 @@ export function PartnerForm() {
     setError("");
 
     try {
-      const response = await fetch("/api/partner-leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(data)),
-        signal: AbortSignal.timeout(15_000),
-      });
-      const result = await response.json();
-      if (!response.ok || result.success !== true) throw new Error(result.error || "Não foi possível confirmar seu cadastro. Tente novamente.");
+      await sendPartner.current("/api/partner-leads", Object.fromEntries(data));
       form.reset();
       setStatus("success");
     } catch (cause) {

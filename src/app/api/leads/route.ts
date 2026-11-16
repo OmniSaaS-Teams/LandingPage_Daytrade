@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     razaoSocial: text("razaoSocial"),
     cnpj: text("cnpj").replace(/[.\s\/-]/g, "").toUpperCase(),
     telefone: text("telefone").replace(/[\s()+.-]/g, ""),
-    email: text("email"),
+    email: text("email").toLowerCase(),
   };
 
   if (!lead.nome || lead.nome.length > 200 || !lead.razaoSocial || lead.razaoSocial.length > 300) {
@@ -50,5 +50,5 @@ export async function POST(request: Request) {
     return Response.json({ error: "Informe um e-mail válido." }, { status: 400 });
   }
 
-  return captureSubmission("lead", { ...leadContext, ...lead });
+  return captureSubmission("lead", { ...leadContext, ...lead }, undefined, request);
 }

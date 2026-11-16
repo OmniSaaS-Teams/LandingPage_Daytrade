@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { siteContent } from "../../data/home";
+import { createFormRequest } from "../../lib/form-request";
 import { FeedbackButton } from "../ui/FeedbackButton";
 
 const focusableSelector =
@@ -22,6 +23,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const submissionInProgressRef = useRef(false);
+  const sendClient = useRef(createFormRequest());
   const router = useRouter();
   const pathname = usePathname();
   const isLight = variant === "light";
@@ -78,28 +80,18 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
     setFormError(null);
 
     try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nome: formData.get("name"),
-          razaoSocial: formData.get("company"),
-          cnpj: formData.get("cnpj"),
-          telefone: formData.get("phone"),
-          email: formData.get("email"),
-        }),
+      await sendClient.current("/api/leads", {
+        nome: formData.get("name"),
+        razaoSocial: formData.get("company"),
+        cnpj: formData.get("cnpj"),
+        telefone: formData.get("phone"),
+        email: formData.get("email"),
       });
-      const result = await response.json();
-
-      if (!response.ok || result.success !== true) {
-        setFormError(result.error || "Não foi possível confirmar o envio. Tente novamente em instantes.");
-        return;
-      }
 
       form.reset();
       setIsFormSubmitted(true);
-    } catch {
-      setFormError("Não foi possível confirmar o envio. Verifique sua conexão e tente novamente.");
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Não foi possível confirmar o envio. Tente novamente.");
     } finally {
       submissionInProgressRef.current = false;
       setIsSubmitting(false);

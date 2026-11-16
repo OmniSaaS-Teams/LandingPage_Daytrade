@@ -1,11 +1,12 @@
 import { db } from "./db.ts";
 
-export const kinds: Record<string, string> = { lead: "Seja cliente", investor: "Investidor", career: "Carreira", contact: "Contato WhatsApp" };
+export const kinds: Record<string, string> = { lead: "Seja cliente", investor: "Investidor", career: "Carreira", contact: "Contato WhatsApp", partner: "Parceiro Indicador" };
 export const statuses: Record<string, string> = { novo: "Novo", em_atendimento: "Em atendimento", concluido: "Concluído", arquivado: "Arquivado" };
 export const jobStatuses: Record<string, string> = { pending: "Pendente", processing: "Enviando", sent: "Entregue", failed: "Falhou" };
 export const dateLabel = (date: string | Date) => new Date(date).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
 export const validId = (id: string) => /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
-export type Submission = { id: string; kind: string; status: string; data: Record<string, string | number | boolean>; created_at: Date; upload_id: string | null; job_status?: string; attempts?: number; last_error?: string; };
+export type Submission = { id: string; kind: string; status: string; data: { nome?: string; email?: string; telefone?: string; [key: string]: unknown }; created_at: Date; upload_id: string | null; job_status?: string; attempts?: number; last_error?: string; };
+export const formatSubmissionValue = (value: unknown) => typeof value === "boolean" ? value ? "Sim" : "Não" : value && typeof value === "object" ? JSON.stringify(value, null, 2) : String(value ?? "");
 
 export async function listSubmissions(kind: string, status: string, search: string, page: number) {
   const values = [kind, status, `%${search.replace(/[\\%_]/g, "\\$&")}%`];

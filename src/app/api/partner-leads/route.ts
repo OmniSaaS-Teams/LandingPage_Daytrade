@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   const fields = value as Record<string, unknown>;
   const text = (key: string) => typeof fields[key] === "string" ? fields[key].trim() : "";
   const nome = text("nome");
-  const email = text("email");
+  const email = text("email").toLowerCase();
   const telefone = text("telefone").replace(/[\s()+.-]/g, "");
   const experiencia = text("experiencia");
   const invalid = (error: string) => Response.json({ error }, { status: 400 });
@@ -25,10 +25,8 @@ export async function POST(request: Request) {
   if (!/^\d{10,15}$/.test(telefone)) return invalid("Informe um telefone ou celular com DDD.");
   if (!["sim", "nao"].includes(experiencia)) return invalid("Informe se tem experiência em FIDCs.");
 
-  // Usa a caixa de contatos existente, sem encaminhar cadastros de parceiros
-  // para o webhook de clientes interessados em antecipação de recebíveis.
-  return captureSubmission("contact", {
+  return captureSubmission("partner", {
     nome, email, telefone, experienciaFIDCs: experiencia === "sim",
     origem: "Site DayTrade - Parceiro Indicador",
-  });
+  }, undefined, request);
 }

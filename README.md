@@ -5,10 +5,11 @@ Site institucional, APIs, painel administrativo e blog no mesmo projeto Next.js.
 ## Recursos
 
 - `/admin`: painel com login, resumo dos cadastros, filtros e status de atendimento.
-- Contatos de clientes, investidores, WhatsApp e carreira salvos no SQLite.
+- Cadastros de clientes, investidores, parceiros, WhatsApp e carreira salvos no SQLite.
 - Currículos em armazenamento privado, com download autenticado e limite de 5 MB.
 - Blog com categorias, capas existentes, editor de texto, rascunhos e publicação.
 - Integração n8n por fila persistente, com até cinco tentativas e revisão pelo painel.
+- `/admin/instagram`: configuração do usuário e token protegido, com sincronização automática da home.
 - Docker Compose com um único serviço para aplicação, SQLite e worker na mesma VPS.
 
 ## Publicação
@@ -46,7 +47,26 @@ A fila e os anexos sobrevivem à atualização da aplicação.
 | `POST /api/leads` | Seja cliente | `N8N_LEAD_WEBHOOK_URL` |
 | `POST /api/investor-leads` | Apresentação e simulador | `N8N_INVESTOR_WEBHOOK_URL` |
 | `POST /api/careers` | Candidato e currículo | `N8N_CAREER_WEBHOOK_URL` |
-| `POST /api/contacts` | Contato antes de abrir o WhatsApp | Sem encaminhamento |
+| `POST /api/contacts` | Contato antes de abrir o WhatsApp | `N8N_CONTACT_WEBHOOK_URL` |
+| `POST /api/partner-leads` | Parceiro Indicador | `N8N_PARTNER_WEBHOOK_URL` |
+
+Todos os formulários usam o mesmo cliente HTTP, com timeout de 15 segundos (25 para
+currículos) e tratamento de respostas inválidas. Cada envio possui um `Idempotency-Key`.
+Se a resposta se perder após a gravação, tentar novamente com os mesmos dados e chave
+retorna o mesmo protocolo, sem duplicar o contato, o currículo ou a tarefa do n8n.
+Reutilizar a chave com outros dados retorna 409. A resposta de sucesso inclui `id`
+e `createdAt`, definidos pelo servidor.
+
+O [workflow inicial do n8n](docs/n8n.md) recebe payloads sem schema obrigatório,
+organiza campos e preserva anexos. O JSON importável está em
+`n8n/daytrade-recepcao-universal.json`; os cinco destinos podem usar a mesma URL.
+
+O cadastro de parceiros tem categoria própria no admin. A migração
+`003_submission_processing.sql` reclassifica os parceiros antigos, preservando os
+demais dados, anexos, status e entregas. Os destinos de parceiros e WhatsApp são
+independentes do webhook de clientes; nenhum é inferido do navegador. A API de
+contatos retorna `whatsappUrl` somente após salvar o cadastro, com a mensagem e o
+número de atendimento definidos no servidor.
 
 O contrato comercial do n8n mantém `lead` e os metadados definidos no servidor:
 empresa `001`/Daytrade, produto `10`/Antecipação de Recebíveis e campanha `1001`/Google Ads.
@@ -60,9 +80,23 @@ O cadastro comercial no Leads2b é independente: a confirmação do site corresp
 à gravação no banco, não à captura no painel do Leads2b. O snippet continua ativo
 nas páginas públicas em desktop e não é carregado ao abrir `/admin`.
 
-O simulador do Investidor mantém as premissas ilustrativas preexistentes: CDI
+O simulador do Investidor é calculado no backend e mantém as premissas ilustrativas preexistentes: CDI
 hipotético de 11,25% a.a., fatores de 69%, 100% e 120%, composição anual, sem impostos
-ou taxas e sem consulta a taxas atuais. Os dados dos formulários são salvos no banco.
+ou taxas e sem consulta a taxas atuais. O resultado é salvo com o cadastro e devolvido
+em `simulation`; a interface apenas exibe os valores recebidos. Valores calculados
+enviados pelo navegador são ignorados. O período é validado no servidor e a data
+exibida deriva do protocolo salvo, no fuso de São Paulo.
+
+Blog, sessões de administração, downloads privados e sincronização do Instagram
+continuam processados no servidor. A Área do Cliente permanece demonstrativa e
+sem integração, conforme o escopo atual. `/api/health` exige a migração atual do
+backend; um banco acessível mas desatualizado retorna 503.
+
+A conexão do Instagram pode ser configurada pelo próprio admin, em
+`/admin/instagram`, sem editar o ambiente. O token é criptografado no banco; a chave
+privada fica em `secrets/instagram.key`, junto ao diretório do SQLite. Preserve ambos
+no backup. O formulário não exibe o token salvo e as alterações são lidas pelo worker
+sem reiniciar a aplicação. Veja [a configuração do Instagram](docs/instagram.md).
 
 ## Blog
 

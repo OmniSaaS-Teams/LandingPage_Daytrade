@@ -375,7 +375,7 @@ export function InvestorContent() {
           <div className={styles["grafico-barras"]}>
             <div className={styles["barra-item"]}>
               <span className={styles["barra-valor"]} id="valorPoupanca">{result ? money(values.poupanca) : "R$ 10.817,33"}</span>
-              <div className={styles["barra"] + " " + styles["barra-1"]} id="barraPoupanca" style={{ height: `${Math.round(values.poupanca / values.carteira * 285)}px` }}></div>
+              <div className={styles["barra"] + " " + styles["barra-1"]} id="barraPoupanca" style={{ height: `${values.carteira ? Math.round(values.poupanca / values.carteira * 285) : 0}px` }}></div>
               <div className={styles["barra-label"]}>
                 <strong>Poupança</strong>
                 <span>(69% do CDI)</span>
@@ -384,7 +384,7 @@ export function InvestorContent() {
 
             <div className={styles["barra-item"]}>
               <span className={styles["barra-valor"]} id="valorCDB">{result ? money(values.cdb) : "R$ 11.490,00"}</span>
-              <div className={styles["barra"] + " " + styles["barra-2"]} id="barraCDB" style={{ height: `${Math.round(values.cdb / values.carteira * 285)}px` }}></div>
+              <div className={styles["barra"] + " " + styles["barra-2"]} id="barraCDB" style={{ height: `${values.carteira ? Math.round(values.cdb / values.carteira * 285) : 0}px` }}></div>
               <div className={styles["barra-label"]}>
                 <strong>CDBs 100%</strong>
                 <span>(100% do CDI)</span>
@@ -393,7 +393,7 @@ export function InvestorContent() {
 
             <div className={styles["barra-item"] + " " + styles["destaque"]}>
               <span className={styles["barra-valor"]} id="valorCarteira">{result ? money(values.carteira) : "R$ 11.788,00"}</span>
-              <div className={styles["barra"] + " " + styles["barra-3"]} id="barraCarteira" style={{ height: `${Math.round(values.carteira / values.carteira * 285)}px` }}></div>
+              <div className={styles["barra"] + " " + styles["barra-3"]} id="barraCarteira" style={{ height: `${values.carteira ? 285 : 0}px` }}></div>
               <div className={styles["barra-label"]}>
                 <strong>Carteira Daytrade</strong>
                 <span>(120% do CDI)</span>
@@ -402,7 +402,7 @@ export function InvestorContent() {
           </div>
 
           <p className={styles["investimento-observacao"]} id="observacaoData">
-            (*) Rendimento calculado em {result?.date ?? "6/3/2026"} se refere ao rendimento total no primeiro ano.
+            (*) Projeção ilustrativa calculada em {result?.date ?? "—"} para o prazo de {result?.years ?? 1} {result?.years === 1 || !result ? "ano" : "anos"}, com CDI hipotético de 11,25% a.a.
             Valores brutos, sem considerar descontos de Imposto de Renda.
             Verifique as condições de cada produto antes de investir.
           </p>
@@ -463,8 +463,8 @@ export function InvestorContent() {
       <div className={styles["cta-box"] + " " + styles["reveal"]}>
         <h2>Receba uma apresentação da estrutura de investimento</h2>
         <p>
-          Preencha os campos abaixo para registrar seu interesse. Este formulário pode ser conectado
-          ao seu backend, CRM ou automação comercial futuramente.
+          Preencha os campos abaixo para registrar seu interesse. Nossa equipe entrará
+          em contato para apresentar a estrutura de investimento.
         </p>
 
         <form className={styles["cta-form"]} id="investForm" onSubmit={submitInterest} aria-busy={contactBusy}><fieldset className={styles["form-fields"]} disabled={contactBusy || contactSuccess}>

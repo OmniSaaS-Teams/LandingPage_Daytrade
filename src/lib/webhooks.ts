@@ -14,7 +14,7 @@ export async function processNextWebhook() {
   try {
     const url = process.env[webhookVariables[job.destination]];
     if (!url || !["http:", "https:"].includes(new URL(url).protocol)) throw new Error("Destino não configurado.");
-    const submission = (await db.query<{ data: Record<string, unknown>; path: string | null; mime: string | null }>("SELECT s.data,u.path,u.mime FROM submissions s LEFT JOIN uploads u ON u.id=s.upload_id WHERE s.id=$1", [job.submission_id])).rows[0];
+    const submission = (await db.query<{ data: Record<string, unknown>; path: string | null; mime: string | null; original_name: string | null }>("SELECT s.data,u.path,u.mime,u.original_name FROM submissions s LEFT JOIN uploads u ON u.id=s.upload_id WHERE s.id=$1", [job.submission_id])).rows[0];
     if (!submission) throw new Error("Cadastro indisponível.");
     let body: FormData | string;
     const headers: Record<string, string> = { "Idempotency-Key": job.submission_id };
@@ -22,7 +22,7 @@ export async function processNextWebhook() {
       if (!submission.path || !submission.mime) throw new Error("Anexo indisponível.");
       body = new FormData();
       for (const [key, value] of Object.entries(submission.data)) body.set(key, String(value));
-      body.set("curriculo", new Blob([new Uint8Array(await readResume(submission.path))], { type: submission.mime }), `curriculo.${submission.path.split(".").pop()}`);
+      body.set("curriculo", new Blob([new Uint8Array(await readResume(submission.path))], { type: submission.mime }), submission.original_name || `curriculo.${submission.path.split(".").pop()}`);
     } else {
       let payload = submission.data;
       if (job.destination === "lead") {

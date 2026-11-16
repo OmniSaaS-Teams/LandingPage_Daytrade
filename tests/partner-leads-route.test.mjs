@@ -8,15 +8,15 @@ databaseFixture();
 const partner = { nome: " Maria Silva ", email: " maria@example.test ", telefone: "+55 (11) 99999-8888", experiencia: "sim" };
 const request = body => new Request("http://localhost/api/partner-leads", { method: "POST", body: JSON.stringify(body) });
 
-test("saves all partner fields with a trusted origin in the contact inbox", async () => {
+test("saves partner fields under their own kind, without forwarding to the client webhook", async () => {
   process.env.N8N_LEAD_WEBHOOK_URL = "https://n8n.example.test/client";
   const response = await POST(request({ ...partner, origem: "untrusted", kind: "lead", linkedin: "obsolete", celular: "obsolete", consentimento: "true" }));
   assert.equal(response.status, 200);
   const result = await response.json();
   assert.equal(result.success, true);
   const stored = (await db.query("SELECT kind,data FROM submissions WHERE id=$1", [result.id])).rows[0];
-  assert.equal(stored.kind, "contact");
-  assert.deepEqual(stored.data, { nome: "Maria Silva", email: "maria@example.test", telefone: "5511999998888", experienciaFIDCs: true, origem: "Site DayTrade - Parceiro Indicador" });
+  assert.equal(stored.kind, "partner");
+  assert.deepEqual(stored.data, { nome: "Maria Silva", email: "maria@example.test", telefone: "5511999998888", experienciaFIDCs: true, origem: "Site DayTrade - Parceiro Indicador", formulario: "parceiro_indicador", caminho_origem: "/parceiro-indicador", endpoint_origem: "/api/partner-leads" });
   assert.equal((await db.query("SELECT * FROM webhook_jobs")).rows.length, 0);
 });
 

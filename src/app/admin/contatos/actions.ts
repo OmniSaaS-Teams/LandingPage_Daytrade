@@ -9,7 +9,7 @@ import { removeResume } from "../../../lib/storage.ts";
 export async function updateSubmission(form: FormData) {
   await requireAdmin();
   const id = String(form.get("id")), status = String(form.get("status"));
-  if (!validId(id) || !statuses[status]) throw new Error("Dados inválidos.");
+  if (!validId(id) || !Object.hasOwn(statuses, status)) throw new Error("Dados inválidos.");
   await db.query("UPDATE submissions SET status=$1 WHERE id=$2", [status, id]);
   revalidatePath("/admin/contatos", "layout");
   redirect(`/admin/contatos/${id}?salvo=1`);

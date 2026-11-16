@@ -1,129 +1,114 @@
-import { InternalHero } from "../../components/layout/InternalHero";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { InternalHero } from "../../components/layout/InternalHero";
 import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
 import { CallToAction } from "../../components/sections/CTA/cta";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import styles from "./About.module.css";
 
-const principles = [
+export const metadata: Metadata = {
+  title: "Sobre nós | DayTrade Invest",
+  description: "Conheça a DayTrade Invest: nossa origem, a proximidade com cada cliente e as soluções de crédito e investimento que conectam histórias a novas possibilidades.",
+};
+
+const solutions = [
   {
-    title: "Entender antes de indicar.",
-    description:
-      "Toda conversa começa pelo contexto da empresa, pelos objetivos e pelo momento que ela está vivendo.",
+    number: "01",
+    title: "Crédito para o seu negócio",
+    description: "Trabalhamos com linhas de antecipação de recebíveis em diversos segmentos, ajudando empresas a transformar oportunidades em novos negócios.",
+    href: "/portfolio#credito",
+    label: "Conheça as soluções de crédito",
   },
   {
-    title: "Transformar dados em direção.",
-    description:
-      "Organizamos informações e alternativas para deixar as escolhas financeiras mais claras.",
-  },
-  {
-    title: "Avançar junto com o negócio.",
-    description:
-      "A proximidade é o que permite acompanhar decisões importantes com consistência ao longo do tempo.",
+    number: "02",
+    title: "Investimentos para o seu futuro",
+    description: "Oferecemos investimentos com rentabilidade atrativa e alta liquidez, aproximando investidores das possibilidades que movimentam a economia.",
+    href: "/investidor",
+    label: "Conheça nossos investimentos",
   },
 ];
-
-function DecisionPreview() {
-  return (
-    <div className={styles.decisionPreview} aria-hidden="true">
-      <div className={styles.decisionHeading}>
-        <span>Próximos movimentos</span>
-        <i />
-      </div>
-      <div className={styles.decisionRows}>
-        <div>
-          <i />
-          <span>
-            <b>Crédito</b>
-            <small>Em análise</small>
-          </span>
-          <em>Ver detalhes</em>
-        </div>
-        <div>
-          <i />
-          <span>
-            <b>Investimentos</b>
-            <small>Em acompanhamento</small>
-          </span>
-          <em>Ver detalhes</em>
-        </div>
-        <div>
-          <i />
-          <span>
-            <b>Fluxo de caixa</b>
-            <small>Atualizado hoje</small>
-          </span>
-          <em>Ver detalhes</em>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
+      <Navbar background="gradient" />
       <main className={styles.page}>
         <InternalHero
           id="about-title"
           title="Sobre nós"
-          description="Aproximamos estratégia, contexto e soluções para apoiar empresas em decisões que movimentam o futuro."
+          description="Conheça a DayTrade Invest e a ideia que nos move: aproximar investidores e empresas para potencializar novos negócios."
           image="/images/features/bpo.png"
-          imageAlt="Profissionais colaborando em um ambiente de trabalho"
+          imageAlt="Profissionais trocando ideias e colaborando em um escritório"
         >
           <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
-          <a href="#nossa-forma-de-atuar">Conheça nossa forma de atuar</a>
+          <a className={styles.historyLink} href="#quem-somos">Conheça nossa história <span aria-hidden="true">↓</span></a>
         </InternalHero>
 
-        <section className={styles.statement}>
-          <div className={styles.narrowContainer}>
-            <p>
-              Acreditamos que escolhas financeiras se tornam mais consistentes quando são construídas com proximidade, leitura de cenário e visão de longo prazo.
-            </p>
-          </div>
-        </section>
-
-        <section className={styles.story} aria-labelledby="story-title">
-          <div className={styles.contentGrid}>
-            <div className={styles.copyBlock}>
-              <p className={styles.eyebrow}>Nossa forma de trabalhar</p>
-              <h2 id="story-title">A estratégia começa por entender o que realmente importa.</h2>
-              <p>
-                Cada empresa tem desafios, oportunidades e ritmos próprios. Por isso, começamos pelo diálogo e transformamos informações em caminhos possíveis para o momento atual.
-              </p>
-              <Link href="/#faq">Converse com a DayTrade <span>→</span></Link>
+        <section id="quem-somos" className={styles.origin} aria-labelledby="origin-title">
+          <div className={`${styles.container} ${styles.originGrid}`}>
+            <div>
+              <p className={styles.eyebrow}>Quem somos</p>
+              <h2 id="origin-title">Uma ideia que conecta <span>novas possibilidades.</span></h2>
             </div>
-            <DecisionPreview />
+            <div className={styles.originCopy}>
+              <p>A DayTrade Invest nasceu de uma ideia central:</p>
+              <blockquote>
+                <span className={styles.quoteMark} aria-hidden="true">“</span>
+                <p>Remunerar melhor nossos investidores e dar crédito a empresas com potencial para novos negócios.</p>
+              </blockquote>
+              <p>Esse propósito orienta a forma como nos relacionamos com cada cliente e desenvolvemos nossas soluções financeiras.</p>
+            </div>
           </div>
         </section>
 
-        <section id="nossa-forma-de-atuar" className={styles.principles} aria-labelledby="principles-title">
-          <div className={styles.narrowContainer}>
-            <p className={styles.eyebrow}>Em cada conversa</p>
-            <h2 id="principles-title">Clareza para olhar o agora. Direção para construir o próximo passo.</h2>
+        <section id="nossa-forma-de-atuar" className={styles.approach} aria-labelledby="approach-title">
+          <div className={`${styles.container} ${styles.approachGrid}`}>
+            <div className={styles.storyPhoto}>
+              <Image src="/images/features/credito-cafe.png" alt="Profissionais conversando e analisando possibilidades para um negócio" fill sizes="(max-width: 767px) calc(100vw - 48px), 45vw" />
+            </div>
+            <div className={styles.storyCopy}>
+              <p className={styles.eyebrow}>Cada cliente, uma história</p>
+              <h2 id="approach-title">Antes de propor, <span>a gente escuta.</span></h2>
+              <p>Em cada visita, ouvimos o que o cliente tem a dizer. Sabemos que cada pessoa percorreu caminhos diferentes, escreveu suas próprias histórias e acumulou experiências valiosas em seu ramo de atuação.</p>
+              <p>É a partir dessa troca que ajudamos a potencializar seus negócios. Aprendemos com seus acertos e erros, valorizando tudo o que faz parte de sua trajetória.</p>
+              <p>Ao atender, nosso ponto de partida é entender o que podemos ajudar a solucionar. Encaramos cada nova situação como um novo desafio.</p>
+              <SpecialistContactButton className={styles.primaryButton}>Converse com a DayTrade <span aria-hidden="true">↗</span></SpecialistContactButton>
+            </div>
           </div>
-          <div className={styles.principlesGrid}>
-            {principles.map((principle, index) => (
-              <article key={principle.title} className={styles.principleCard}>
-                <span>0{index + 1}</span>
-                <h3>{principle.title}</h3>
-                <p>{principle.description}</p>
-              </article>
-            ))}
+        </section>
+
+        <section className={styles.difference} aria-labelledby="difference-title">
+          <div className={styles.container}>
+            <div className={styles.sectionHeading}>
+              <div>
+                <p className={styles.eyebrow}>Nosso diferencial</p>
+                <h2 id="difference-title">Soluções financeiras que começam <span>por você.</span></h2>
+              </div>
+              <p>Desenvolvemos soluções adequadas a cada cliente por meio de serviços financeiros. Entender a realidade de quem está do outro lado é o que nos permite encontrar caminhos para seus negócios e investimentos.</p>
+            </div>
+            <div className={styles.solutionsGrid}>
+              {solutions.map((solution) => (
+                <article key={solution.number} className={styles.solution}>
+                  <span className={styles.solutionNumber}>{solution.number}</span>
+                  <h3>{solution.title}</h3>
+                  <p>{solution.description}</p>
+                  <Link href={solution.href}>{solution.label} <span aria-hidden="true">↗</span></Link>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
         <CallToAction
           id="about-cta"
-          highlight="A próxima decisão começa com uma boa conversa."
-          title="Entenda seu cenário e encontre caminhos mais claros para avançar."
+          highlight="Uma boa conversa abre novos caminhos."
+          title="Vamos entender o que o seu negócio precisa?"
           primaryLabel="Fale com um especialista"
-          primaryHref="/#faq"
-          secondaryLabel="Conheça a DayTrade"
-          secondaryHref="#nossa-forma-de-atuar"
-          note="Uma conversa inicial, sem compromisso."
+          secondaryLabel="Conheça nossas soluções"
+          secondaryHref="/portfolio"
+          note="Conte sua história. Vamos encontrar juntos o próximo passo."
           showPixels={false}
           variant="blue"
         />

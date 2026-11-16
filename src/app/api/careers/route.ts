@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 
   const text = (name: string) => typeof data.get(name) === "string" ? (data.get(name) as string).trim() : "";
   const nome = text("nome");
-  const email = text("email");
+  const email = text("email").toLowerCase();
   const telefone = text("telefone").replace(/[\s()+.-]/g, "");
   const area = text("area");
   const mensagem = text("mensagem");
@@ -66,6 +66,6 @@ export async function POST(request: Request) {
     : null;
   if (!mime) return invalid("Envie um arquivo PDF, DOC ou DOCX válido.");
 
-  const resume = new File([await file.arrayBuffer()], `curriculo.${extension}`, { type: mime });
-  return captureSubmission("career", { nome, email, telefone, area, mensagem, consentimento: true, origem: "Site DayTrade - Carreira" }, resume);
+  const resume = new File([await file.arrayBuffer()], file.name, { type: mime });
+  return captureSubmission("career", { nome, email, telefone, area, mensagem, consentimento: true, origem: "Site DayTrade - Carreira" }, resume, request);
 }

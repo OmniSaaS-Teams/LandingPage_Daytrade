@@ -8,8 +8,8 @@ import styles from "../admin.module.css";
 async function Contacts({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const admin = await requireAdmin();
   const params = await searchParams;
-  const kind = params.tipo && kinds[params.tipo] ? params.tipo : "";
-  const status = params.status && statuses[params.status] ? params.status : "";
+  const kind = params.tipo && Object.hasOwn(kinds, params.tipo) ? params.tipo : "";
+  const status = params.status && Object.hasOwn(statuses, params.status) ? params.status : "";
   const search = String(params.busca || "").slice(0, 200);
   const page = Math.max(1, Math.min(100000, Number.parseInt(params.pagina || "1") || 1));
   const { rows, total } = await listSubmissions(kind, status, search, page);

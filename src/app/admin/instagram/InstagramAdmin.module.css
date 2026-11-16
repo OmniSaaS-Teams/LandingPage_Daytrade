@@ -1,0 +1,9 @@
+.grid { display: grid; grid-template-columns: 1.2fr 1fr; align-items: start; gap: 24px; margin-top: 28px; }
+.heading { margin: 0 0 12px; font-size: 21px; font-weight: 600; letter-spacing: -.03em; }
+.description { margin: 16px 0; color: #647188; font-size: 14px; line-height: 1.6; }
+.form { margin-top: 24px; }
+.form input { width: 100%; min-width: 0; }
+.status { display: grid; gap: 18px; margin: 24px 0; }
+.status dt { color: #647188; font-size: 12px; }
+.status dd { margin: 6px 0 0; font-size: 14px; overflow-wrap: anywhere; }
+@media (max-width: 767px) { .grid { grid-template-columns: minmax(0, 1fr); } }

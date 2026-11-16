@@ -7,9 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-
-export const WHATSAPP_SPECIALIST_URL =
-  "https://wa.me/5515991269893?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações";
+import { createFormRequest, type SubmissionReceipt } from "../../lib/form-request";
 
 const openSpecialistContactEvent = "daytrade:open-specialist-contact";
 const focusableSelector =
@@ -42,6 +40,7 @@ export function SpecialistContactModal() {
   const [isSending, setIsSending] = useState(false);
   const [formError, setFormError] = useState("");
   const sendingRef = useRef(false);
+  const sendContact = useRef(createFormRequest());
 
   const closeModal = () => setIsOpen(false);
 
@@ -111,23 +110,16 @@ export function SpecialistContactModal() {
     setFormError("");
     const data = new FormData(event.currentTarget);
     try {
-      const response = await fetch("/api/contacts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: data.get("name"), empresa: data.get("company"), telefone: data.get("phone") }), signal: AbortSignal.timeout(15_000) });
-      const result = await response.json();
-      if (!response.ok || !result.success) throw new Error(result.error || "Não foi possível salvar seu contato.");
+      const result = await sendContact.current<SubmissionReceipt & { whatsappUrl: string }>("/api/contacts", { nome: data.get("name"), empresa: data.get("company"), telefone: data.get("phone") });
+      const whatsappUrl = new URL(result.whatsappUrl);
+      if (whatsappUrl.origin !== "https://wa.me") throw new Error("Não foi possível abrir o atendimento. Tente novamente.");
+      window.location.assign(whatsappUrl.toString());
     } catch (error) {
       setFormError(error instanceof Error && error.name === "Error" ? error.message : "Não foi possível salvar seu contato. Tente novamente.");
       sendingRef.current = false;
       setIsSending(false);
       return;
     }
-    const whatsappUrl = new URL(WHATSAPP_SPECIALIST_URL);
-
-    whatsappUrl.searchParams.set(
-      "text",
-      `Olá, sou ${data.get("name")}, da empresa ${data.get("company")}. Vim pelo site e gostaria de mais informações.`,
-    );
-
-    window.location.assign(whatsappUrl.toString());
     sendingRef.current = false;
     setIsSending(false);
   };

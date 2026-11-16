@@ -1,12 +1,14 @@
 "use client";
 
 import { type FormEvent, useRef, useState } from "react";
+import { createFormRequest } from "../../lib/form-request";
 import styles from "../../app/carreira/Careers.module.css";
 
 export function CareerForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const sending = useRef(false);
+  const sendCareer = useRef(createFormRequest());
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,9 +25,7 @@ export function CareerForm() {
     setStatus("sending");
     setMessage("");
     try {
-      const response = await fetch("/api/careers", { method: "POST", body: data, signal: AbortSignal.timeout(25_000) });
-      const result = await response.json();
-      if (!response.ok || result.success !== true) throw new Error(result.error || "Não foi possível confirmar o envio. Tente novamente.");
+      await sendCareer.current("/api/careers", data, 25_000);
       form.reset();
       setStatus("success");
       setMessage("Currículo enviado! Obrigado por compartilhar sua trajetória com a DayTrade.");

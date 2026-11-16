@@ -1,4 +1,5 @@
 import { db } from "./db.ts";
+import { environmentInstagramUsername, instagramConnection, instagramConnectionStatus } from "./instagram-settings.ts";
 
 const refreshInterval = 15 * 60 * 1000;
 const maxCacheAge = 24 * 60 * 60 * 1000;
@@ -6,8 +7,7 @@ export type InstagramPost = { id: string; caption: string; permalink: string; im
 type Feed = { username: string; posts: string; last_success_at: string | null; next_attempt_at: number; lease_until: number; last_error: string | null };
 
 export function instagramUsername() {
-  const name = (process.env.INSTAGRAM_USERNAME || "daytradesa").replace(/^@/, "").toLowerCase();
-  return /^[a-z0-9._]{1,30}$/.test(name) ? name : "daytradesa";
+  return environmentInstagramUsername();
 }
 function instagramLink(value: unknown) {
   if (typeof value !== "string") return null;
@@ -40,12 +40,12 @@ export function normalizeInstagramPosts(value: unknown): InstagramPost[] {
 }
 
 export async function instagramFeed() {
-  const username = instagramUsername();
+  const { username, configured } = await instagramConnectionStatus();
   const row = (await db.query<Feed>("SELECT * FROM instagram_feeds WHERE username=$1", [username])).rows[0];
   const fresh = row?.last_success_at && Date.parse(row.last_success_at) > Date.now() - maxCacheAge;
   // Only public post fields are returned, never account credentials or raw API responses.
   const posts: InstagramPost[] = fresh ? JSON.parse(row.posts) : [];
-  return { username, posts, lastSuccess: row?.last_success_at || null, lastError: row?.last_error || null, configured: Boolean(process.env.INSTAGRAM_ACCESS_TOKEN) };
+  return { username, posts, lastSuccess: row?.last_success_at || null, lastError: row?.last_error || null, configured };
 }
 
 class InstagramError extends Error {}
@@ -62,9 +62,11 @@ async function graphRequest(path: string, fields: Record<string, string>, token:
 }
 
 export async function syncInstagram(force = false) {
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+  let config: Awaited<ReturnType<typeof instagramConnection>>;
+  try { config = await instagramConnection(); }
+  catch { return "credentials_unavailable"; }
+  const { token, username } = config;
   if (!token) return "not_configured";
-  const username = instagramUsername();
   const now = Date.now();
   await db.query("INSERT INTO instagram_feeds(username) VALUES($1) ON CONFLICT(username) DO NOTHING", [username]);
   // A short lease prevents concurrent worker/manual refreshes from repeating API calls.
@@ -74,7 +76,7 @@ export async function syncInstagram(force = false) {
     const identityResponse = await graphRequest("me", { fields: "user_id,username" }, token);
     const identity = Array.isArray(identityResponse.data) ? identityResponse.data[0] : identityResponse;
     const userId = String(identity?.user_id || identity?.id || "");
-    if (!/^\d+$/.test(userId) || String(identity.username).toLowerCase() !== username || (process.env.INSTAGRAM_USER_ID && process.env.INSTAGRAM_USER_ID !== userId)) throw new InstagramError("wrong_account");
+    if (!/^\d+$/.test(userId) || String(identity.username).toLowerCase() !== username || (config.userId && config.userId !== userId)) throw new InstagramError("wrong_account");
     const result = await graphRequest(`${userId}/media`, { fields: "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp", limit: "25" }, token);
     if (!Array.isArray(result.data)) throw new InstagramError("api_unavailable");
     const posts = normalizeInstagramPosts(result.data);

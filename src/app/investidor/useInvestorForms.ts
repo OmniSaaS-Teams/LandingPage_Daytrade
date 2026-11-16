@@ -1,21 +1,11 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { createFormRequest, type SubmissionReceipt } from "../../lib/form-request";
+import type { InvestmentSimulation } from "../../lib/investment-simulation";
 
 export const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-type Simulation = { name: string; amount: number; years: number; date: string };
-
-async function sendInterest(data: Record<string, unknown>) {
-  const response = await fetch("/api/investor-leads", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...data, pagina_origem: window.location.href }),
-  });
-  const result = await response.json();
-  if (!response.ok || result.success !== true) {
-    throw new Error(result.error || "Ocorreu um erro ao enviar. Tente novamente mais tarde.");
-  }
-}
+type Simulation = InvestmentSimulation & { name: string; date: string };
 
 export function useInvestorForms() {
   const [result, setResult] = useState<Simulation | null>(null);
@@ -27,6 +17,8 @@ export function useInvestorForms() {
   const simulationInProgress = useRef(false);
   const contactInProgress = useRef(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const sendSimulation = useRef(createFormRequest());
+  const sendPresentation = useRef(createFormRequest());
 
   async function simulate(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,8 +37,9 @@ export function useInvestorForms() {
     setSimulationBusy(true);
     setSimulationError("");
     try {
-      await sendInterest({ nome: name, email: data.get("emailInvestidor"), telefone: data.get("telefoneInvestidor"), valor: amount, periodo: String(years), origem: "simulador_investimento" });
-      setResult({ name, amount, years, date: new Date().toLocaleDateString("pt-BR") });
+      const receipt = await sendSimulation.current<SubmissionReceipt & { simulation: InvestmentSimulation }>("/api/investor-leads", { nome: name, email: data.get("emailInvestidor"), telefone: data.get("telefoneInvestidor"), valor: amount, periodo: String(years), origem: "simulador_investimento", pagina_origem: window.location.pathname });
+      if (!receipt.simulation?.values) throw new Error("Não foi possível obter o resultado da simulação. Tente novamente.");
+      setResult({ ...receipt.simulation, name, date: new Date(receipt.createdAt).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" }) });
       requestAnimationFrame(() => {
         resultRef.current?.focus({ preventScroll: true });
         resultRef.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "center" });
@@ -68,7 +61,7 @@ export function useInvestorForms() {
     setContactBusy(true);
     setContactError("");
     try {
-      await sendInterest({ nome: data.get("nome"), email: data.get("email"), perfil: data.get("perfil"), origem: "solicitar_apresentacao" });
+      await sendPresentation.current("/api/investor-leads", { nome: data.get("nome"), email: data.get("email"), perfil: data.get("perfil"), origem: "solicitar_apresentacao", pagina_origem: window.location.pathname });
       form.reset();
       setContactSuccess(true);
     } catch (cause) {
@@ -79,15 +72,7 @@ export function useInvestorForms() {
     }
   }
 
-  // Calculation assumptions from the original landing page, unchanged.
-  const amount = result?.amount ?? 10000;
-  const years = result?.years ?? 1;
-  const annualCdi = 0.1125;
-  const values = {
-    poupanca: amount * (1 + annualCdi * 0.69) ** years,
-    cdb: amount * (1 + annualCdi) ** years,
-    carteira: amount * (1 + annualCdi * 1.2) ** years,
-  };
+  const values = result?.values ?? { poupanca: 0, cdb: 0, carteira: 0 };
 
   return { result, values, resultRef, simulate, simulationBusy, simulationError, submitInterest, contactBusy, contactSuccess, contactError };
 }

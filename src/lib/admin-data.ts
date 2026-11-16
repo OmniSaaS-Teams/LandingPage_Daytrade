@@ -1,6 +1,6 @@
 import { db } from "./db.ts";
 
-export const kinds: Record<string, string> = { lead: "Seja cliente", investor: "Investidor", career: "Carreira", contact: "Contato WhatsApp" };
+export const kinds: Record<string, string> = { lead: "Seja cliente", investor: "Investidor", career: "Carreira", contact: "Contato" };
 export const statuses: Record<string, string> = { novo: "Novo", em_atendimento: "Em atendimento", concluido: "Concluído", arquivado: "Arquivado" };
 export const jobStatuses: Record<string, string> = { pending: "Pendente", processing: "Enviando", sent: "Entregue", failed: "Falhou" };
 export const dateLabel = (date: string | Date) => new Date(date).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });

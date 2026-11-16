@@ -104,8 +104,9 @@ test("failed webhook preserves the contact, retries and stops after five attempt
   }finally{network.mock.restore();}
 });
 test("migration runner is idempotent",async()=>{
+  const before = (await db.query("SELECT * FROM schema_migrations ORDER BY name")).rows;
   await migrate();
-  assert.equal((await db.query("SELECT * FROM schema_migrations")).rows.length,1);
+  assert.deepEqual((await db.query("SELECT * FROM schema_migrations ORDER BY name")).rows,before);
 });
 test("capture and queued delivery roll back together on error",async()=>{
   process.env.N8N_LEAD_WEBHOOK_URL="https://n8n.example.test/lead";

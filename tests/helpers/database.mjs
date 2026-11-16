@@ -15,7 +15,7 @@ export function databaseFixture() {
     await migrate();
   });
   beforeEach(async () => {
-    await db.exec("DELETE FROM webhook_jobs; DELETE FROM submissions; DELETE FROM uploads; DELETE FROM admin_sessions; DELETE FROM admin_users; DELETE FROM rate_limits; DELETE FROM blog_posts;");
+    await db.exec("DELETE FROM webhook_jobs; DELETE FROM submissions; DELETE FROM uploads; DELETE FROM admin_sessions; DELETE FROM admin_users; DELETE FROM rate_limits; DELETE FROM blog_posts; DELETE FROM instagram_feeds;");
     delete process.env.N8N_LEAD_WEBHOOK_URL;
     delete process.env.N8N_INVESTOR_WEBHOOK_URL;
     delete process.env.N8N_CAREER_WEBHOOK_URL;

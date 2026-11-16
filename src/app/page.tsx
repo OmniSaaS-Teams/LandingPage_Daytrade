@@ -8,6 +8,7 @@ import { FAQ } from "../components/sections/FAQ/FAQ";
 import { Footer } from "../components/layout/Footer";
 import { BrandWaves } from "../components/ui/BrandWaves";
 import styles from "./page.module.css";
+import { Instagram } from "../components/sections/Instagram/Instagram";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <Process />
         <div className={styles.waveDivider}><BrandWaves className={styles.waves} /></div>
         <Blog />
+        <Instagram />
         <BankCTA />
         <FAQ />
       </main>

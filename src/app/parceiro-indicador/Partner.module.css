@@ -1,0 +1,685 @@
+.headerSpace {
+  height: 96px;
+  background: #030316;
+}
+
+.page {
+  --navy: #00213d;
+  --accent: #08083d;
+  background: #fff;
+  color: #263746;
+}
+
+.hero h1,
+.applicationCopy h2,
+.closingCopy h2 {
+  font-family: var(--display);
+}
+
+.container {
+  width: min(100% - 96px, 1216px);
+  margin-inline: auto;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(100svh - 96px);
+  min-height: 600px;
+  color: #fff;
+  isolation: isolate;
+}
+
+.heroImage {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 65% center;
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(0 21 39 / 86%) 0%, rgb(0 27 47 / 56%) 43%, rgb(0 21 39 / 12%) 100%);
+}
+
+.heroCopy {
+  max-width: 512px;
+  padding-block: 60px;
+}
+
+.hero h1 {
+  max-width: 500px;
+  margin: 0;
+  font-size: clamp(48px, 5.3vw, 76px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+.heroCopy>p {
+  margin: 38px 0 0;
+  font-size: clamp(21px, 2vw, 28px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.035em;
+}
+
+.benefits {
+  padding-block: 96px;
+  background: #f4f7f8;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.benefitCard {
+  min-height: 208px;
+  padding: 40px;
+  border: 1px solid #edf1f3;
+  border-radius: 32px;
+  background: #fff;
+  box-shadow: 0 2px 3px rgb(0 33 61 / 3%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgb(0 33 61 / 7%);
+}
+
+.benefitCard svg {
+  display: block;
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+}
+
+.benefitCard p {
+  margin-top: 24px;
+  color: var(--navy);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.introduction {
+  padding-block: 80px;
+}
+
+.narrowContainer {
+  width: min(100% - 48px, 856px);
+  margin-inline: auto;
+}
+
+.introduction p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.introduction p+p {
+  margin-top: 32px;
+}
+
+.page strong {
+  font-weight: 700;
+}
+
+.application {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+  padding: 24px clamp(24px, 4vw, 56px);
+  background: linear-gradient(120deg, #030316 0%, #08083d 55%, #111154 100%);
+  color: #fff;
+  scroll-margin-top: 24px;
+}
+
+.applicationCopy {
+  min-width: 0;
+}
+
+.applicationCopy h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(26px, 2.4vw, 32px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.applicationCopy p {
+  max-width: 400px;
+  margin-top: 12px;
+  color: #c0c6db;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  align-items: center;
+  gap: 12px 20px;
+  width: 100%;
+  min-width: 0;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 8px;
+  outline: none;
+  background: rgb(255 255 255 / 7%);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.field input::placeholder {
+  color: #b2c3ce;
+  opacity: 1;
+}
+
+.field select:has(option:checked[value=""]) {
+  color: #b2c3ce;
+}
+
+.field select option {
+  color: #fff;
+  background: #08083d;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #86d5e5;
+  background: rgb(255 255 255 / 11%);
+  box-shadow: 0 0 0 3px rgb(134 213 229 / 15%);
+}
+
+.formActions {
+  display: flex;
+  align-self: end;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.formActions p {
+  max-width: 210px;
+  margin: 0;
+  color: #c0c6db;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.submit {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #08083d;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.submit:hover {
+  background: #e7eaf4;
+}
+
+.submit:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.submit:disabled:has(.spinner) {
+  cursor: wait;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  border: 2px solid rgb(8 8 61 / 20%);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: partnerSpinner 700ms linear infinite;
+}
+
+@keyframes partnerSpinner {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+
+.fields:disabled {
+  opacity: 0.65;
+}
+
+.formError {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  padding: 14px;
+  margin-top: 20px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.formError {
+  border-color: #f3a6a6;
+  background: rgb(190 40 40 / 20%);
+  color: #ffd6d6;
+}
+
+.successDialog {
+  position: fixed;
+  inset: 0;
+  width: min(440px, calc(100% - 40px));
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #e7ecf0;
+  border-radius: 16px;
+  background: #fff;
+  color: #263746;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+}
+
+.successDialog::backdrop {
+  background: rgb(3 3 22 / 65%);
+  backdrop-filter: blur(4px);
+}
+
+.successContent {
+  position: relative;
+  padding: 40px 32px 32px;
+  text-align: center;
+}
+
+.closeDialog {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: #657484;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.closeDialog:hover { background: #f3f6f8; }
+
+.successIcon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: #e9f3ed;
+  color: #287847;
+}
+
+.successContent h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  color: #00213d;
+}
+
+.successContent p {
+  margin: 16px 0 28px;
+  color: #657484;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.confirmDialog {
+  min-height: 40px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #00213d;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.confirmDialog:hover { background: #06456a; }
+
+.closeDialog:focus-visible,
+.confirmDialog:focus-visible {
+  outline: 3px solid #86d5e5;
+  outline-offset: 3px;
+}
+
+.closing {
+  padding-block: 96px;
+}
+
+.closingGrid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.closingCopy h2 {
+  margin: 0 0 30px;
+  color: var(--navy);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.closingCopy p {
+  margin: 0 0 26px;
+  font-size: 20px;
+  line-height: 1.75;
+}
+
+.closingVisual {
+  position: relative;
+  min-height: 640px;
+  align-self: stretch;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.closingImage {
+  object-fit: cover;
+  object-position: 70% center;
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  min-height: 48px;
+  margin-top: 18px;
+  padding: 13px 20px;
+  border-radius: 5px;
+  color: #fff;
+  background: #00213d;
+  font-family: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.primaryAction:hover {
+  background: #06456a;
+}
+
+.primaryAction:focus-visible,
+.submit:focus-visible {
+  outline: 3px solid #86d5e5;
+  outline-offset: 5px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (max-width: 1023px) {
+  .headerSpace {
+    height: 80px;
+  }
+
+  .container {
+    width: calc(100% - 64px);
+  }
+
+  .hero {
+    height: calc(100svh - 80px);
+  }
+
+  .benefitCard {
+    padding: 30px;
+  }
+
+  .application {
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 32px;
+    padding: 24px 32px;
+  }
+
+  .form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .formActions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .closingGrid {
+    gap: 40px;
+    grid-template-columns: 1.15fr 1fr;
+  }
+
+  .closingCopy p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: calc(100% - 48px);
+  }
+
+  .hero {
+    min-height: 560px;
+  }
+
+  .heroCopy {
+    max-width: 400px;
+  }
+
+  .hero h1 {
+    max-width: 350px;
+    font-size: clamp(36px, 8.6vw, 54px);
+  }
+
+  .heroCopy>p {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .heroImage {
+    object-position: 59% center;
+  }
+
+  .heroShade {
+    background: linear-gradient(90deg, rgb(0 21 39 / 78%), rgb(0 21 39 / 22%));
+  }
+
+  .benefits {
+    padding-block: 64px;
+  }
+
+  .benefitsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .benefitCard {
+    padding: 28px;
+    border-radius: 26px;
+  }
+
+  .benefitCard p {
+    font-size: 18px;
+  }
+
+  .introduction {
+    padding: 64px 0 0;
+  }
+
+  .introduction p {
+    font-size: 17px;
+  }
+
+  .application {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+    padding: 24px;
+  }
+
+  .applicationCopy h2 {
+    max-width: 480px;
+    font-size: 26px;
+  }
+
+  .applicationCopy p {
+    max-width: 420px;
+    margin-top: 8px;
+  }
+
+  .formActions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .formActions p {
+    max-width: 100%;
+  }
+
+  .closing {
+    padding-block: 64px;
+  }
+
+  .closingGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .closingCopy h2 {
+    font-size: 32px;
+  }
+
+  .closingCopy p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .closingVisual {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 479px) {
+  .benefitsGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .benefitCard {
+    min-height: 188px;
+    padding: 32px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    letter-spacing: -0.04em;
+  }
+
+  .heroCopy>p {
+    max-width: 310px;
+    font-size: 18px;
+  }
+
+  .application {
+    padding: 20px;
+  }
+
+  .fields {
+    column-gap: 12px;
+  }
+
+  .field input,
+  .field select {
+    padding-inline: 10px;
+  }
+
+  .submit {
+    width: 100%;
+  }
+}
+
+@media (max-width: 359px) {
+  .headerSpace {
+    height: 64px;
+  }
+
+  .hero {
+    height: calc(100svh - 64px);
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+}

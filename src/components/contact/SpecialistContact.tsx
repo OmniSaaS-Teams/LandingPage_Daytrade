@@ -39,6 +39,9 @@ export function SpecialistContactModal() {
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const [isSending, setIsSending] = useState(false);
+  const [formError, setFormError] = useState("");
+  const sendingRef = useRef(false);
 
   const closeModal = () => setIsOpen(false);
 
@@ -100,17 +103,33 @@ export function SpecialistContactModal() {
     };
   }, [isOpen]);
 
-  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    if (sendingRef.current) return;
+    sendingRef.current = true;
+    setIsSending(true);
+    setFormError("");
+    const data = new FormData(event.currentTarget);
+    try {
+      const response = await fetch("/api/contacts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: data.get("name"), empresa: data.get("company"), telefone: data.get("phone") }), signal: AbortSignal.timeout(15_000) });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.error || "Não foi possível salvar seu contato.");
+    } catch (error) {
+      setFormError(error instanceof Error && error.name === "Error" ? error.message : "Não foi possível salvar seu contato. Tente novamente.");
+      sendingRef.current = false;
+      setIsSending(false);
+      return;
+    }
     const whatsappUrl = new URL(WHATSAPP_SPECIALIST_URL);
 
     whatsappUrl.searchParams.set(
       "text",
-      "Olá, vim pelo site e gostaria de mais informações.",
+      `Olá, sou ${data.get("name")}, da empresa ${data.get("company")}. Vim pelo site e gostaria de mais informações.`,
     );
 
     window.location.assign(whatsappUrl.toString());
+    sendingRef.current = false;
+    setIsSending(false);
   };
 
   if (!isOpen) {
@@ -159,7 +178,7 @@ export function SpecialistContactModal() {
           Conte um pouco sobre você. Ao enviar, abriremos uma conversa no WhatsApp com nossa equipe.
         </p>
 
-        <form className="mt-7 grid gap-4" onSubmit={submitForm}>
+        <form className="mt-7 grid gap-4" onSubmit={submitForm} aria-busy={isSending}>
           <label htmlFor="specialist-name" className="grid gap-1.5 text-sm font-medium text-zinc-800">
             Nome
             <input
@@ -196,10 +215,12 @@ export function SpecialistContactModal() {
           </label>
           <button
             type="submit"
+            disabled={isSending}
             className="mt-2 inline-flex h-11 items-center justify-center rounded-md bg-[#00213d] px-5 text-sm font-medium text-white transition hover:bg-[#00345f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00213d]"
           >
-            Continuar no WhatsApp
+            {isSending ? "Salvando contato…" : "Continuar no WhatsApp"}
           </button>
+          {formError && <p role="alert" className="text-sm text-red-700">{formError}</p>}
         </form>
       </div>
     </div>

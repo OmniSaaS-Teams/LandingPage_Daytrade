@@ -6,6 +6,7 @@ import { BankCTA } from "../components/sections/CTA/BankCTA";
 import { Blog } from "../components/sections/Blog/Blog";
 import { FAQ } from "../components/sections/FAQ/FAQ";
 import { Footer } from "../components/layout/Footer";
+import { BrandWaves } from "../components/ui/BrandWaves";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -14,9 +15,11 @@ export default function Home() {
       <main>
         <Hero />
         <Insights />
+        <div className={`${styles.sectionDivider} ${styles.blueDivider}`} aria-hidden="true" />
         <Features />
         <div className={styles.sectionDivider} aria-hidden="true" />
         <Process />
+        <div className={styles.waveDivider}><BrandWaves className={styles.waves} /></div>
         <Blog />
         <BankCTA />
         <FAQ />

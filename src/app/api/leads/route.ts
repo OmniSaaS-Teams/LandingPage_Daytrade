@@ -1,3 +1,6 @@
+import { captureSubmission } from "../../../lib/submissions.ts";
+import { readJson, BodyTooLargeError } from "../../../lib/read-json.ts";
+
 const leadContext = {
   idEmpresa: "001",
   empresa: "Daytrade",
@@ -7,14 +10,13 @@ const leadContext = {
   descricaoCampanha: "Google Ads",
 };
 
-const failureMessage = "Não foi possível confirmar o envio. Tente novamente em instantes.";
-
 export async function POST(request: Request) {
   let data: unknown;
 
   try {
-    data = await request.json();
-  } catch {
+    data = await readJson(request);
+  } catch (error) {
+    if (error instanceof BodyTooLargeError) return Response.json({ error: "Formulário excede o tamanho permitido." }, { status: 413 });
     return Response.json({ error: "Dados inválidos. Verifique o formulário." }, { status: 400 });
   }
 
@@ -48,28 +50,5 @@ export async function POST(request: Request) {
     return Response.json({ error: "Informe um e-mail válido." }, { status: 400 });
   }
 
-  const webhookUrl = process.env.N8N_LEAD_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    return Response.json({ error: failureMessage }, { status: 503 });
-  }
-
-  try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...leadContext, lead }),
-      cache: "no-store",
-      redirect: "error",
-      signal: AbortSignal.timeout(15_000),
-    });
-
-    if (!response.ok) {
-      return Response.json({ error: failureMessage }, { status: 502 });
-    }
-
-    return Response.json({ success: true });
-  } catch {
-    return Response.json({ error: failureMessage }, { status: 502 });
-  }
+  return captureSubmission("lead", { ...leadContext, ...lead });
 }

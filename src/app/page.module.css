@@ -1,3 +1,17 @@
+.waveDivider {
+  width: 100%;
+  height: clamp(100px, 12vw, 190px);
+  overflow: hidden;
+  background: #ffffff;
+  pointer-events: none;
+}
+
+.waves {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .sectionDivider {
   position: relative;
   width: 100%;
@@ -15,6 +29,10 @@
   height: 1px;
   background: #a8cf45;
   transform: translate(-50%, -50%);
+}
+
+.blueDivider::before {
+  background: #00008b;
 }
 
 @media (max-width: 767px) {

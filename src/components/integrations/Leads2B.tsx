@@ -1,11 +1,13 @@
 "use client";
 
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const desktopMediaQuery = "(min-width: 768px)";
 
 export function Leads2B() {
+  const pathname = usePathname();
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export function Leads2B() {
     return () => mediaQuery.removeEventListener("change", syncViewport);
   }, []);
 
-  if (!isDesktop) {
+  if (!isDesktop || pathname.startsWith("/admin")) {
     return null;
   }
 

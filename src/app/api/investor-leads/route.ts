@@ -1,12 +1,12 @@
-const failureMessage = "Não foi possível confirmar o envio. Tente novamente em instantes.";
-// Same destination as the supplied investor landing page; override per environment when needed.
-const referenceWebhook = "https://n8n.omnisaas.com.br/stg/fb5e9f6a-5690-4fce-9a1f-cc88f57ef134";
+import { captureSubmission } from "../../../lib/submissions.ts";
+import { readJson, BodyTooLargeError } from "../../../lib/read-json.ts";
+
 const profiles = ["Investidor pessoa física", "Investidor pessoa jurídica", "Parceiro comercial", "Outro"];
 
 export async function POST(request: Request) {
   let data: unknown;
-  try { data = await request.json(); }
-  catch { return Response.json({ error: "Dados inválidos. Verifique o formulário." }, { status: 400 }); }
+  try { data = await readJson(request); }
+  catch (error) { return Response.json({ error: "Dados inválidos. Verifique o formulário." }, { status: error instanceof BodyTooLargeError ? 413 : 400 }); }
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     return Response.json({ error: "Dados inválidos. Verifique o formulário." }, { status: 400 });
   }
@@ -34,16 +34,5 @@ export async function POST(request: Request) {
   } else {
     return Response.json({ error: "Selecione um perfil e verifique o formulário." }, { status: 400 });
   }
-  try {
-    const response = await fetch(process.env.N8N_INVESTOR_WEBHOOK_URL || referenceWebhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      cache: "no-store",
-      redirect: "error",
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!response.ok) return Response.json({ error: failureMessage }, { status: 502 });
-    return Response.json({ success: true });
-  } catch { return Response.json({ error: failureMessage }, { status: 502 }); }
+  return captureSubmission("investor", payload);
 }

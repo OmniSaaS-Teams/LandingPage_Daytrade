@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function InvestorPage() {
   return (
     <>
-      <Navbar />
+      <Navbar background="gradient" />
       <InvestorContent />
       <Footer />
     </>

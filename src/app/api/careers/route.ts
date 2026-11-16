@@ -1,7 +1,8 @@
+import { captureSubmission } from "../../../lib/submissions.ts";
+
 const maxFileSize = 5 * 1024 * 1024;
 const maxRequestSize = maxFileSize + 128 * 1024;
 const areas = new Set(["Comercial e relacionamento", "Crédito e operações", "Administrativo e financeiro", "Tecnologia e dados", "Outras áreas"]);
-const failureMessage = "Não foi possível confirmar o envio do currículo. Tente novamente em instantes.";
 const invalid = (error: string, status = 400) => Response.json({ error }, { status });
 
 export async function POST(request: Request) {
@@ -65,20 +66,6 @@ export async function POST(request: Request) {
     : null;
   if (!mime) return invalid("Envie um arquivo PDF, DOC ou DOCX válido.");
 
-  const webhookUrl = process.env.N8N_CAREER_WEBHOOK_URL;
-  if (!webhookUrl) return invalid("O recebimento de currículos está temporariamente indisponível. Tente novamente mais tarde.", 503);
-
-  const payload = new FormData();
-  for (const [key, value] of Object.entries({ nome, email, telefone, area, mensagem, consentimento: "true", origem: "Site DayTrade - Carreira" })) {
-    payload.set(key, value);
-  }
-  // Use a server-defined filename and MIME; do not trust uploaded metadata.
-  payload.set("curriculo", new Blob([await file.arrayBuffer()], { type: mime }), `curriculo.${extension}`);
-  try {
-    const response = await fetch(webhookUrl, { method: "POST", body: payload, redirect: "error", cache: "no-store", signal: AbortSignal.timeout(15_000) });
-    if (!response.ok) return invalid(failureMessage, 502);
-    return Response.json({ success: true });
-  } catch {
-    return invalid(failureMessage, 502);
-  }
+  const resume = new File([await file.arrayBuffer()], `curriculo.${extension}`, { type: mime });
+  return captureSubmission("career", { nome, email, telefone, area, mensagem, consentimento: true, origem: "Site DayTrade - Carreira" }, resume);
 }

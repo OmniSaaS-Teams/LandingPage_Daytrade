@@ -1,0 +1,25 @@
+name: daytrade
+services:
+  app:
+    image: daytrade-site:local
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DATABASE_FILE: /app/data/daytrade.sqlite
+      UPLOAD_DIR: /app/data/private
+    volumes:
+      - data:/app/data
+    ports:
+      - "127.0.0.1:3000:3000"
+    init: true
+    stop_grace_period: 20s
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+volumes:
+  data:

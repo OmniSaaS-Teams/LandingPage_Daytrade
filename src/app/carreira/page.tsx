@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navbar } from "../../components/layout/Navbar";
 import { Footer } from "../../components/layout/Footer";
 import { CareerForm } from "../../components/careers/CareerForm";
+import { BrandWaves } from "../../components/ui/BrandWaves";
 import styles from "./Careers.module.css";
 
 export const metadata: Metadata = {
@@ -16,16 +17,6 @@ const principles = [
   ["02", "Conhecimento que move", "Ter curiosidade para aprender, compartilhar experiências e encontrar caminhos mais claros."],
   ["03", "Responsabilidade em cada decisão", "Agir com cuidado, transparência e compromisso com o que fazemos."],
 ];
-
-function CareerWaves({ bottom = false }: { bottom?: boolean }) {
-  return (
-    <svg className={bottom ? styles.bottomWaves : styles.waves} viewBox="0 0 1440 300" fill="none" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M-80 120C200 340 390 30 610 133S980 370 1510 20" stroke="#eaf1f6" strokeWidth="45" />
-      <path d="M-60 210C260 350 390 35 610 130S1040 330 1490 45" stroke="#a7ce45" strokeWidth="4" />
-      <path d="M-60 145C270 340 490 225 760 108S1050 48 1180 213 1310 230 1500 60" stroke="#08083d" strokeWidth="20" />
-    </svg>
-  );
-}
 
 export default function CareersPage() {
   return (
@@ -46,7 +37,7 @@ export default function CareersPage() {
               <span className={styles.photoCaption}>Conexões que abrem caminhos.</span>
             </div>
           </div>
-          <CareerWaves />
+          <BrandWaves className={styles.waves} />
         </section>
 
         <section id="nossa-cultura" className={styles.intro} aria-labelledby="culture-title">
@@ -90,7 +81,7 @@ export default function CareersPage() {
           <p>Queremos conhecer pessoas, suas histórias e suas possibilidades. Apresente quem você é, o que já aprendeu e onde quer chegar.</p>
         </section>
 
-        <div className={styles.waveDivider}><CareerWaves bottom /></div>
+        <div className={styles.waveDivider}><BrandWaves className={styles.bottomWaves} /></div>
 
         <section id="candidate-se" className={styles.application} aria-labelledby="application-title">
           <div className={styles.applicationCopy}>

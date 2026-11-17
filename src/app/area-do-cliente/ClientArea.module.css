@@ -14,6 +14,19 @@
   padding-bottom: 24px;
 }
 
+.resourceImageVisual {
+  position: relative;
+  flex-shrink: 0;
+  height: 122px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.resourceImage {
+  object-fit: contain;
+}
+
 .resourceCard .resourceAction {
   display: inline-flex;
   align-items: center;

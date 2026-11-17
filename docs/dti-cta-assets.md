@@ -6,7 +6,8 @@ oficiais do aplicativo nem uma oferta de cartão. As imagens mantêm transparên
 
 Atualização: a tela do celular foi substituída pela captura azul de login DTI fornecida
 pelo usuário, aplicada à moldura em perspectiva com ImageGen. O novo arquivo é
-`public/images/dti-cta-phone-login.png`; o anterior foi preservado.
+`public/images/dti-cta-phone-login.png`; a versão anterior foi removida na limpeza
+dos arquivos sem uso.
 
 Prompt da atualização: inserir a captura azul DTI na tela do mockup de celular,
 preservando o fundo azul, a logo, os textos em português, a moldura metálica,
@@ -16,10 +17,10 @@ Mostrar o aparelho isolado e completo, com fundo transparente, sem cartão ou pa
 Fonte de conteúdo e destino do botão: https://www.bancodti.com.br/
 
 Saídas no projeto:
-- `public/images/dti-cta-phone.png`
+- `public/images/dti-cta-phone-login.png`
 - `public/images/dti-cta-card.png`
 
-## Prompt do celular
+## Prompt original do celular (histórico)
 
 Use case: precise-object-edit. Asset: transparent smartphone cutout for Banco DTI website CTA. Edit image 1, preserve the realistic silver/black angled smartphone silhouette, perspective, full object, clean transparent edges. Replace ONLY its screen with a premium Portuguese DTI Digital business banking illustrative interface. Supporting brand reference image 2 is the exact DTI white and gold logo; use DTI branding and dark navy #08083d, warm gold #ba8d31 accents, white screen. Top 'DTI Digital', 'Conta empresarial', 'Olá, empresa'. Show 'Visão da conta', 'Pagamentos', 'Transferências', a fine gold line chart, minimalist UI. No real personal identity, no English, no dollar amounts, no invented savings promises. Tiny footer 'Interface ilustrativa'. No floating panels or bank card; phone ONLY as a separate layer. Portrait composition tightly framed around entire phone, no background or floor, genuine transparent alpha. Remove all Payable branding. Return asset and save locally.
 

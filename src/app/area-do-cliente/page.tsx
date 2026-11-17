@@ -98,6 +98,7 @@ export default function ClientAreaPage() {
       <Navbar />
       <main className={styles.page}>
         <InternalHero
+          fullBackground
           id="client-area-title"
           title="Área do Cliente"
           description="Acompanhe sua relação com a DayTrade de forma simples, com mais contexto para cada conversa, solicitação e próximo passo."

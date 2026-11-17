@@ -37,6 +37,7 @@ export default function AboutPage() {
       <main className={styles.page}>
         <InternalHero
           id="about-title"
+          fullBackground
           title="Sobre nós"
           description="Conheça a DayTrade Invest e a ideia que nos move: aproximar investidores e empresas para potencializar novos negócios."
           image="/images/features/bpo.png"

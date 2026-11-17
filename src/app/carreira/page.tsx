@@ -33,7 +33,7 @@ export default function CareersPage() {
               <a className={styles.heroTextLink} href="#nossa-cultura">Conheça o que nos move <span aria-hidden="true">↓</span></a>
             </div>
             <div className={styles.heroPhoto}>
-              <Image src="/images/features/bpo.png" alt="Pessoas colaborando em uma mesa de trabalho" fill preload sizes="(max-width: 767px) 90vw, 38vw" />
+              <Image src="/images/features/carreira-oportunidades.png" alt="Pessoas colaborando em uma mesa de trabalho" fill preload sizes="(max-width: 767px) 90vw, 38vw" />
               <span className={styles.photoCaption}>Conexões que abrem caminhos.</span>
             </div>
           </div>

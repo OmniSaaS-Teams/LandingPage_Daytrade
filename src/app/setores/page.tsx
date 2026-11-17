@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import { InternalHero } from "../../components/layout/InternalHero";
-import { CallToAction } from "../../components/sections/CTA/cta";
+import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
 import styles from "./Sectors.module.css";
+import careerStyles from "../carreira/Careers.module.css";
 
 export const metadata: Metadata = {
   title: "Agro, Indústria e Construtora | DayTrade Invest",
@@ -18,11 +20,11 @@ const sectors = [
     title: "Recursos no ritmo da sua safra.",
     description:
       "Planejamento e crédito para acompanhar cada ciclo, do plantio à expansão do negócio.",
-    tone: "mint",
-    solutions: [
-      { title: "Custeio da produção", description: "Antecipe recebíveis da safra e tenha capital para insumos, sementes e operação no momento certo." },
-      { title: "Planejamento financeiro", description: "Alinhe entradas e saídas ao calendário do campo e reduza o descompasso entre gastos e recebimentos." },
-      { title: "Expansão do negócio", description: "Financie máquinas, tecnologia e novas áreas com uma estrutura de crédito pensada para o agro." },
+    image: "/images/features/credito-cafe.png",
+    imageAlt: "Profissionais conversando sobre o planejamento de um negócio",
+    paragraphs: [
+      "Antecipe recebíveis da safra para ter capital para insumos, sementes e operação no momento certo. Com as entradas e saídas alinhadas ao calendário do campo, você reduz o descompasso entre gastos e recebimentos.",
+      "Para expandir seu negócio, conte com uma estrutura de crédito pensada para financiar máquinas, tecnologia e novas áreas.",
     ],
   },
   {
@@ -31,11 +33,11 @@ const sectors = [
     title: "Capital para a produção avançar.",
     description:
       "Soluções financeiras para manter a operação em movimento e preparar os próximos investimentos.",
-    tone: "blue",
-    solutions: [
-      { title: "Capital de giro", description: "Recursos para matéria-prima, folha de pagamento e custos fixos, sem travar a produção." },
-      { title: "Máquinas e expansão", description: "Transforme duplicatas e vendas a prazo em caixa e ganhe previsibilidade no fluxo financeiro." },
-      { title: "Gestão de caixa", description: "Financie máquinas, automação e ampliação da capacidade com crédito estruturado para a indústria." },
+    image: "/images/features/bpo.png",
+    imageAlt: "Equipe reunida para analisar informações e planejar a operação",
+    paragraphs: [
+      "Tenha recursos para matéria-prima, folha de pagamento e custos fixos, sem travar a produção. Transforme duplicatas e vendas a prazo em caixa para ganhar previsibilidade no fluxo financeiro.",
+      "Na hora de investir, conte com crédito estruturado para financiar máquinas, automação e a ampliação da capacidade da sua indústria.",
     ],
   },
   {
@@ -44,11 +46,11 @@ const sectors = [
     title: "Uma base sólida para cada obra.",
     description:
       "Crédito e planejamento alinhados ao cronograma, do canteiro ao próximo projeto.",
-    tone: "lavender",
-    solutions: [
-      { title: "Financiamento de obras", description: "Capital para materiais, mão de obra e etapas do cronograma, sem deixar a obra desacelerar." },
-      { title: "Antecipação de recebíveis", description: "Antecipe as parcelas das unidades vendidas e libere caixa para a próxima etapa do projeto." },
-      { title: "Novos projetos", description: "Financie terrenos, lançamentos e a próxima fase do negócio com crédito estruturado para o setor." },
+    image: "/images/features/investimento.png",
+    imageAlt: "Profissional analisando documentos diante de uma paisagem urbana",
+    paragraphs: [
+      "Conte com capital para materiais, mão de obra e etapas do cronograma, sem deixar a obra desacelerar. Antecipe as parcelas das unidades vendidas e libere caixa para a próxima etapa do projeto.",
+      "Do terreno aos lançamentos, encontre crédito estruturado para financiar novos projetos e a próxima fase do seu negócio.",
     ],
   },
 ];
@@ -56,57 +58,49 @@ const sectors = [
 export default function SectorsPage() {
   return (
     <>
-      <Navbar />
+      <Navbar background="gradient" />
       <main className={styles.page}>
         <InternalHero
           id="sectors-title"
+          fullBackground
           title="Agro, Indústria e Construtora."
           description="Soluções financeiras para planejar, produzir e construir os próximos passos do seu negócio."
           image="/images/portfolio-products.webp"
           imageAlt="Profissional planejando negócios com uma caneta e um tablet"
         >
-          <a href="#agronegocio">Agro ↓</a>
-          <a href="#industria">Indústria ↓</a>
-          <a href="#construtora">Construtora ↓</a>
+          <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
+          <a className={styles.sectorsLink} href="#agronegocio">Conheça os setores <span aria-hidden="true">↓</span></a>
         </InternalHero>
+
+        <section className={styles.intro} aria-labelledby="sectors-intro-title">
+          <p className={styles.eyebrow}>Setores que movem negócios</p>
+          <h2 id="sectors-intro-title">Soluções para planejar,<br />produzir e <span>construir.</span></h2>
+          <p>Conheça as soluções financeiras da DayTrade para o agronegócio, a indústria e a construção em um só lugar.</p>
+        </section>
+
         {sectors.map((sector, index) => (
           <section
             key={sector.id}
             id={sector.id}
-            className={`${styles.sector} ${styles[sector.tone]}`}
+            className={styles.sector}
             aria-labelledby={`${sector.id}-title`}
           >
-            <div className={styles.sectorHeading}>
-              <div>
-                <p className={styles.eyebrow}>
-                  <span className={styles.sectorNumber}>0{index + 1}</span>
-                  {sector.label}
-                </p>
+            <div className={`${styles.story} ${index % 2 === 1 ? styles.reverse : ""}`}>
+              <div className={styles.storyCopy}>
+                <p className={styles.eyebrow}>{sector.label}</p>
                 <h2 id={`${sector.id}-title`}>{sector.title}</h2>
+                <p>{sector.description}</p>
+                {sector.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                <SpecialistContactButton className={`${careerStyles.textLink} ${styles.contactButton}`}>
+                  Fale com um especialista <span aria-hidden="true">↗</span>
+                </SpecialistContactButton>
               </div>
-              <p className={styles.sectorDescription}>{sector.description}</p>
-            </div>
-            <div className={styles.solutionGrid}>
-              {sector.solutions.map((solution) => (
-                <article key={solution.title} className={styles.solutionCard}>
-                  <h3>{solution.title}</h3>
-                  <p>{solution.description}</p>
-                </article>
-              ))}
+              <div className={styles.storyPhoto}>
+                <Image src={sector.image} alt={sector.imageAlt} fill sizes="(max-width: 767px) 88vw, 45vw" />
+              </div>
             </div>
           </section>
         ))}
-        <CallToAction
-          id="sectors-cta"
-          highlight="Seu próximo passo começa com uma conversa."
-          title="Encontre a solução financeira para o seu negócio."
-          primaryLabel="Fale com um especialista"
-          primaryHref="/#faq"
-          secondaryLabel="Conheça a DayTrade"
-          secondaryHref="/sobre-nos"
-          showPixels={false}
-          variant="blue"
-        />
       </main>
       <Footer />
     </>

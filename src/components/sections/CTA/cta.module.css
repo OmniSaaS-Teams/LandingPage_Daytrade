@@ -329,6 +329,7 @@
         transform: translate(50%, -18px) scale(0.75);
         transform-origin: bottom center;
     }
+
 }
 
 /* =====================================
@@ -443,6 +444,78 @@
         height: 15px;
         flex: 0 0 15px;
     }
+}
+
+.section.imageSection {
+    padding-block: 36px;
+}
+
+.banner.imageBanner {
+    display: block;
+    min-height: 316px;
+    padding: 28px 32px;
+    box-shadow: 0 18px 48px rgba(0, 27, 49, .2);
+}
+
+.backgroundImage {
+    z-index: 0;
+    object-fit: cover;
+    object-position: center 35%;
+}
+
+.imageBanner::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: linear-gradient(90deg, #00213d 0%, rgba(0, 33, 61, .94) 32%, rgba(0, 33, 61, .64) 52%, rgba(0, 33, 61, .1) 76%, transparent 100%);
+    pointer-events: none;
+}
+
+.imageBanner .content {
+    display: block;
+    max-width: 600px;
+}
+
+.imageBanner .title {
+    margin-bottom: 22px;
+    font-size: clamp(24px, 2.35vw, 30px);
+}
+
+.imageBanner .primaryButton,
+.imageBanner .secondaryButton {
+    min-height: 44px;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.imageBanner .primaryButton {
+    border-color: #fff;
+    background: #fff;
+    color: #00213d;
+}
+
+.imageBanner .primaryButton:hover {
+    border-color: #e1f0f4;
+    background: #e1f0f4;
+}
+
+.imageBanner .secondaryButton {
+    border-color: #86a8b7;
+    background: transparent;
+}
+
+.imageBanner .note {
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+@media (max-width: 767px) {
+    .section.imageSection { padding-block: 24px; }
+    .banner.imageBanner { padding: 24px 18px; }
+    .imageBanner .backgroundImage { object-position: 76% center; }
+    .imageBanner::after { background: linear-gradient(90deg, rgba(0, 33, 61, .96), rgba(0, 33, 61, .7)); }
 }
 
 /* =====================================

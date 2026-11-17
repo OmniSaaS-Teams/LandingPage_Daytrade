@@ -172,14 +172,19 @@ export default function ClientAreaPage() {
         <div id="acessar-area">
           <CallToAction
             id="client-area-cta"
-            highlight="Seu próximo investimento começa com uma boa conversa."
-            title="Conheça as possibilidades de investir com a DayTrade."
-            primaryLabel="Fale com um especialista"
-            secondaryLabel="Conheça nossos investimentos"
-            secondaryHref="/investidor"
-            note="Converse com nossa equipe, conheça nossa estrutura e avalie o que faz sentido para os seus objetivos."
+            highlight="Conecte seu patrimônio à economia real."
+            title="Conheça a renda fixa da DayTrade, com lastro em recebíveis e gestão ativa de risco."
+            primaryLabel="Simular meu investimento"
+            primaryHref="/investidor#investimento"
+            secondaryLabel="Conhecer a estrutura"
+            secondaryHref="/investidor#solucoes"
+            note="Simulação gratuita e sem compromisso. Explore a estrutura de investimento e avalie as possibilidades para os seus objetivos."
             showPixels={false}
             variant="blue"
+            backgroundImage={{
+              src: "/images/cta-investidor-cidade-casual.png",
+              alt: "Registro espontâneo de um profissional observando prédios da cidade durante o dia",
+            }}
           />
         </div>
       </main>

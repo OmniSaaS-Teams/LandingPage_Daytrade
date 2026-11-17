@@ -14,6 +14,7 @@ type CallToActionProps = {
     note?: string;
     showPixels?: boolean;
     variant?: "default" | "blue";
+    backgroundImage?: { src: string; alt: string };
 };
 
 const totalColumns = 60;
@@ -69,15 +70,19 @@ export function CallToAction({
     note = "",
     showPixels = true,
     variant = "default",
+    backgroundImage,
 }: CallToActionProps) {
     return (
         <section
             id={id}
-            className={styles.section}
+            className={`${styles.section} ${backgroundImage ? styles.imageSection : ""}`}
             aria-labelledby={`${id}-title`}
         >
             <div className={styles.container}>
-                <div className={`${styles.banner} ${variant === "blue" ? styles.blueBanner : ""}`}>
+                <div className={`${styles.banner} ${variant === "blue" ? styles.blueBanner : ""} ${backgroundImage ? styles.imageBanner : ""}`}>
+                    {backgroundImage && (
+                        <Image src={backgroundImage.src} alt={backgroundImage.alt} fill sizes="100vw" className={styles.backgroundImage} />
+                    )}
                     <div className={styles.content}>
                         <div className={styles.copy}>
                             {variant === "default" ? (

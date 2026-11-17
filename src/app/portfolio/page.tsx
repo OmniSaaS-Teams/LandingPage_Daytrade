@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import portfolioImage from "../../../public/images/portfolio-products.webp";
+import { InternalHero } from "../../components/layout/InternalHero";
+import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import styles from "./Portfolio.module.css";
@@ -111,27 +111,23 @@ const serviceSections = [
 export default function PortfolioPage() {
   return (
     <>
-      <Navbar />
+      <Navbar background="gradient" />
       <main className={styles.page}>
-        <section className={styles.hero} aria-labelledby="portfolio-title">
-          <div className={`${styles.container} ${styles.heroContent}`}>
-            <h1 id="portfolio-title">
-              Portfólio de
-              <br />
-              Produtos
-            </h1>
-            <Image
-              src={portfolioImage}
-              alt="Profissional de negócios com uma caneta e um tablet nas mãos"
-              sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 900px) 52vw, 470px"
-              preload
-              className={styles.heroImage}
-            />
-          </div>
-        </section>
+        <InternalHero
+          id="portfolio-title"
+          fullBackground
+          title="Portfólio de Produtos"
+          description="Conheça o portfólio de produtos da DayTrade e as soluções financeiras para sua empresa."
+          image="/images/portfolio-products.webp"
+          imageAlt="Profissional de negócios com uma caneta e um tablet nas mãos"
+        >
+          <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
+          <a className={styles.productsLink} href="#produtos">Conheça nossos produtos <span aria-hidden="true">↓</span></a>
+        </InternalHero>
 
         <div className={styles.container}>
           <section
+            id="produtos"
             className={styles.exclusives}
             aria-labelledby="exclusive-products-title"
           >

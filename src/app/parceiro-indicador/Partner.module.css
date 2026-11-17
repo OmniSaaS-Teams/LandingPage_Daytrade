@@ -1,8 +1,3 @@
-.headerSpace {
-  height: 96px;
-  background: #030316;
-}
-
 .page {
   --navy: #00213d;
   --accent: #08083d;
@@ -23,14 +18,17 @@
 
 .hero {
   position: relative;
-  display: flex;
-  align-items: center;
-  height: auto;
-  min-height: 544px;
+  min-height: 640px;
+  padding: 184px 0 124px;
   border-bottom: 4px solid #a6ce44;
   overflow: hidden;
   color: #fff;
   isolation: isolate;
+}
+
+.hero > .container {
+  width: calc(100% - 64px);
+  max-width: 1152px;
 }
 
 .heroImage {
@@ -47,25 +45,60 @@
 }
 
 .heroCopy {
-  max-width: 512px;
-  padding-block: 60px;
+  min-width: 0;
+  max-width: 560px;
 }
 
 .hero h1 {
-  max-width: 500px;
   margin: 0;
-  font-size: clamp(48px, 5.3vw, 76px);
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
+  color: #fff;
+  font-size: clamp(44px, 4.2vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
 .heroCopy>p {
-  margin: 38px 0 0;
-  font-size: clamp(21px, 2vw, 28px);
+  max-width: 470px;
+  margin: 26px 0 0;
+  color: #eef0f8;
+  font-size: 17px;
   font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: -0.035em;
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.heroActions > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 17px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: #fff;
+  color: #08083d;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background-color .18s;
+}
+
+.heroActions > a:hover {
+  background: #e9edfa;
+}
+
+.heroActions > a:focus-visible {
+  outline: 2px solid #a6ce44;
+  outline-offset: 4px;
 }
 
 .benefits {
@@ -293,6 +326,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation: none; }
+  .heroActions > a { transition: none; }
 }
 
 .fields:disabled {
@@ -485,16 +519,8 @@
 }
 
 @media (max-width: 1023px) {
-  .headerSpace {
-    height: 80px;
-  }
-
   .container {
     width: calc(100% - 64px);
-  }
-
-  .hero {
-    min-height: 560px;
   }
 
   .benefitCard {
@@ -527,28 +553,15 @@
   }
 }
 
+@media (max-width: 900px) {
+  .hero {
+    padding: 148px 0 88px;
+  }
+}
+
 @media (max-width: 767px) {
   .container {
     width: calc(100% - 48px);
-  }
-
-  .hero {
-    min-height: 560px;
-  }
-
-  .heroCopy {
-    max-width: 400px;
-  }
-
-  .hero h1 {
-    max-width: 350px;
-    font-size: clamp(36px, 8.6vw, 54px);
-  }
-
-  .heroCopy>p {
-    margin-top: 30px;
-    font-size: 20px;
-    line-height: 1.6;
   }
 
   .heroImage {
@@ -634,6 +647,29 @@
   }
 }
 
+@media (max-width: 640px) {
+  .hero {
+    padding: 132px 0 64px;
+  }
+
+  .hero > .container {
+    width: calc(100% - 48px);
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 10vw, 52px);
+  }
+
+  .heroCopy>p {
+    font-size: 16px;
+  }
+
+  .heroActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 479px) {
   .benefitsGrid {
     grid-template-columns: minmax(0, 1fr);
@@ -642,16 +678,6 @@
   .benefitCard {
     min-height: 188px;
     padding: 32px;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-    letter-spacing: -0.04em;
-  }
-
-  .heroCopy>p {
-    max-width: 310px;
-    font-size: 18px;
   }
 
   .application {
@@ -669,19 +695,5 @@
 
   .submit {
     width: 100%;
-  }
-}
-
-@media (max-width: 359px) {
-  .headerSpace {
-    height: 64px;
-  }
-
-  .hero {
-    min-height: 576px;
-  }
-
-  .hero h1 {
-    font-size: 32px;
   }
 }

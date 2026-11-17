@@ -3,49 +3,25 @@
   color: #24324a;
 }
 
+.page h1 {
+  font-family: var(--display);
+}
+
+.productsLink {
+  gap: 12px;
+}
+
 .container {
   width: calc(100% - 64px);
   max-width: 1152px;
   margin: 0 auto;
 }
 
-.hero {
-  padding: 184px 0 124px;
-  background: linear-gradient(120deg, #030316 0%, #08083d 55%, #111154 100%);
-  border-bottom: 4px solid #a6ce44;
-}
-
-.heroContent {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: center;
-  gap: 64px;
-}
-
-.hero h1 {
-  margin: 0;
-  color: #ffffff;
-  font-size: clamp(44px, 4.2vw, 56px);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-}
-
 .exclusiveGrid { max-width: 760px; }
 .exclusiveGrid .product h3 { font-size: 24px; letter-spacing: -.035em; }
 
-.heroImage {
-  display: block;
-  width: 100%;
-  max-width: 470px;
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 24px 38px -18px rgba(13, 28, 43, 0.36);
-}
-
 .exclusives {
+  scroll-margin-top: 32px;
   padding: 94px 0 90px;
   border-bottom: 1px solid #edf0f2;
 }
@@ -102,14 +78,6 @@
 }
 
 @media (max-width: 900px) {
-  .hero {
-    padding: 148px 0 88px;
-  }
-
-  .heroContent {
-    gap: 40px;
-  }
-
   .exclusives {
     padding: 76px 0;
   }
@@ -133,24 +101,6 @@
 @media (max-width: 640px) {
   .container {
     width: calc(100% - 48px);
-  }
-
-  .hero {
-    padding: 132px 0 64px;
-  }
-
-  .heroContent {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 36px;
-  }
-
-  .hero h1 {
-    font-size: clamp(40px, 10vw, 52px);
-  }
-
-  .heroImage {
-    max-width: 100%;
-    border-radius: 12px;
   }
 
   .exclusives,

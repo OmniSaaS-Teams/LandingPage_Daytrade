@@ -29,7 +29,7 @@ const iconPaths = {
 export default function PartnerPage() {
   return (
     <>
-      <div className={styles.headerSpace}><Navbar background="gradient" /></div>
+      <Navbar background="gradient" />
       <main className={styles.page}>
         <section className={styles.hero} aria-labelledby="partner-title">
           <Image src={partnerContent.hero.image} alt={partnerContent.hero.imageAlt} fill sizes="100vw" preload className={styles.heroImage} />
@@ -38,6 +38,9 @@ export default function PartnerPage() {
             <div className={styles.heroCopy}>
               <h1 id="partner-title">{partnerContent.hero.title}</h1>
               <p>{partnerContent.hero.description}</p>
+              <div className={styles.heroActions}>
+                <a href="#formulario-parceiro">Seja um parceiro</a>
+              </div>
             </div>
           </div>
         </section>

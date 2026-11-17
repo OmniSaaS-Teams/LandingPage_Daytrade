@@ -14,27 +14,66 @@ const capabilities = [
   "Atendimento",
 ];
 
-const highlights = [
+type ClientResource = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  tone: "blue" | "mint" | "lavender";
+  href?: string;
+  actionLabel?: string;
+};
+
+const highlights: ClientResource[] = [
   {
-    eyebrow: "Visão consolidada",
-    title: "Encontre o que importa em um só lugar.",
+    eyebrow: "Banco Digital",
+    title: "Acesse seu Banco Digital DayTrade.",
     description:
-      "Acompanhe informações, solicitações e próximos passos com uma leitura simples e organizada.",
+      "Entre no ambiente do Banco Digital da DayTrade para acessar sua conta.",
     tone: "blue",
+    href: "https://daytrade.hub.moneyp.com.br/acesso",
+    actionLabel: "Acessar Banco Digital",
   },
   {
-    eyebrow: "Acompanhamento",
-    title: "Saiba o que está acontecendo agora.",
+    eyebrow: "Carteira de recebíveis",
+    title: "Consulte sua carteira de recebíveis.",
     description:
-      "Tenha visibilidade sobre cada conversa e oportunidade em andamento com a DayTrade.",
+      "Acesse o portal para visualizar sua carteira de recebíveis e consultar as informações dos seus títulos.",
     tone: "mint",
+    href: "https://iwbarecebiveis.wba.com.br/iwba/pages/index.jsf",
+    actionLabel: "Acessar minha carteira",
   },
   {
-    eyebrow: "Documentos",
-    title: "Tudo organizado para quando precisar.",
+    eyebrow: "Carteira de investimentos",
+    title: "Acompanhe sua carteira de investimentos.",
     description:
-      "Centralize materiais e informações importantes para tornar cada etapa mais objetiva.",
+      "Acesse o portal para visualizar sua carteira e consultar as informações dos seus investimentos.",
     tone: "lavender",
+    href: "https://auth.wba.com.br/realms/portal/protocol/openid-connect/auth?client_id=portal-angular&redirect_uri=https%3A%2F%2Fportal.wba.com.br%2F4d9f09bb-b532-4ad0-8f39-b0d9bf957033&state=be655c5e-9940-47b9-929d-dd4dfa469645&response_mode=fragment&response_type=code&scope=openid&nonce=476ae6a6-ae89-466d-8038-75bd709712e6",
+    actionLabel: "Acessar meus investimentos",
+  },
+  {
+    eyebrow: "Acesso comercial",
+    title: "Acesse seu ambiente comercial.",
+    description: "Entre no portal comercial da DayTrade para acessar seu ambiente de trabalho.",
+    tone: "blue",
+    href: "https://new.wba.com.br/login/5d42d85f-87a1-4acb-ad77-8eea77ae2ee6",
+    actionLabel: "Acessar portal comercial",
+  },
+  {
+    eyebrow: "Assinatura Digital",
+    title: "Acesse a plataforma de assinatura digital.",
+    description: "Entre na plataforma para acessar e assinar seus documentos digitalmente.",
+    tone: "mint",
+    href: "https://plataforma.crdc.com.br:8443/",
+    actionLabel: "Acessar Assinatura Digital",
+  },
+  {
+    eyebrow: "Trokee",
+    title: "Antecipação e gestão de recebíveis.",
+    description: "Acesse a plataforma Trokee para antecipação de recebíveis, gestão de ativos elegíveis e risco sacado.",
+    tone: "lavender",
+    href: "https://www.trokee.com.br/",
+    actionLabel: "Acessar Trokee",
   },
 ];
 
@@ -95,7 +134,7 @@ function ClientDashboard() {
 export default function ClientAreaPage() {
   return (
     <>
-      <Navbar />
+      <Navbar background="gradient" />
       <main className={styles.page}>
         <InternalHero
           fullBackground
@@ -122,12 +161,16 @@ export default function ClientAreaPage() {
           </div>
           <div className={styles.solutionGrid}>
             {highlights.map((highlight, index) => (
-              <article key={highlight.title} className={`${styles.solutionCard} ${styles[highlight.tone]}`}>
+              <article key={highlight.eyebrow} className={`${styles.solutionCard} ${styles[highlight.tone]} ${clientStyles.resourceCard}`}>
                 <div className={styles.solutionVisual}><span>0{index + 1}</span><i /><i /><i /></div>
                 <p>{highlight.eyebrow}</p>
                 <h3>{highlight.title}</h3>
-                <span>{highlight.description}</span>
-                <a href="#acessar-area">Conhecer <b>→</b></a>
+                <span className={clientStyles.resourceDescription}>{highlight.description}</span>
+                {highlight.href ? (
+                  <a className={clientStyles.resourceAction} href={highlight.href}>{highlight.actionLabel ?? "Conhecer"} <b aria-hidden="true">→</b></a>
+                ) : (
+                  <button className={clientStyles.resourceAction} type="button" disabled title="Link a definir">Conhecer <b aria-hidden="true">→</b></button>
+                )}
               </article>
             ))}
           </div>
@@ -165,7 +208,6 @@ export default function ClientAreaPage() {
             ))}
           </div>
         </section>
-
         <div id="acessar-area">
           <CallToAction
             id="client-area-cta"

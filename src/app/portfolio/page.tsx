@@ -23,7 +23,7 @@ const products = [
   {
     title: "Capital de Giro",
     description:
-      "Pague parcelado seu décimo terceiro salário dos funcionários, ganhe desconto na compra de sua matéria-prima, parcele a compra das suas máquinas e equipamentos.",
+      "Pague parcelado o décimo terceiro salário dos seus funcionários, ganhe desconto na compra de sua matéria-prima, parcele a compra das suas máquinas e equipamentos.",
   },
   {
     title: "Comissária",
@@ -51,7 +51,7 @@ const products = [
       "Para aquele cliente em que há vedação de negociação de títulos. Mande um boleto em seu nome em que o crédito irá para a DayTrade.",
   },
   {
-    title: "Conta Corrente",
+    title: "Conta-Corrente",
     description:
       "Utilize nossa conta-corrente com todas as funcionalidades de um grande banco digital e aumente seus limites conosco.",
   },

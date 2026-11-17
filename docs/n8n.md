@@ -158,7 +158,7 @@ outros protocolos específicos ainda não fazem parte desta etapa.
 
 ## Manutenção e verificação local
 
-O código fonte do processamento fica em [`n8n/process-webhook.mjs`](../n8n/process-webhook.mjs).
+O código-fonte do processamento fica em [`n8n/process-webhook.mjs`](../n8n/process-webhook.mjs).
 Depois de editar, regenere o JSON e execute os testes:
 
 ```sh

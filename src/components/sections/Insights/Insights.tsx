@@ -49,10 +49,10 @@ export function Insights() {
       <div className={styles.container}>
         <h2 id="insights-title" className={styles.title}>
           <span className={styles.titleStrong}>
-            Daytrade Invest, há mais de 9 anos no mercado de securitização,
+            DayTrade Invest, há mais de 9 anos no mercado de securitização,
           </span>{" "}
           <span className={styles.titleMuted}>
-            ajudando empresas com crédito estruturado, alternativas sob medidas para empresas.
+            ajudando empresas com crédito estruturado, alternativas sob medida para empresas.
           </span>
         </h2>
 

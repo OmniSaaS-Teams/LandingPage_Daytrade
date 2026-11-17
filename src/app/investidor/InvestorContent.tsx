@@ -348,7 +348,7 @@ export function InvestorContent() {
             </p>
             <br />
             <p>
-              (*) Todo e qualquer tipo de investimento possui algum tipo de risco. Perfil do investidor será submetido a análise e prévia aprovação.
+              (*) Todo e qualquer tipo de investimento possui algum tipo de risco. O perfil do investidor será submetido à análise e à prévia aprovação.
             </p>
           </div>
         </div>
@@ -395,7 +395,7 @@ export function InvestorContent() {
               <span className={styles["barra-valor"]} id="valorCarteira">{result ? money(values.carteira) : "R$ 11.788,00"}</span>
               <div className={styles["barra"] + " " + styles["barra-3"]} id="barraCarteira" style={{ height: `${values.carteira ? 285 : 0}px` }}></div>
               <div className={styles["barra-label"]}>
-                <strong>Carteira Daytrade</strong>
+                <strong>Carteira DayTrade</strong>
                 <span>(120% do CDI)</span>
               </div>
             </div>

@@ -256,7 +256,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
           : {
               headline: "Conheça a DayTrade.",
               description:
-                "Conteudos e atalhos do menu serao definidos nesta area.",
+                "Conteúdos e atalhos do menu serão definidos nesta área.",
               items: [
                 { label: "Sobre nós", href: "/sobre-nos" },
                 { label: "Parceiro indicador", href: "/parceiro-indicador" },
@@ -517,7 +517,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
             id="mobile-navigation"
             role="dialog"
             aria-modal="true"
-            aria-label="Menu de navegacao"
+            aria-label="Menu de navegação"
             className="ml-auto flex h-dvh w-full max-w-sm flex-col overflow-y-auto bg-zinc-950 px-6 py-6 text-white shadow-2xl shadow-black max-[359px]:px-4 max-[359px]:py-4"
           >
             <div className="flex items-center justify-between">

@@ -7,7 +7,7 @@ export const partnerContent = {
     imageAlt: "Profissionais conversando sobre oportunidades de negócios",
   },
   benefits: [
-    { icon: "clock", text: "+13 anos de atuação no mercado" },
+    { icon: "clock", text: "+9 anos de atuação no mercado" },
     { icon: "globe", text: "Capilaridade nacional" },
     { icon: "building", text: "Estrutura completa para atender suas necessidades" },
     { icon: "home", text: "Modelo Home office" },

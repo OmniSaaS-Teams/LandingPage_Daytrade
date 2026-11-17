@@ -31,6 +31,9 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
   const [openDesktopMenu, setOpenDesktopMenu] = useState<
     "DayTrade" | "Setores" | null
   >(null);
+  const [openMobileMenu, setOpenMobileMenu] = useState<
+    "DayTrade" | "Setores" | null
+  >(null);
   const [desktopMenuLeft, setDesktopMenuLeft] = useState(0);
 
   const openMenu = (element: HTMLElement, menu: "DayTrade" | "Setores") => {
@@ -46,11 +49,13 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
 
   const closeMenu = () => {
     setIsOpen(false);
+    setOpenMobileMenu(null);
     window.requestAnimationFrame(() => buttonRef.current?.focus());
   };
 
   const showNavigationFeedback = () => {
     setIsOpen(false);
+    setOpenMobileMenu(null);
   };
 
   const openClientModal = () => {
@@ -59,6 +64,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
       setFormError(null);
     }
     setIsOpen(false);
+    setOpenMobileMenu(null);
     setIsClientModalOpen(true);
   };
 
@@ -116,10 +122,10 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const focusable = Array.from(
+    const getFocusable = () => Array.from(
       panelRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ?? [],
-    );
-    focusable[0]?.focus();
+    ).filter((element) => !element.matches(":disabled") && element.getClientRects().length > 0);
+    getFocusable()[0]?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -128,7 +134,12 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
         return;
       }
 
-      if (event.key !== "Tab" || focusable.length === 0) {
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
         return;
       }
 
@@ -228,9 +239,8 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
       );
     }
 
-    if (item.type === "menu" && variant === "desktop") {
+    if (item.type === "menu") {
       const menuKey = item.label === "Setores" ? "Setores" : "DayTrade";
-      const isMenuOpen = openDesktopMenu === menuKey;
       const menuContent =
         menuKey === "Setores"
           ? {
@@ -253,6 +263,46 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
                 { label: "Área do cliente", href: "/area-do-cliente" },
               ],
             };
+
+      if (variant === "mobile") {
+        const isMenuOpen = openMobileMenu === menuKey;
+        const submenuId = `mobile-submenu-${menuKey.toLowerCase()}`;
+
+        return (
+          <div className="w-full">
+            <button
+              type="button"
+              className={linkClass}
+              aria-expanded={isMenuOpen}
+              aria-controls={submenuId}
+              onClick={() => setOpenMobileMenu((current) => current === menuKey ? null : menuKey)}
+            >
+              {item.label}
+              <ChevronDown isOpen={isMenuOpen} />
+            </button>
+            <ul
+              id={submenuId}
+              hidden={!isMenuOpen}
+              className={isMenuOpen ? "mt-2 ml-2.5 grid gap-1 border-l border-white/20 pl-3" : "hidden"}
+            >
+              {menuContent.items.map((menuItem) => (
+                <li key={menuItem.label}>
+                  <Link
+                    href={menuItem.href}
+                    className="flex min-h-11 items-center rounded-md px-2.5 py-2 text-base text-zinc-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    aria-current={pathname === menuItem.href ? "page" : undefined}
+                    onClick={showNavigationFeedback}
+                  >
+                    {menuItem.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      const isMenuOpen = openDesktopMenu === menuKey;
 
       return (
         <div
@@ -334,27 +384,6 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
             </div>
           </div>
         </div>
-      );
-    }
-
-    if (item.label === "Setores") {
-      return (
-        <Link href="/setores" className={linkClass} onClick={showNavigationFeedback}>
-          {item.label}
-        </Link>
-      );
-    }
-
-    if (item.type === "menu") {
-      return (
-        <FeedbackButton
-          message={siteContent.feedback.navigation}
-          className={linkClass}
-          onActivate={showNavigationFeedback}
-        >
-          {item.label}
-          <ChevronDown />
-        </FeedbackButton>
       );
     }
 
@@ -489,7 +518,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegacao"
-            className="ml-auto flex min-h-dvh w-full max-w-sm flex-col bg-zinc-950 px-6 py-6 text-white shadow-2xl shadow-black max-[359px]:px-4 max-[359px]:py-4"
+            className="ml-auto flex h-dvh w-full max-w-sm flex-col overflow-y-auto bg-zinc-950 px-6 py-6 text-white shadow-2xl shadow-black max-[359px]:px-4 max-[359px]:py-4"
           >
             <div className="flex items-center justify-between">
               <Image
@@ -514,7 +543,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
 
             <div className="mt-12 flex flex-col items-start gap-5 text-xl font-normal">
               {siteContent.navigation.map((item) => (
-                <span key={item.label}>{navAction(item, "mobile")}</span>
+                <div key={item.label} className="w-full">{navAction(item, "mobile")}</div>
               ))}
             </div>
 
@@ -660,7 +689,7 @@ const lightNavLinkClass =
 const desktopDropdownItemClass =
   "inline-flex w-fit items-center rounded-md px-1 py-0.5 text-left text-lg font-normal text-zinc-950 transition-colors hover:bg-zinc-100 hover:text-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950";
 const mobileNavLinkClass =
-  "group inline-flex min-h-11 w-max items-center justify-center rounded-md bg-transparent px-2.5 py-1 text-left text-xl font-normal text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "group inline-flex min-h-11 w-full items-center justify-between rounded-md bg-transparent px-2.5 py-1 text-left text-xl font-normal text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 const formInputClass =
   "min-h-11 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-base font-normal text-zinc-950 outline-none transition placeholder:text-zinc-400 focus:border-[#00213d] focus:ring-2 focus:ring-[#00213d]/15";
 

@@ -2,8 +2,8 @@ import styles from "./Insights.module.css";
 
 const metrics = [
   { value: "400+", label: "Clientes atendidos" },
-  { value: "R$ 500M+", label: "Em operações realizadas" },
-  { value: "10.000+", label: "Operações realizadas" },
+  { value: "R$ 647M+", label: "Em operações realizadas" },
+  { value: "151.000+", label: "Operações realizadas" },
   { value: "4 passos", label: "Jornada simples" },
 ];
 

@@ -77,13 +77,6 @@ const highlights: ClientResource[] = [
   },
 ];
 
-const benefits = [
-  ["Mais visibilidade", "Entenda o cenário atual com informações organizadas e fáceis de consultar."],
-  ["Menos idas e vindas", "Acompanhe solicitações e documentos sem precisar procurar em diferentes canais."],
-  ["Próximos passos claros", "Saiba o que está em andamento e quais decisões merecem sua atenção."],
-  ["Relação próxima", "Conte com a DayTrade em uma experiência construída para acompanhar seu negócio."],
-];
-
 function ClientDashboard() {
   return (
     <div className={styles.dashboard} aria-hidden="true">
@@ -176,48 +169,15 @@ export default function ClientAreaPage() {
           </div>
         </section>
 
-        <section className={styles.context} aria-labelledby="context-title">
-          <div className={styles.contextIntro}>
-            <p className={styles.eyebrow}>Acompanhamento sem ruído</p>
-            <h2 id="context-title">Uma visão clara para saber o que precisa da sua atenção.</h2>
-            <p>Organizamos informações relevantes para que você acompanhe a operação e aproveite melhor cada conversa com a DayTrade.</p>
-            <a href="#acessar-area">Explorar a Área do Cliente <span>→</span></a>
-          </div>
-          <div className={styles.contextVisual} aria-hidden="true">
-            <div className={styles.contextTop}><span>Próximos passos</span><i /></div>
-            <div className={styles.contextRows}>
-              <div><i /><span><b>Documentos solicitados</b><small>2 itens pendentes</small></span><em>Ver agora</em></div>
-              <div><i /><span><b>Conversa com especialista</b><small>Quinta-feira, 14:30</small></span><em>Detalhes</em></div>
-              <div><i /><span><b>Atualização da operação</b><small>Disponível hoje</small></span><em>Acessar</em></div>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.benefits} aria-labelledby="benefits-title">
-          <div className={styles.sectionHeading}>
-            <p className={styles.eyebrow}>Feita para o seu dia a dia</p>
-            <h2 id="benefits-title">Mais contexto para cuidar melhor das decisões do seu negócio.</h2>
-          </div>
-          <div className={styles.benefitGrid}>
-            {benefits.map(([title, description], index) => (
-              <article key={title}>
-                <span>0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
         <div id="acessar-area">
           <CallToAction
             id="client-area-cta"
-            highlight="Sua operação merece uma visão mais próxima."
-            title="Acesse a Área do Cliente e acompanhe seus próximos passos."
-            primaryLabel="Acessar minha área"
-            primaryHref="#acessar-area"
-            secondaryLabel="Falar com a DayTrade"
-            secondaryHref="/#faq"
-            note="Caso precise de ajuda, nossa equipe está pronta para conversar."
+            highlight="Seu próximo investimento começa com uma boa conversa."
+            title="Conheça as possibilidades de investir com a DayTrade."
+            primaryLabel="Fale com um especialista"
+            secondaryLabel="Conheça nossos investimentos"
+            secondaryHref="/investidor"
+            note="Converse com nossa equipe, conheça nossa estrutura e avalie o que faz sentido para os seus objetivos."
             showPixels={false}
             variant="blue"
           />

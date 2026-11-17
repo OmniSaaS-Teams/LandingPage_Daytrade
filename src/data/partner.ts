@@ -29,11 +29,11 @@ export const partnerContent = {
     description: "Deixe seu contato e descubra como fazer parte da nossa rede de parceiros.",
   },
   closing: {
-    title: "Seja Único",
+    title: "Conecte seus clientes a novas oportunidades",
     paragraphs: [
-      "O mercado de crédito exige agilidade, e a DayTrade entrega exatamente isso: soluções estruturadas de capital de giro e antecipação de recebíveis com foco em liquidez imediata. É a alternativa ideal à burocracia do sistema bancário tradicional.",
-      "Para o executivo comercial, a parceria significa contar com suporte de backoffice especializado e uma esteira de crédito ágil, garantindo segurança na tramitação de cada operação. O modelo home office assegura flexibilidade total para gerenciar a rotina e focar no atendimento.",
-      "Quem tem bagagem em fomento comercial, securitização ou mercado bancário encontra aqui a infraestrutura necessária para originar novos negócios e escalar resultados com autonomia.",
+      "Sua rede de contatos pode aproximar empresas das soluções financeiras de que precisam. Como parceiro indicador da DayTrade, você identifica demandas de crédito e abre caminho para novas oportunidades de negócio.",
+      "Conte com nossa equipe para apoiar a análise e a condução das operações de capital de giro e antecipação de recebíveis. Você mantém o foco no relacionamento com seus clientes, com suporte especializado ao longo do processo.",
+      "Se você atua em fomento comercial, securitização ou no mercado bancário, encontre na DayTrade uma parceria para ampliar sua atuação e desenvolver relações comerciais de longo prazo.",
     ],
     image: "/images/features/credito-escritorio.png",
     imageAlt: "Equipe analisando soluções financeiras em um escritório",

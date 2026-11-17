@@ -55,10 +55,10 @@ export default function CareersPage() {
               <p>Se você se identifica com esse olhar, queremos conhecer sua experiência e o que deseja construir na próxima etapa da sua carreira.</p>
               <Link className={styles.textLink} href="/sobre-nos">Conheça a DayTrade <span aria-hidden="true">↗</span></Link>
             </div>
-            <div className={styles.storyPhoto}><Image src="/images/features/credito-escritorio.png" alt="Profissionais analisando informações em um notebook" fill sizes="(max-width: 767px) 90vw, 45vw" /></div>
+            <div className={styles.storyPhoto}><Image src="/images/features/carreira-equipe.png" alt="Profissionais analisando informações em um notebook" fill sizes="(max-width: 767px) 90vw, 45vw" /></div>
           </div>
           <div className={`${styles.story} ${styles.reverse}`}>
-            <div className={styles.storyPhoto}><Image src="/images/features/credito-cafe.png" alt="Conversa e troca de ideias em um ambiente de trabalho" fill sizes="(max-width: 767px) 90vw, 45vw" /></div>
+            <div className={styles.storyPhoto}><Image src="/images/features/carreira-retrato-corporativo.png" alt="Conversa e troca de ideias em um ambiente de trabalho" fill sizes="(max-width: 767px) 90vw, 45vw" /></div>
             <div className={styles.storyCopy}>
               <p className={styles.eyebrow}>DIFERENTES TRAJETÓRIAS. NOVAS POSSIBILIDADES.</p>
               <h2>Há muito valor no que só você traz.</h2>

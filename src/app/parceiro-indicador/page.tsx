@@ -74,7 +74,7 @@ export default function PartnerPage() {
             <div className={styles.closingCopy}>
               <h2 id="closing-title">{partnerContent.closing.title}</h2>
               {partnerContent.closing.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              <p>Descubra o significado de ser <strong>único!</strong></p>
+              <p>Vamos construir novas oportunidades juntos.</p>
               <a href="#formulario-parceiro" className={styles.primaryAction}>Seja um parceiro <span aria-hidden="true">↗</span></a>
             </div>
             <div className={styles.closingVisual}>

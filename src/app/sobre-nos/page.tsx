@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { InternalHero } from "../../components/layout/InternalHero";
 import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
-import { CallToAction } from "../../components/sections/CTA/cta";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import styles from "./About.module.css";
@@ -102,17 +101,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <CallToAction
-          id="about-cta"
-          highlight="Uma boa conversa abre novos caminhos."
-          title="Vamos entender o que o seu negócio precisa?"
-          primaryLabel="Fale com um especialista"
-          secondaryLabel="Conheça nossas soluções"
-          secondaryHref="/portfolio"
-          note="Conte sua história. Vamos encontrar juntos o próximo passo."
-          showPixels={false}
-          variant="blue"
-        />
       </main>
       <Footer />
     </>

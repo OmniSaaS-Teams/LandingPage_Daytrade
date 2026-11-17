@@ -134,6 +134,18 @@
   );
 }
 
+.cardLink {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid white;
+  outline-offset: -5px;
+}
+
 .card:hover .cardImage {
   transform: scale(1.045);
 }

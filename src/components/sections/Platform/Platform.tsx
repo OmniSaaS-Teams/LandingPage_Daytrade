@@ -138,6 +138,13 @@ export function Features() {
                 }`}
               />
               <div className={styles.cardOverlay} aria-hidden="true" />
+              {feature.id === 4 && (
+                <Link
+                  href="/investidor"
+                  className={styles.cardLink}
+                  aria-label={feature.title}
+                />
+              )}
               <div className={styles.cardIcon}>
                 <FeatureIcon icon={feature.icon} />
               </div>
@@ -155,7 +162,7 @@ export function Features() {
           ))}
         </div>
 
-        <a className={styles.productsLink} href="#features">
+        <a className={styles.productsLink} href="/portfolio">
           <span>Conheça todos os nossos produtos</span>
           <svg
             width="18"

@@ -62,13 +62,9 @@ export function Hero() {
 
       <div className={styles.content}>
         <div className={styles.contentInner}>
-          <a
-            className={styles.compliance}
-            href={siteContent.hero.complianceHref}
-            rel="noopener noreferrer"
-          >
+          <span className={styles.compliance}>
             {siteContent.hero.compliance}
-          </a>
+          </span>
           <h1
             id="hero-title"
             className={styles.title}

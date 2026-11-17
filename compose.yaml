@@ -9,6 +9,7 @@ services:
       NODE_ENV: production
       DATABASE_FILE: /app/data/daytrade.sqlite
       UPLOAD_DIR: /app/data/private
+      ANALYTICS_TRUST_PROXY: ${ANALYTICS_TRUST_PROXY:-true}
     volumes:
       - data:/app/data
     ports:

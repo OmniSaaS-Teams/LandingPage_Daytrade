@@ -10,6 +10,7 @@ Site institucional, APIs, painel administrativo e blog no mesmo projeto Next.js.
 - Blog com categorias, capas existentes, editor de texto, rascunhos e publicação.
 - Integração n8n por fila persistente, com até cinco tentativas e revisão pelo painel.
 - `/admin/instagram`: configuração do usuário e token protegido, com sincronização automática da home.
+- `/admin/acessos`: visualizações das páginas públicas, IPs distintos e acessos por IP e por página.
 - Docker Compose com um único serviço para aplicação, SQLite e worker na mesma VPS.
 
 ## Publicação

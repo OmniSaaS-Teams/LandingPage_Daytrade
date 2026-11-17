@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Suspense } from "react";
 import { SpecialistContactModal } from "../components/contact/SpecialistContact";
 import { Leads2B } from "../components/integrations/Leads2B";
+import { PageViewTracker } from "../components/integrations/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </Script>
         {children}
         <Suspense fallback={null}><Leads2B /></Suspense>
+        <Suspense fallback={null}><PageViewTracker /></Suspense>
         <SpecialistContactModal />
       </body>
     </html>

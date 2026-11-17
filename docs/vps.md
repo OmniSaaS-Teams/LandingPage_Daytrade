@@ -33,6 +33,30 @@ A porta no host é `127.0.0.1:3000`. Adapte `deploy/nginx.conf.example` ao domí
 certificado HTTPS. Preserve Host, X-Forwarded-Host e X-Forwarded-Proto para cookies
 e formulários administrativos. O proxy admite 6 MB para currículos de até 5 MB.
 
+## Monitoramento de acessos
+
+O menu **Acessos** do Admin lê as visualizações registradas a partir da instalação
+da migração `005_page_views.sql`. A coleta usa uma requisição do próprio site
+quando uma página pública fica visível no navegador. A contagem inclui recargas
+e navegação interna e ignora pré-carregamentos e agentes automatizados conhecidos.
+Navegadores com JavaScript desativado ou que bloqueiem a requisição podem ficar de
+fora. IPs distintos medem endereços de rede e podem ser compartilhados.
+
+O Compose habilita `ANALYTICS_TRUST_PROXY` com a porta da aplicação restrita ao
+host local. O Nginx deve sobrescrever `X-Real-IP` com `$remote_addr`, como no
+arquivo de exemplo. Para instalações fora do Compose, habilite
+`ANALYTICS_TRUST_PROXY=true` somente se todo o tráfego chegar por um proxy
+confiável que sobrescreva esse cabeçalho. Defina `false` se a aplicação estiver
+exposta diretamente. Sem IP confiável, a visualização ainda entra no total.
+Se houver CDN antes do Nginx, configure a identificação do IP original no Nginx
+com as origens confiáveis do provedor. Caso contrário, a CDN poderá aparecer como
+origem de muitos acessos.
+
+Cada registro guarda o caminho da página, o IP quando disponível e a data. A
+coleta dispensa cookies próprios e evita parâmetros da URL. A consulta aos IPs
+exige sessão administrativa. O worker exclui registros com mais de 90 dias do
+banco ativo. Backups existentes seguem a política de retenção da organização.
+
 ## Criar ou redefinir administrador
 
 No Bash da VPS, leia a senha sem exibi-la ou gravá-la no histórico:

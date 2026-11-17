@@ -19,7 +19,7 @@ test("production startup migrates SQLite and processes every public form with au
   const port = portProbe.address().port;
   await new Promise(resolve => portProbe.close(resolve));
   const child = spawn(process.execPath, ["scripts/start.mjs"], {
-    env: { ...process.env, NODE_ENV: "production", PORT: String(port), HOSTNAME: "127.0.0.1", DATABASE_FILE: join(directory, "site.sqlite"), UPLOAD_DIR: join(directory, "private"), N8N_LEAD_WEBHOOK_URL: "", N8N_INVESTOR_WEBHOOK_URL: "", N8N_CAREER_WEBHOOK_URL: "", N8N_PARTNER_WEBHOOK_URL: "", N8N_CONTACT_WEBHOOK_URL: "", INSTAGRAM_ACCESS_TOKEN: "" },
+    env: { ...process.env, NODE_ENV: "production", PORT: String(port), HOSTNAME: "127.0.0.1", DATABASE_FILE: join(directory, "site.sqlite"), UPLOAD_DIR: join(directory, "private"), N8N_LEAD_WEBHOOK_URL: "", N8N_INVESTOR_WEBHOOK_URL: "", N8N_CAREER_WEBHOOK_URL: "", N8N_PARTNER_WEBHOOK_URL: "", N8N_CONTACT_WEBHOOK_URL: "", INSTAGRAM_ACCESS_TOKEN: "", ANALYTICS_TRUST_PROXY: "true" },
     stdio: ["ignore", "pipe", "pipe", "ipc"],
   });
   let logs = "";
@@ -60,12 +60,35 @@ test("production startup migrates SQLite and processes every public form with au
     resume.set("curriculo", new File(["%PDF-1.7 startup test"], "curriculo.pdf", { type: "application/pdf" }));
     const candidate = await fetch(`${base}/api/careers`, { method: "POST", headers: { "Idempotency-Key": randomUUID() }, body: resume });
     assert.equal(candidate.status, 200, await candidate.text());
+    const eventId = randomUUID();
+    const pageView = (headers = {}) => fetch(`${base}/api/page-views`, {
+      method: "POST",
+      headers: {
+        "Idempotency-Key": randomUUID(), "X-Daytrade-Page-Path": "/", "User-Agent": "Mozilla/5.0",
+        "X-Real-IP": "192.0.2.10", ...headers,
+      },
+    });
+    assert.equal((await pageView({ "Idempotency-Key": eventId })).status, 204);
+    assert.equal((await pageView({ "Idempotency-Key": eventId })).status, 204);
+    assert.equal((await pageView({ "X-Real-IP": "::ffff:192.0.2.10" })).status, 204);
+    assert.equal((await pageView({ "X-Real-IP": "2001:0DB8::1", "X-Daytrade-Page-Path": "/investidor" })).status, 204);
+    assert.equal((await pageView({ "X-Real-IP": "", "X-Forwarded-For": "192.0.2.90" })).status, 204);
+    assert.equal((await pageView({ "User-Agent": "Googlebot" })).status, 204);
+    assert.equal((await pageView({ "Sec-Purpose": "prefetch" })).status, 204);
+    assert.equal((await pageView({ "X-Daytrade-Page-Path": "/blog/artigo-inexistente" })).status, 204);
+    assert.equal((await pageView({ "X-Daytrade-Page-Path": "/admin" })).status, 400);
+    assert.equal((await pageView({ "X-Daytrade-Page-Path": "/?email=privado" })).status, 400);
+
     const sqlite = new DatabaseSync(join(directory, "site.sqlite"));
     try {
       assert.equal(sqlite.prepare("SELECT count(*) AS total FROM submissions").get().total, 6);
       assert.equal(sqlite.prepare("SELECT count(*) AS total FROM webhook_jobs").get().total, 0);
       assert.equal(sqlite.prepare("PRAGMA journal_mode").get().journal_mode, "wal");
       assert.equal(sqlite.prepare("PRAGMA foreign_key_check").all().length, 0);
+      const views = sqlite.prepare("SELECT path, ip, count(*) AS total FROM page_views GROUP BY path, ip ORDER BY path, ip").all();
+      assert.deepEqual(views.map(({ path, ip, total }) => [path, ip, total]), [
+        ["/", null, 1], ["/", "192.0.2.10", 2], ["/investidor", "2001:db8::1", 1],
+      ]);
       const upload = sqlite.prepare("SELECT id FROM uploads").get().id;
       assert.equal((await fetch(`${base}/api/admin/curriculos/${upload}`)).status, 401);
       const userId = randomUUID(), token = randomBytes(32).toString("hex");
@@ -78,6 +101,20 @@ test("production startup migrates SQLite and processes every public form with au
       const admin = await fetch(`${base}/admin/contatos?tipo=partner`, { headers: { Cookie: `daytrade_admin=${token}` } });
       assert.equal(admin.status, 200);
       assert.match(await admin.text(), /Parceiro Indicador/);
+      const anonymousAccess = await fetch(`${base}/admin/acessos`, { redirect: "manual" });
+      const anonymousAccessHtml = await anonymousAccess.text();
+      assert.match(anonymousAccess.headers.get("location") ?? anonymousAccessHtml, /admin\/login/);
+      assert.ok(!anonymousAccessHtml.includes("192.0.2.10"));
+      const access = await fetch(`${base}/admin/acessos?periodo=7&rota=%2F`, { headers: { Cookie: `daytrade_admin=${token}` } });
+      assert.equal(access.status, 200);
+      assert.equal(access.headers.get("cache-control"), "private, no-store");
+      const accessHtml = await access.text();
+      assert.match(accessHtml, /Visualizações<\/span><strong>3<\/strong>/);
+      assert.match(accessHtml, /IPs distintos<\/span><strong>1<\/strong>/);
+      assert.match(accessHtml, /IPs com mais de um acesso<\/span><strong>1<\/strong>/);
+      assert.match(accessHtml, /Visualizações sem IP<\/span><strong>1<\/strong>/);
+      assert.match(accessHtml, /192\.0\.2\.10<\/code><\/td><td>2<\/td>/);
+      assert.ok(!accessHtml.includes("2001:db8::1"));
       const anonymousInstagram = await fetch(`${base}/admin/instagram`, { redirect: "manual" });
       // A redirect after a Suspense boundary has started streaming uses a meta tag.
       if (anonymousInstagram.status === 307) assert.match(anonymousInstagram.headers.get("location"), /admin\/login/);

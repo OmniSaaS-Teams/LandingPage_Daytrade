@@ -2,6 +2,7 @@ import { setTimeout } from "node:timers/promises";
 import { processNextWebhook } from "../src/lib/webhooks.ts";
 import { db } from "../src/lib/db.ts";
 import { syncInstagram } from "../src/lib/instagram.ts";
+import { prunePageViews } from "../src/lib/page-views.ts";
 
 let stopping = false;
 process.on("SIGTERM", () => { stopping = true; });
@@ -12,6 +13,7 @@ while (!stopping) {
     if (Date.now() > cleanupAt) {
       await db.query("DELETE FROM admin_sessions WHERE expires_at<strftime('%Y-%m-%dT%H:%M:%fZ','now')");
       await db.query("DELETE FROM rate_limits WHERE reset_at<strftime('%Y-%m-%dT%H:%M:%fZ','now')");
+      await prunePageViews();
       cleanupAt = Date.now() + 3600000;
     }
     await syncInstagram();

@@ -3,9 +3,9 @@ export const partnerContent = {
   hero: {
     title: "Parceiro Indicador",
     description: "Estrutura ágil de crédito para acelerar novos negócios e expandir carteiras de clientes",
-    image: "/images/parceiro-indicador-hero.png",
-    mobileImage: "/images/parceiro-indicador-hero-mobile.png",
-    imageAlt: "Profissional conversa com uma mulher por videochamada no notebook",
+    image: "/images/parceiro-indicador-hero-notebook.png",
+    mobileImage: "/images/parceiro-indicador-hero-notebook-mobile.png",
+    imageAlt: "Homem sorrindo enquanto usa um notebook no escritório",
   },
   benefits: [
     { icon: "clock", text: "+9 anos de atuação no mercado" },

@@ -16,19 +16,17 @@
   background: #08083d;
 }
 
-.page .hero::before {
-  content: none;
-}
-
 .hero > img {
   --art-width: min(74vw, 1136px);
+  box-sizing: border-box;
   max-width: var(--art-width);
   max-height: calc(var(--art-width) * 1087 / 1932);
   margin: auto 0 auto auto;
+  /* Match the logo's position inside the previous 1932px-wide artwork. */
+  padding-inline: calc(var(--art-width) * 630 / 1932) calc(var(--art-width) * 217 / 1932);
+  z-index: 0;
   object-fit: contain;
-  mask-image: linear-gradient(90deg, transparent, #000 28%, #000 94%, transparent),
-    linear-gradient(transparent, #000 25%, #000 75%, transparent);
-  mask-composite: intersect;
+  pointer-events: none;
 }
 
 @media (max-width: 1100px) {
@@ -41,16 +39,18 @@
   }
 
   .hero > img {
+    --art-width: min(calc(100% - 48px), 640px);
     position: relative !important;
     height: auto !important;
-    z-index: 0;
-    max-width: min(calc(100% - 48px), 640px);
     max-height: none;
     aspect-ratio: 16 / 5;
     margin: 0 auto;
-    object-fit: cover;
-    mask-image: linear-gradient(90deg, transparent, #000 28%, #000 94%, transparent),
-      linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  }
+}
+
+@media (max-width: 767px) {
+  .page .hero::before {
+    background: linear-gradient(180deg, rgb(3 3 22 / 48%), rgb(3 3 22 / 52%) 64%, rgb(3 3 22 / 8%) 86%);
   }
 }
 

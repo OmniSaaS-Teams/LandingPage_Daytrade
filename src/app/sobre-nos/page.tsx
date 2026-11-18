@@ -40,7 +40,7 @@ export default function AboutPage() {
           fullBackground
           title="Sobre nós"
           description="Conheça a Daytrade Invest e a ideia que nos move: aproximar investidores e empresas para potencializar novos negócios."
-          image="/images/sobre-nos-hero-marinho.png"
+          image="/images/daytrade-logo-home.png"
           imageAlt="Logotipo da Daytrade"
         >
           <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>

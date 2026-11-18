@@ -161,9 +161,9 @@ export default function ClientAreaPage() {
           className={clientStyles.hero}
           title="Área do Cliente"
           description="Acompanhe sua relação com a Daytrade de forma simples, com mais contexto para cada conversa, solicitação e próximo passo."
-          image="/images/area-cliente-hero-cafe-ampla.png"
-          mobileImage="/images/area-cliente-hero-cafe-mobile.png"
-          imageAlt="Homem usando um notebook à mesa de um café"
+          image="/images/area-cliente-hero-escritorio.png"
+          mobileImage="/images/area-cliente-hero-escritorio-mobile.png"
+          imageAlt="Profissional de blazer escrevendo em um caderno ao lado do computador"
         >
           <a href="#acessar-area">Acessar minha área</a>
           <a href="#recursos">Conheça os recursos</a>

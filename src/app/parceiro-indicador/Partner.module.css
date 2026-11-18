@@ -34,7 +34,7 @@
 .heroImage {
   z-index: -2;
   object-fit: cover;
-  object-position: 65% center;
+  object-position: 65% top;
 }
 
 .heroShade {
@@ -565,11 +565,11 @@
   }
 
   .heroImage {
-    object-position: center;
+    object-position: 65% 65%;
   }
 
   .heroShade {
-    background: linear-gradient(180deg, rgb(3 3 22 / 48%) 0%, rgb(3 3 22 / 35%) 58%, rgb(3 3 22 / 8%) 78%);
+    background: linear-gradient(180deg, rgb(3 3 22 / 64%), rgb(3 3 22 / 51%) 57%, rgb(3 3 22 / 8%) 80%);
   }
 
   .benefits {
@@ -699,6 +699,10 @@
 }
 
 @media (max-width: 359px) {
+  .hero {
+    min-height: 41rem;
+  }
+
   .heroImage {
     padding-top: 4rem;
   }

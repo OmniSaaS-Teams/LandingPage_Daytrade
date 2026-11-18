@@ -7,6 +7,30 @@
   font-family: var(--display);
 }
 
+@media (min-width: 768px) {
+  .hero > picture > img {
+    box-sizing: border-box;
+    padding-top: 5rem;
+    object-position: center 55%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero > picture > img {
+    padding-top: 6rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero > picture > img {
+    object-position: center 65%;
+  }
+
+  .page .hero::before {
+    background: linear-gradient(180deg, rgb(3 3 22 / 48%), rgb(3 3 22 / 52%) 64%, rgb(3 3 22 / 8%) 86%);
+  }
+}
+
 .productsLink {
   gap: 12px;
 }

@@ -14,7 +14,7 @@ const navigationGroups = [
     ],
   },
   {
-    title: "DayTrade",
+    title: "Daytrade",
     links: [
       { label: "Quem somos", href: "/sobre-nos" },
       { label: "Carreira", href: "/carreira" },
@@ -33,7 +33,7 @@ export function Footer() {
             <Link className={styles.brandLink} href="/" aria-label="Voltar ao início">
               <Image
                 src="/images/daytrade-logo-home.png"
-                alt="DayTrade"
+                alt="Daytrade"
                 width={515}
                 height={167}
                 className={styles.logo}
@@ -65,7 +65,7 @@ export function Footer() {
         </div>
 
         <div className={styles.bottomBar}>
-          <p>© 2026 DayTrade. Todos os direitos reservados.</p>
+          <p>© 2026 Daytrade. Todos os direitos reservados.</p>
           <div className={styles.legalLinks}>
             <Link href="/">Privacidade</Link>
             <Link href="/">Termos de uso</Link>

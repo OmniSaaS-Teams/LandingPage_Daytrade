@@ -28,7 +28,7 @@ export function CareerForm() {
       await sendCareer.current("/api/careers", data, 25_000);
       form.reset();
       setStatus("success");
-      setMessage("Currículo enviado! Obrigado por compartilhar sua trajetória com a DayTrade.");
+      setMessage("Currículo enviado! Obrigado por compartilhar sua trajetória com a Daytrade.");
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error && error.name === "Error" ? error.message : "Não foi possível confirmar o envio. Verifique sua conexão e tente novamente.");
@@ -50,7 +50,7 @@ export function CareerForm() {
         <label className={styles.field} htmlFor="career-area">Área de interesse *<select id="career-area" name="area" required defaultValue=""><option value="" disabled>Selecione uma área</option><option>Comercial e relacionamento</option><option>Crédito e operações</option><option>Administrativo e financeiro</option><option>Tecnologia e dados</option><option>Outras áreas</option></select></label>
         <label className={styles.field} htmlFor="career-message">Um pouco sobre você <textarea id="career-message" name="mensagem" maxLength={2000} placeholder="Sua experiência, seus interesses e o que busca para o próximo passo." /></label>
         <label className={styles.upload} htmlFor="career-file"><span className={styles.uploadHeading}>Seu currículo * <span aria-hidden="true">↑</span></span><small>PDF, DOC ou DOCX · até 5 MB</small><input id="career-file" name="curriculo" type="file" accept=".pdf,.doc,.docx" required /></label>
-        <label className={styles.consent}><input name="consentimento" type="checkbox" required value="true" /><span>Autorizo a DayTrade a utilizar meus dados e currículo para avaliar meu perfil e entrar em contato sobre oportunidades profissionais. *</span></label>
+        <label className={styles.consent}><input name="consentimento" type="checkbox" required value="true" /><span>Autorizo a Daytrade a utilizar meus dados e currículo para avaliar meu perfil e entrar em contato sobre oportunidades profissionais. *</span></label>
       </fieldset>
       {message && <p className={`${styles.status} ${status === "error" ? styles.error : ""}`} role={status === "error" ? "alert" : "status"}>{message}</p>}
       <button className={`${styles.primaryButton} ${styles.submit}`} type="submit" disabled={status === "sending"}>{status === "sending" ? "Enviando currículo…" : "Enviar meu currículo"}<span aria-hidden="true">↗</span></button>

@@ -16,7 +16,7 @@ for (let index = 0; index < items.length; index++) {
 return result;`;
 
 const workflow = {
-  name: "DayTrade | Recepção universal de payloads",
+  name: "Daytrade | Recepção universal de payloads",
   active: false,
   nodes: [
     {

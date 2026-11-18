@@ -10,7 +10,7 @@ CREATE TABLE submissions_next (
   request_hash text
 );
 INSERT INTO submissions_next(id,kind,data,status,upload_id,created_at)
-SELECT id,CASE WHEN kind='contact' AND json_extract(data,'$.origem')='Site DayTrade - Parceiro Indicador' THEN 'partner' ELSE kind END,
+SELECT id,CASE WHEN kind='contact' AND json_extract(data,'$.origem')='Site Daytrade - Parceiro Indicador' COLLATE NOCASE THEN 'partner' ELSE kind END,
   data,status,upload_id,created_at FROM submissions;
 
 CREATE TABLE webhook_jobs_next (

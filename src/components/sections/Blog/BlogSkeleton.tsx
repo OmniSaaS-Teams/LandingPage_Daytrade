@@ -13,7 +13,7 @@ export function BlogSkeletonCards() {
 }
 
 export function BlogSkeleton() {
-  return <section id="blog" className={styles.section} aria-label="Conteúdos DayTrade"><div className={styles.container}>
+  return <section id="blog" className={styles.section} aria-label="Conteúdos Daytrade"><div className={styles.container}>
     <div className={styles.categories} aria-hidden="true">{["Todos", "Crédito", "Câmbio", "Investimentos", "Gestão financeira", "Institucional"].map(category => <span key={category} className={styles.categoryLink}>{category}</span>)}</div>
     <Link href="/blog" className={styles.categoryLink}>Ver todos os conteúdos ↗</Link>
     <div className={styles.divider} />

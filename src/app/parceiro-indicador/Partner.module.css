@@ -565,11 +565,11 @@
   }
 
   .heroImage {
-    object-position: 59% center;
+    object-position: center;
   }
 
   .heroShade {
-    background: linear-gradient(90deg, rgb(0 21 39 / 78%), rgb(0 21 39 / 22%));
+    background: linear-gradient(180deg, rgb(3 3 22 / 48%) 0%, rgb(3 3 22 / 35%) 58%, rgb(3 3 22 / 8%) 78%);
   }
 
   .benefits {
@@ -695,5 +695,11 @@
 
   .submit {
     width: 100%;
+  }
+}
+
+@media (max-width: 359px) {
+  .heroImage {
+    padding-top: 4rem;
   }
 }

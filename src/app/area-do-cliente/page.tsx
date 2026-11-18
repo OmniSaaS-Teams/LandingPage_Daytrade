@@ -28,9 +28,9 @@ type ClientResource = {
 const highlights: ClientResource[] = [
   {
     eyebrow: "Banco Digital",
-    title: "Acesse seu Banco Digital DayTrade.",
+    title: "Acesse seu Banco Digital Daytrade.",
     description:
-      "Entre no ambiente do Banco Digital da DayTrade para acessar sua conta.",
+      "Entre no ambiente do Banco Digital da Daytrade para acessar sua conta.",
     tone: "blue",
     href: "https://daytrade.hub.moneyp.com.br/acesso",
     actionLabel: "Acessar Banco Digital",
@@ -62,13 +62,13 @@ const highlights: ClientResource[] = [
     actionLabel: "Acessar meus investimentos",
     image: {
       src: "/images/area-cliente-investimentos-v2.png",
-      alt: "DayTrade: acesso ao Painel do Investidor",
+      alt: "Daytrade: acesso ao Painel do Investidor",
     },
   },
   {
     eyebrow: "Acesso comercial",
     title: "Acesse seu ambiente comercial.",
-    description: "Entre no portal comercial da DayTrade para acessar seu ambiente de trabalho.",
+    description: "Entre no portal comercial da Daytrade para acessar seu ambiente de trabalho.",
     tone: "blue",
     href: "https://new.wba.com.br/login/5d42d85f-87a1-4acb-ad77-8eea77ae2ee6",
     actionLabel: "Acessar portal comercial",
@@ -107,7 +107,7 @@ function ClientDashboard() {
   return (
     <div className={styles.dashboard} aria-hidden="true">
       <div className={styles.dashboardHeader}>
-        <div className={styles.dashboardBrand}><span>D</span> DayTrade</div>
+        <div className={styles.dashboardBrand}><span>D</span> Daytrade</div>
         <div className={styles.dashboardHeaderActions}><i /><i /><b>Meu perfil</b></div>
       </div>
       <div className={styles.dashboardBody}>
@@ -158,10 +158,12 @@ export default function ClientAreaPage() {
         <InternalHero
           fullBackground
           id="client-area-title"
+          className={clientStyles.hero}
           title="Área do Cliente"
-          description="Acompanhe sua relação com a DayTrade de forma simples, com mais contexto para cada conversa, solicitação e próximo passo."
-          image="/images/portfolio-products.webp"
-          imageAlt="Profissional utilizando um tablet para acompanhar informações"
+          description="Acompanhe sua relação com a Daytrade de forma simples, com mais contexto para cada conversa, solicitação e próximo passo."
+          image="/images/area-cliente-hero-cafe-ampla.png"
+          mobileImage="/images/area-cliente-hero-cafe-mobile.png"
+          imageAlt="Homem usando um notebook à mesa de um café"
         >
           <a href="#acessar-area">Acessar minha área</a>
           <a href="#recursos">Conheça os recursos</a>
@@ -211,7 +213,7 @@ export default function ClientAreaPage() {
           <CallToAction
             id="client-area-cta"
             highlight="Conecte seu patrimônio à economia real."
-            title="Conheça a renda fixa da DayTrade, com lastro em recebíveis e gestão ativa de risco."
+            title="Conheça a renda fixa da Daytrade, com lastro em recebíveis e gestão ativa de risco."
             primaryLabel="Simular meu investimento"
             primaryHref="/investidor#investimento"
             secondaryLabel="Conhecer a estrutura"

@@ -29,14 +29,14 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
   const isLight = variant === "light";
   const headerLogo = siteContent.brand.logo;
   const [openDesktopMenu, setOpenDesktopMenu] = useState<
-    "DayTrade" | "Setores" | null
+    "Daytrade" | "Setores" | null
   >(null);
   const [openMobileMenu, setOpenMobileMenu] = useState<
-    "DayTrade" | "Setores" | null
+    "Daytrade" | "Setores" | null
   >(null);
   const [desktopMenuLeft, setDesktopMenuLeft] = useState(0);
 
-  const openMenu = (element: HTMLElement, menu: "DayTrade" | "Setores") => {
+  const openMenu = (element: HTMLElement, menu: "Daytrade" | "Setores") => {
     const { left } = element.getBoundingClientRect();
     const width = Math.min(760, window.innerWidth - 112);
     setDesktopMenuLeft(Math.max(56 - left, Math.min(0, window.innerWidth - 56 - left - width)));
@@ -240,7 +240,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
     }
 
     if (item.type === "menu") {
-      const menuKey = item.label === "Setores" ? "Setores" : "DayTrade";
+      const menuKey = item.label === "Setores" ? "Setores" : "Daytrade";
       const menuContent =
         menuKey === "Setores"
           ? {
@@ -254,7 +254,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
               ],
             }
           : {
-              headline: "Conheça a DayTrade.",
+              headline: "Conheça a Daytrade.",
               description:
                 "Conteúdos e atalhos do menu serão definidos nesta área.",
               items: [
@@ -586,7 +586,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
               <span className="text-2xl leading-none" aria-hidden="true">×</span>
             </button>
 
-            <p className="pr-12 text-sm font-medium uppercase tracking-[0.16em] text-blue-700">DayTrade Invest</p>
+            <p className="pr-12 text-sm font-medium uppercase tracking-[0.16em] text-blue-700">Daytrade Invest</p>
             <h2 id="client-modal-title" className="mt-3 pr-10 text-3xl font-normal tracking-tight sm:text-4xl">
               Seja cliente
             </h2>

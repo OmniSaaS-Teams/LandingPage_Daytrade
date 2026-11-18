@@ -12,6 +12,48 @@
   font-family: var(--display);
 }
 
+.page .hero {
+  background: #08083d;
+}
+
+.page .hero::before {
+  content: none;
+}
+
+.hero > img {
+  --art-width: min(74vw, 1136px);
+  max-width: var(--art-width);
+  max-height: calc(var(--art-width) * 1087 / 1932);
+  margin: auto 0 auto auto;
+  object-fit: contain;
+  mask-image: linear-gradient(90deg, transparent, #000 28%, #000 94%, transparent),
+    linear-gradient(transparent, #000 25%, #000 75%, transparent);
+  mask-composite: intersect;
+}
+
+@media (max-width: 1100px) {
+  .page .hero {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 24px;
+    min-height: 0;
+    padding-bottom: 40px;
+  }
+
+  .hero > img {
+    position: relative !important;
+    height: auto !important;
+    z-index: 0;
+    max-width: min(calc(100% - 48px), 640px);
+    max-height: none;
+    aspect-ratio: 16 / 5;
+    margin: 0 auto;
+    object-fit: cover;
+    mask-image: linear-gradient(90deg, transparent, #000 28%, #000 94%, transparent),
+      linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  }
+}
+
 .historyLink {
   gap: 12px;
 }
@@ -121,7 +163,7 @@
 
 .storyPhoto img {
   object-fit: cover;
-  object-position: 42% center;
+  object-position: 22% center;
 }
 
 .storyCopy>p:not(.eyebrow) {

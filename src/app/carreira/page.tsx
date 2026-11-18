@@ -8,8 +8,8 @@ import { BrandWaves } from "../../components/ui/BrandWaves";
 import styles from "./Careers.module.css";
 
 export const metadata: Metadata = {
-  title: "Carreira | DayTrade Invest",
-  description: "Conheça a DayTrade e apresente sua trajetória. Envie seu currículo para futuras oportunidades em nosso time.",
+  title: "Carreira | Daytrade Invest",
+  description: "Conheça a Daytrade e apresente sua trajetória. Envie seu currículo para futuras oportunidades em nosso time.",
 };
 
 const principles = [
@@ -46,14 +46,14 @@ export default function CareersPage() {
           <p>Por trás de cada solução financeira, existe uma conversa, uma ideia e alguém disposto a fazer acontecer. É essa conexão que queremos construir com você.</p>
         </section>
 
-        <section className={styles.stories} aria-label="Conheça a DayTrade">
+        <section className={styles.stories} aria-label="Conheça a Daytrade">
           <div className={styles.story}>
             <div className={styles.storyCopy}>
               <p className={styles.eyebrow}>UM TRABALHO COM PROPÓSITO</p>
               <h2>Seu talento pode abrir novos caminhos.</h2>
-              <p>A DayTrade conecta empresas a soluções financeiras. Nosso trabalho começa por entender cada negócio e encontrar possibilidades para que ele siga em frente.</p>
+              <p>A Daytrade conecta empresas a soluções financeiras. Nosso trabalho começa por entender cada negócio e encontrar possibilidades para que ele siga em frente.</p>
               <p>Se você se identifica com esse olhar, queremos conhecer sua experiência e o que deseja construir na próxima etapa da sua carreira.</p>
-              <Link className={styles.textLink} href="/sobre-nos">Conheça a DayTrade <span aria-hidden="true">↗</span></Link>
+              <Link className={styles.textLink} href="/sobre-nos">Conheça a Daytrade <span aria-hidden="true">↗</span></Link>
             </div>
             <div className={styles.storyPhoto}><Image src="/images/features/carreira-equipe.png" alt="Profissionais analisando informações em um notebook" fill sizes="(max-width: 767px) 90vw, 45vw" /></div>
           </div>
@@ -87,7 +87,7 @@ export default function CareersPage() {
           <div className={styles.applicationCopy}>
             <p className={styles.eyebrow}>VAMOS NOS CONHECER</p>
             <h2 id="application-title">O próximo capítulo<br />pode começar <span>aqui.</span></h2>
-            <p>Conte um pouco sobre você e envie seu currículo para futuras oportunidades na DayTrade.</p>
+            <p>Conte um pouco sobre você e envie seu currículo para futuras oportunidades na Daytrade.</p>
             <div className={styles.applicationNote}><span aria-hidden="true">↗</span><p>Este é um cadastro de interesse. O envio não está vinculado a uma vaga específica nem garante participação em um processo seletivo.</p></div>
           </div>
           <CareerForm />

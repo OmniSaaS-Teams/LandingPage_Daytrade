@@ -67,5 +67,5 @@ export async function POST(request: Request) {
   if (!mime) return invalid("Envie um arquivo PDF, DOC ou DOCX válido.");
 
   const resume = new File([await file.arrayBuffer()], file.name, { type: mime });
-  return captureSubmission("career", { nome, email, telefone, area, mensagem, consentimento: true, origem: "Site DayTrade - Carreira" }, resume, request);
+  return captureSubmission("career", { nome, email, telefone, area, mensagem, consentimento: true, origem: "Site Daytrade - Carreira" }, resume, request);
 }

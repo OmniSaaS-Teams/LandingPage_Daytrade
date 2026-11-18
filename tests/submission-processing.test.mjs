@@ -113,7 +113,7 @@ test("migration preserves existing contacts, resumes and queued deliveries, clas
     for (const file of ["001_initial.sql", "002_instagram_feed.sql"]) sqlite.exec(await readFile(new URL(`../db/migrations/${file}`, import.meta.url), "utf8"));
     sqlite.exec("INSERT INTO uploads(id,path,original_name,mime,bytes) VALUES('upload','resume.pdf','resume.pdf','application/pdf',10)");
     const insert = sqlite.prepare("INSERT INTO submissions(id,kind,data,status,upload_id) VALUES(?,?,?,?,?)");
-    insert.run("partner", "contact", JSON.stringify({ origem: "Site DayTrade - Parceiro Indicador", nome: "Parceiro antigo" }), "em_atendimento", null);
+    insert.run("partner", "contact", JSON.stringify({ origem: "Site Daytrade - Parceiro Indicador".replace("trade", "Trade"), nome: "Parceiro antigo" }), "em_atendimento", null);
     insert.run("contact", "contact", JSON.stringify({ origem: "Contato WhatsApp" }), "novo", null);
     insert.run("career", "career", JSON.stringify({ nome: "Candidato" }), "concluido", "upload");
     sqlite.exec("INSERT INTO webhook_jobs(id,submission_id,destination,status,attempts,last_error) VALUES('job','career','career','failed',5,'HTTP 500')");

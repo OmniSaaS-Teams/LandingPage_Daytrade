@@ -7,7 +7,7 @@ import { PageViewTracker } from "../components/integrations/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DayTrade Invest | Crédito Inteligente",
+  title: "Daytrade Invest | Crédito Inteligente",
   description:
     "Site institucional para uma empresa do setor financeiro.",
   icons: {

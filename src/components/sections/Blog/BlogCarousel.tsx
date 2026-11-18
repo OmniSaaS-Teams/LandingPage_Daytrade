@@ -40,7 +40,7 @@ export function BlogCarousel({ articles }: { articles: BlogArticle[] }) {
   };
 
   return (
-    <section id="blog" className={styles.section} aria-label="Conteúdos DayTrade">
+    <section id="blog" className={styles.section} aria-label="Conteúdos Daytrade">
       <div className={styles.container}>
         <nav className={styles.categories} aria-label="Categorias do blog">
           {categories.map((item) => (

@@ -155,7 +155,7 @@ export function SpecialistContactModal() {
         </button>
 
         <p className="pr-12 text-sm font-medium uppercase tracking-[0.16em] text-blue-700">
-          DayTrade Invest
+          Daytrade Invest
         </p>
         <h2
           id="specialist-modal-title"

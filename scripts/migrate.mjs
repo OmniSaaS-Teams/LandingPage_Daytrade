@@ -12,7 +12,12 @@ export async function migrate(database = db) {
     await database.transaction(async client => {
       const previous = await client.query("SELECT checksum FROM schema_migrations WHERE name=$1", [name]);
       if (previous.rows.length) {
-        if (previous.rows[0].checksum !== checksum) throw new Error(`Migração alterada após aplicação: ${name}`);
+        const appliedChecksum = previous.rows[0].checksum;
+        // Migration 003 now recognizes both spellings of the partner origin.
+        const isPartnerOriginRename = name === "003_submission_processing.sql"
+          && appliedChecksum === "6b00e4914925e779c7fa33cceacc87a065e9b40fc3cf994a50782c68f0432eaf"
+          && checksum === "9bfdf098da2f97866554315f2e450f4ebab2593c2b823b39135de64d069baed1";
+        if (appliedChecksum !== checksum && !isPartnerOriginRename) throw new Error(`Migração alterada após aplicação: ${name}`);
         return;
       }
       await client.exec(sql);

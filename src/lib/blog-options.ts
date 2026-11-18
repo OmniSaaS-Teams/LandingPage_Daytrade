@@ -1,5 +1,5 @@
 export const blogCovers = [
-  { path: "/images/hero-office.png", label: "Escritório DayTrade" },
+  { path: "/images/hero-office.png", label: "Escritório Daytrade" },
   { path: "/images/features/credito-escritorio.png", label: "Crédito e negócios" },
   { path: "/images/features/cambio.png", label: "Câmbio" },
   { path: "/images/features/bpo.png", label: "Gestão financeira" },

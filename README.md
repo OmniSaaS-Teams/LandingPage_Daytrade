@@ -1,4 +1,4 @@
-# Site DayTrade
+# Site Daytrade
 
 Site institucional, APIs, painel administrativo e blog no mesmo projeto Next.js.
 

@@ -27,6 +27,6 @@ export async function POST(request: Request) {
 
   return captureSubmission("partner", {
     nome, email, telefone, experienciaFIDCs: experiencia === "sim",
-    origem: "Site DayTrade - Parceiro Indicador",
+    origem: "Site Daytrade - Parceiro Indicador",
   }, undefined, request);
 }

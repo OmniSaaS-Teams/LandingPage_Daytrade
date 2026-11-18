@@ -16,7 +16,7 @@ test("saves partner fields under their own kind, without forwarding to the clien
   assert.equal(result.success, true);
   const stored = (await db.query("SELECT kind,data FROM submissions WHERE id=$1", [result.id])).rows[0];
   assert.equal(stored.kind, "partner");
-  assert.deepEqual(stored.data, { nome: "Maria Silva", email: "maria@example.test", telefone: "5511999998888", experienciaFIDCs: true, origem: "Site DayTrade - Parceiro Indicador", formulario: "parceiro_indicador", caminho_origem: "/parceiro-indicador", endpoint_origem: "/api/partner-leads" });
+  assert.deepEqual(stored.data, { nome: "Maria Silva", email: "maria@example.test", telefone: "5511999998888", experienciaFIDCs: true, origem: "Site Daytrade - Parceiro Indicador", formulario: "parceiro_indicador", caminho_origem: "/parceiro-indicador", endpoint_origem: "/api/partner-leads" });
   assert.equal((await db.query("SELECT * FROM webhook_jobs")).rows.length, 0);
 });
 

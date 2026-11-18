@@ -13,7 +13,7 @@ function SkeletonCards() {
 }
 function FeedSection({ username, children }: { username: string; children: React.ReactNode }) {
   return <section className={styles.section} aria-labelledby="instagram-title">
-    <div className={styles.heading}><div><span className={styles.eyebrow}>CONEXÕES QUE APROXIMAM</span><h2 id="instagram-title">Acompanhe a DayTrade</h2><p>Ideias, novidades e o nosso dia a dia no Instagram.</p></div><a className={styles.profile} href={`https://www.instagram.com/${username}/`} target="_blank" rel="noopener noreferrer">@{username} ↗</a></div>
+    <div className={styles.heading}><div><span className={styles.eyebrow}>CONEXÕES QUE APROXIMAM</span><h2 id="instagram-title">Acompanhe a Daytrade</h2><p>Ideias, novidades e o nosso dia a dia no Instagram.</p></div><a className={styles.profile} href={`https://www.instagram.com/${username}/`} target="_blank" rel="noopener noreferrer">@{username} ↗</a></div>
     {children}
   </section>;
 }
@@ -23,7 +23,7 @@ async function Posts() {
   return <FeedSection username={feed.username}>
     {feed.posts.length > 0 ? <div className={styles.grid}>{feed.posts.map(post => <a key={post.id} className={styles.card} href={post.permalink} target="_blank" rel="noopener noreferrer">
       <div className={styles.media}>{post.imageUrl ? <picture><img src={post.imageUrl} alt="" loading="lazy" referrerPolicy="no-referrer" /></picture> : <span>Ver publicação no Instagram ↗</span>}<span className={styles.badge}>{post.mediaType === "VIDEO" ? "Reel" : post.mediaType === "CAROUSEL_ALBUM" ? "Carrossel" : "Instagram"}</span></div>
-      <div className={styles.content}><time dateTime={post.timestamp}>{new Date(post.timestamp).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", day: "numeric", month: "long", year: "numeric" })}</time><p>{post.caption || "Confira esta publicação da DayTrade."}</p><span className={styles.link}>Ver no Instagram ↗</span></div>
+      <div className={styles.content}><time dateTime={post.timestamp}>{new Date(post.timestamp).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", day: "numeric", month: "long", year: "numeric" })}</time><p>{post.caption || "Confira esta publicação da Daytrade."}</p><span className={styles.link}>Ver no Instagram ↗</span></div>
     </a>)}</div> : <SkeletonCards />}
   </FeedSection>;
 }

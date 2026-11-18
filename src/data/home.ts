@@ -2,16 +2,16 @@ import heroImage from "../../public/images/hero-office.png";
 
 export const siteContent = {
   brand: {
-    name: "DayTrade",
+    name: "Daytrade",
     logo: {
       src: "/images/daytrade-logo-home.png",
-      alt: "DayTrade",
+      alt: "Daytrade",
       width: 515,
       height: 167,
     },
   },
   navigation: [
-    { label: "DayTrade", type: "menu" },
+    { label: "Daytrade", type: "menu" },
     { label: "Portfólio", type: "link", href: "/portfolio" },
     { label: "Investidor", type: "link", href: "/investidor" },
     { label: "Setores", type: "menu" },
@@ -23,7 +23,7 @@ export const siteContent = {
     primary: "Start now",
   },
   hero: {
-    compliance: "CNPJ: 29.270.075/0001-74 - DayTrade Invest Securitizadora S/A",
+    compliance: "CNPJ: 29.270.075/0001-74 - Daytrade Invest Securitizadora S/A",
     title: "Crédito Inteligente.",
     description:
       "Estruturamos soluções de crédito sob medida para empresas que buscam capital com agilidade, segurança e condições competitivas, do primeiro contato à liberação dos recursos.",

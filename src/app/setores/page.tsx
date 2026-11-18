@@ -8,9 +8,9 @@ import styles from "./Sectors.module.css";
 import careerStyles from "../carreira/Careers.module.css";
 
 export const metadata: Metadata = {
-  title: "Agro, Indústria e Construtora | DayTrade Invest",
+  title: "Agro, Indústria e Construtora | Daytrade Invest",
   description:
-    "Conheça as soluções financeiras da DayTrade para o agronegócio, a indústria e a construção em um só lugar.",
+    "Conheça as soluções financeiras da Daytrade para o agronegócio, a indústria e a construção em um só lugar.",
 };
 
 const sectors = [
@@ -20,8 +20,8 @@ const sectors = [
     title: "Recursos no ritmo da sua safra.",
     description:
       "Planejamento e crédito para acompanhar cada ciclo, do plantio à expansão do negócio.",
-    image: "/images/features/credito-cafe.png",
-    imageAlt: "Profissionais conversando sobre o planejamento de um negócio",
+    image: "/images/setores-agro.png",
+    imageAlt: "Vista aérea de um trator pulverizando uma plantação",
     paragraphs: [
       "Antecipe recebíveis da safra para ter capital para insumos, sementes e operação no momento certo. Com as entradas e saídas alinhadas ao calendário do campo, você reduz o descompasso entre gastos e recebimentos.",
       "Para expandir seu negócio, conte com uma estrutura de crédito pensada para financiar máquinas, tecnologia e novas áreas.",
@@ -33,8 +33,8 @@ const sectors = [
     title: "Capital para a produção avançar.",
     description:
       "Soluções financeiras para manter a operação em movimento e preparar os próximos investimentos.",
-    image: "/images/features/bpo.png",
-    imageAlt: "Equipe reunida para analisar informações e planejar a operação",
+    image: "/images/setores-industria.png",
+    imageAlt: "Dois profissionais de capacete consultam um tablet no chão de fábrica",
     paragraphs: [
       "Tenha recursos para matéria-prima, folha de pagamento e custos fixos, sem travar a produção. Transforme duplicatas e vendas a prazo em caixa para ganhar previsibilidade no fluxo financeiro.",
       "Na hora de investir, conte com crédito estruturado para financiar máquinas, automação e a ampliação da capacidade da sua indústria.",
@@ -46,8 +46,8 @@ const sectors = [
     title: "Uma base sólida para cada obra.",
     description:
       "Crédito e planejamento alinhados ao cronograma, do canteiro ao próximo projeto.",
-    image: "/images/features/investimento.png",
-    imageAlt: "Profissional analisando documentos diante de uma paisagem urbana",
+    image: "/images/setores-construtora.png",
+    imageAlt: "Equipe de capacete e colete acompanha o trabalho em um canteiro de obras",
     paragraphs: [
       "Conte com capital para materiais, mão de obra e etapas do cronograma, sem deixar a obra desacelerar. Antecipe as parcelas das unidades vendidas e libere caixa para a próxima etapa do projeto.",
       "Do terreno aos lançamentos, encontre crédito estruturado para financiar novos projetos e a próxima fase do seu negócio.",
@@ -62,11 +62,12 @@ export default function SectorsPage() {
       <main className={styles.page}>
         <InternalHero
           id="sectors-title"
+          className={styles.hero}
           fullBackground
           title="Agro, Indústria e Construtora."
           description="Soluções financeiras para planejar, produzir e construir os próximos passos do seu negócio."
-          image="/images/portfolio-products.webp"
-          imageAlt="Profissional planejando negócios com uma caneta e um tablet"
+          image="/images/setores-hero.png"
+          imageAlt="Quatro profissionais conversando em um escritório"
         >
           <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
           <a className={styles.sectorsLink} href="#agronegocio">Conheça os setores <span aria-hidden="true">↓</span></a>
@@ -75,7 +76,7 @@ export default function SectorsPage() {
         <section className={styles.intro} aria-labelledby="sectors-intro-title">
           <p className={styles.eyebrow}>Setores que movem negócios</p>
           <h2 id="sectors-intro-title">Soluções para planejar,<br />produzir e <span>construir.</span></h2>
-          <p>Conheça as soluções financeiras da DayTrade para o agronegócio, a indústria e a construção em um só lugar.</p>
+          <p>Conheça as soluções financeiras da Daytrade para o agronegócio, a indústria e a construção em um só lugar.</p>
         </section>
 
         {sectors.map((sector, index) => (

@@ -108,6 +108,22 @@ test("migration runner is idempotent",async()=>{
   await migrate();
   assert.deepEqual((await db.query("SELECT * FROM schema_migrations ORDER BY name")).rows,before);
 });
+test("migration runner accepts the original partner migration checksum", async () => {
+  const name = "003_submission_processing.sql";
+  const select = "SELECT checksum FROM schema_migrations WHERE name=$1";
+  const update = "UPDATE schema_migrations SET checksum=$1 WHERE name=$2";
+  const { checksum } = (await db.query(select, [name])).rows[0];
+  const original = "6b00e4914925e779c7fa33cceacc87a065e9b40fc3cf994a50782c68f0432eaf";
+  try {
+    await db.query(update, [original, name]);
+    await migrate();
+    assert.equal((await db.query(select, [name])).rows[0].checksum, original);
+    await db.query(update, ["unexpected", name]);
+    await assert.rejects(migrate(), /Migração alterada após aplicação/);
+  } finally {
+    await db.query(update, [checksum, name]);
+  }
+});
 test("capture and queued delivery roll back together on error",async()=>{
   process.env.N8N_LEAD_WEBHOOK_URL="https://n8n.example.test/lead";
   const transaction = db.transaction.bind(db);

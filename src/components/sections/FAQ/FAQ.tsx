@@ -2,9 +2,9 @@ import styles from "./FAQ.module.css";
 
 const questions = [
   {
-    question: "Quais soluções financeiras a DayTrade oferece?",
+    question: "Quais soluções financeiras a Daytrade oferece?",
     answer:
-      "A DayTrade reúne soluções de crédito, câmbio, BPO e investimento. A indicação mais adequada é definida a partir do momento e dos objetivos do seu negócio.",
+      "A Daytrade reúne soluções de crédito, câmbio, BPO e investimento. A indicação mais adequada é definida a partir do momento e dos objetivos do seu negócio.",
   },
   {
     question: "Como posso começar uma conversa com a equipe?",
@@ -12,7 +12,7 @@ const questions = [
       "Você pode entrar em contato pelo canal de atendimento para compartilhar o contexto da sua empresa. A equipe direciona os próximos passos de acordo com a sua necessidade.",
   },
   {
-    question: "A DayTrade atende empresas de todos os portes?",
+    question: "A Daytrade atende empresas de todos os portes?",
     answer:
       "Cada demanda é analisada de forma individual. Assim, a conversa inicial ajuda a entender o porte, o momento e os objetivos financeiros da sua empresa.",
   },
@@ -38,7 +38,7 @@ export function FAQ() {
             Respostas claras para você tomar o próximo passo.
           </h2>
           <p className={styles.description}>
-            Reunimos as dúvidas iniciais para facilitar a sua conversa com a DayTrade.
+            Reunimos as dúvidas iniciais para facilitar a sua conversa com a Daytrade.
           </p>
         </div>
 

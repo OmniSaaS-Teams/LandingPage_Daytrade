@@ -395,7 +395,7 @@ export function InvestorContent() {
               <span className={styles["barra-valor"]} id="valorCarteira">{result ? money(values.carteira) : "R$ 11.788,00"}</span>
               <div className={styles["barra"] + " " + styles["barra-3"]} id="barraCarteira" style={{ height: `${values.carteira ? 285 : 0}px` }}></div>
               <div className={styles["barra-label"]}>
-                <strong>Carteira DayTrade</strong>
+                <strong>Carteira Daytrade</strong>
                 <span>(120% do CDI)</span>
               </div>
             </div>

@@ -17,7 +17,7 @@ const firstToken = "test-only-instagram-secret-token-12345";
 const secondToken = "test-only-replacement-secret-token-67890";
 
 test("admin connection encrypts the token and only exposes safe metadata", async () => {
-  await saveInstagramConnection(" @DayTradeSa ", firstToken);
+  await saveInstagramConnection(" @DaytradeSa ", firstToken);
   const saved = (await db.query("SELECT * FROM instagram_connection")).rows[0];
   assert.equal(saved.username, "daytradesa");
   assert.match(saved.token_ciphertext, /^v1\./);

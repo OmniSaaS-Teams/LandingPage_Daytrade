@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import { partnerContent } from "../../data/partner";
@@ -7,8 +7,8 @@ import { PartnerForm } from "./PartnerForm";
 import styles from "./Partner.module.css";
 
 export const metadata: Metadata = {
-  title: "Parceiro Indicador | DayTrade",
-  description: "Conheça a parceria comercial DayTrade e cadastre seu interesse em fazer parte da nossa rede de parceiros.",
+  title: "Parceiro Indicador | Daytrade",
+  description: "Conheça a parceria comercial Daytrade e cadastre seu interesse em fazer parte da nossa rede de parceiros.",
 };
 
 const iconPaths = {
@@ -27,17 +27,28 @@ const iconPaths = {
 };
 
 export default function PartnerPage() {
+  const { hero } = partnerContent;
+  const { props: { srcSet: mobileHeroSrcSet } } = getImageProps({
+    src: hero.mobileImage,
+    alt: hero.imageAlt,
+    fill: true,
+    sizes: "100vw",
+  });
+
   return (
     <>
       <Navbar background="gradient" />
       <main className={styles.page}>
         <section className={styles.hero} aria-labelledby="partner-title">
-          <Image src={partnerContent.hero.image} alt={partnerContent.hero.imageAlt} fill sizes="100vw" preload className={styles.heroImage} />
+          <picture>
+            <source media="(max-width: 767px)" srcSet={mobileHeroSrcSet} sizes="100vw" />
+            <Image src={hero.image} alt={hero.imageAlt} fill sizes="100vw" loading="eager" fetchPriority="high" className={styles.heroImage} />
+          </picture>
           <div className={styles.heroShade} />
           <div className={styles.container}>
             <div className={styles.heroCopy}>
-              <h1 id="partner-title">{partnerContent.hero.title}</h1>
-              <p>{partnerContent.hero.description}</p>
+              <h1 id="partner-title">{hero.title}</h1>
+              <p>{hero.description}</p>
               <div className={styles.heroActions}>
                 <a href="#formulario-parceiro">Seja um parceiro</a>
               </div>

@@ -114,7 +114,7 @@ export function Features() {
         <div className={styles.header}>
           <span className={styles.badge}>Produtos e Serviços</span>
           <p className={styles.subtitle}>
-            Como a DayTrade pode te ajudar hoje?
+            Como a Daytrade pode te ajudar hoje?
           </p>
         </div>
 

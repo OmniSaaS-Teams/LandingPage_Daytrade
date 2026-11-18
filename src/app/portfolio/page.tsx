@@ -6,9 +6,9 @@ import { Navbar } from "../../components/layout/Navbar";
 import styles from "./Portfolio.module.css";
 
 export const metadata: Metadata = {
-  title: "Portfólio de Produtos | DayTrade",
+  title: "Portfólio de Produtos | Daytrade",
   description:
-    "Conheça o portfólio de produtos da DayTrade e as soluções financeiras para sua empresa.",
+    "Conheça o portfólio de produtos da Daytrade e as soluções financeiras para sua empresa.",
 };
 
 const exclusiveProducts = [
@@ -43,12 +43,12 @@ const products = [
   {
     title: "Risco Sacado",
     description:
-      "Conheça os benefícios de também ser sacado da DayTrade. Melhore seu fluxo de caixa tendo mais prazo de pagamento das suas duplicatas, indicando seus fornecedores para a DayTrade.",
+      "Conheça os benefícios de também ser sacado da Daytrade. Melhore seu fluxo de caixa tendo mais prazo de pagamento das suas duplicatas, indicando seus fornecedores para a Daytrade.",
   },
   {
     title: "Boleto Especial",
     description:
-      "Para aquele cliente em que há vedação de negociação de títulos. Mande um boleto em seu nome em que o crédito irá para a DayTrade.",
+      "Para aquele cliente em que há vedação de negociação de títulos. Mande um boleto em seu nome em que o crédito irá para a Daytrade.",
   },
   {
     title: "Conta-Corrente",
@@ -115,11 +115,13 @@ export default function PortfolioPage() {
       <main className={styles.page}>
         <InternalHero
           id="portfolio-title"
+          className={styles.hero}
           fullBackground
           title="Portfólio de Produtos"
-          description="Conheça o portfólio de produtos da DayTrade e as soluções financeiras para sua empresa."
-          image="/images/portfolio-products.webp"
-          imageAlt="Profissional de negócios com uma caneta e um tablet nas mãos"
+          description="Conheça o portfólio de produtos da Daytrade e as soluções financeiras para sua empresa."
+          image="/images/portfolio-hero.png"
+          mobileImage="/images/portfolio-hero-mobile.png"
+          imageAlt="Duas pessoas analisam planilhas financeiras com um gráfico de fluxo de caixa no notebook"
         >
           <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
           <a className={styles.productsLink} href="#produtos">Conheça nossos produtos <span aria-hidden="true">↓</span></a>
@@ -132,7 +134,7 @@ export default function PortfolioPage() {
             aria-labelledby="exclusive-products-title"
           >
             <h2 id="exclusive-products-title">
-              Exclusividade da DayTrade
+              Exclusividade da Daytrade
             </h2>
             <div className={styles.exclusiveGrid}>
               {exclusiveProducts.map((product) => (

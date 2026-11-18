@@ -8,8 +8,8 @@ import { Navbar } from "../../components/layout/Navbar";
 import styles from "./About.module.css";
 
 export const metadata: Metadata = {
-  title: "Sobre nós | DayTrade Invest",
-  description: "Conheça a DayTrade Invest: nossa origem, a proximidade com cada cliente e as soluções de crédito e investimento que conectam histórias a novas possibilidades.",
+  title: "Sobre nós | Daytrade Invest",
+  description: "Conheça a Daytrade Invest: nossa origem, a proximidade com cada cliente e as soluções de crédito e investimento que conectam histórias a novas possibilidades.",
 };
 
 const solutions = [
@@ -36,11 +36,12 @@ export default function AboutPage() {
       <main className={styles.page}>
         <InternalHero
           id="about-title"
+          className={styles.hero}
           fullBackground
           title="Sobre nós"
-          description="Conheça a DayTrade Invest e a ideia que nos move: aproximar investidores e empresas para potencializar novos negócios."
-          image="/images/features/bpo.png"
-          imageAlt="Profissionais trocando ideias e colaborando em um escritório"
+          description="Conheça a Daytrade Invest e a ideia que nos move: aproximar investidores e empresas para potencializar novos negócios."
+          image="/images/sobre-nos-hero-marinho.png"
+          imageAlt="Logotipo da Daytrade"
         >
           <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
           <a className={styles.historyLink} href="#quem-somos">Conheça nossa história <span aria-hidden="true">↓</span></a>
@@ -53,7 +54,7 @@ export default function AboutPage() {
               <h2 id="origin-title">Uma ideia que conecta <span>novas possibilidades.</span></h2>
             </div>
             <div className={styles.originCopy}>
-              <p>A DayTrade Invest nasceu de uma ideia central:</p>
+              <p>A Daytrade Invest nasceu de uma ideia central:</p>
               <blockquote>
                 <span className={styles.quoteMark} aria-hidden="true">“</span>
                 <p>Remunerar melhor nossos investidores e dar crédito a empresas com potencial para novos negócios.</p>
@@ -66,7 +67,7 @@ export default function AboutPage() {
         <section id="nossa-forma-de-atuar" className={styles.approach} aria-labelledby="approach-title">
           <div className={`${styles.container} ${styles.approachGrid}`}>
             <div className={styles.storyPhoto}>
-              <Image src="/images/features/credito-cafe.png" alt="Profissionais conversando e analisando possibilidades para um negócio" fill sizes="(max-width: 767px) calc(100vw - 48px), 45vw" />
+              <Image src="/images/sobre-nos-equipe.png" alt="Equipe acompanha uma apresentação sobre securitização e crédito em uma sala de reunião" fill sizes="(max-width: 767px) calc(100vw - 48px), 45vw" />
             </div>
             <div className={styles.storyCopy}>
               <p className={styles.eyebrow}>Cada cliente, uma história</p>
@@ -74,7 +75,7 @@ export default function AboutPage() {
               <p>Em cada visita, ouvimos o que o cliente tem a dizer. Sabemos que cada pessoa percorreu caminhos diferentes, escreveu suas próprias histórias e acumulou experiências valiosas em seu ramo de atuação.</p>
               <p>É a partir dessa troca que ajudamos a potencializar seus negócios. Aprendemos com seus acertos e erros, valorizando tudo o que faz parte de sua trajetória.</p>
               <p>Ao atender, nosso ponto de partida é entender o que podemos ajudar a solucionar. Encaramos cada nova situação como um novo desafio.</p>
-              <SpecialistContactButton className={styles.primaryButton}>Converse com a DayTrade <span aria-hidden="true">↗</span></SpecialistContactButton>
+              <SpecialistContactButton className={styles.primaryButton}>Converse com a Daytrade <span aria-hidden="true">↗</span></SpecialistContactButton>
             </div>
           </div>
         </section>

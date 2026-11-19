@@ -1,6 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import dtiLogo from "../../../../public/images/logos/dti_240x80.png";
-import sinfacLogo from "../../../../public/images/logos/sinfac-sp.png";
+import sinfacLogo from "../../../../public/images/logos/sinfac-sp-light.png";
 import { SpecialistContactButton } from "../../contact/SpecialistContact";
 import { Navbar } from "../../layout/Navbar";
 import { siteContent } from "../../../data/home";
@@ -9,7 +9,7 @@ import styles from "./Hero.module.css";
 type CustomerLogo = {
   name: string;
   label?: string;
-  style: string;
+  style?: string;
   src?: string | StaticImageData;
 };
 
@@ -42,17 +42,16 @@ const customerLogos: CustomerLogo[] = [
     name: "ANFAC",
     label: "ANFAC Fomento Comercial",
     style: "anfac",
-    src: "/images/logos/anfac.png",
+    src: "/images/logos/anfac-light.png",
   },
   {
     name: "Assertiva",
     style: "assertiva",
-    src: "/images/logos/assertiva.png",
+    src: "/images/logos/assertiva-light.png",
   },
   {
     name: "ABRAFESC",
-    style: "abrafesc",
-    src: "/images/logos/abrafesc.png",
+    src: "/images/logos/abrafesc-light.png",
   },
   {
     name: "SINFAC-SP",
@@ -62,8 +61,7 @@ const customerLogos: CustomerLogo[] = [
   {
     name: "Linear Group",
     label: "Linear Group Auditores Independentes S/S",
-    style: "linearGroup",
-    src: "/images/logos/linear-group.png",
+    src: "/images/logos/linear-group-light.png",
   },
 ];
 
@@ -74,16 +72,16 @@ export function Hero() {
       className={styles.hero}
       aria-labelledby="hero-title"
     >
-      <Image
-        src={siteContent.hero.image.src}
-        alt={siteContent.hero.image.alt}
-        fill
-        preload
-        sizes="100vw"
-        className={styles.backgroundImage}
-        aria-hidden="true"
-      />
-      <div className={styles.directionalOverlay} aria-hidden="true" />
+      <div className={styles.backgroundMedia} aria-hidden="true">
+        <Image
+          src={siteContent.hero.image.src}
+          alt={siteContent.hero.image.alt}
+          fill
+          preload
+          sizes="100vw"
+          className={styles.backgroundImage}
+        />
+      </div>
 
       <Navbar />
 
@@ -197,7 +195,7 @@ export function Hero() {
                 {customerLogos.map((logo, index) => (
                   <span
                     key={`${logo.name}-${index}`}
-                    className={`${styles.logo} ${styles[logo.style]}`}
+                    className={logo.style ? `${styles.logo} ${styles[logo.style]}` : styles.logo}
                     aria-label={logo.src ? undefined : logo.label}
                   >
                     {logo.src ? (

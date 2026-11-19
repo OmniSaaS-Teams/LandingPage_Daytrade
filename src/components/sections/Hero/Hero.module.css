@@ -8,25 +8,14 @@
   overflow: hidden;
 }
 
-.backgroundImage {
+.backgroundMedia {
   position: absolute;
   z-index: 0;
   inset: 0;
-  object-fit: cover;
-  object-position: 58% center;
-  transform: scale(1.015);
 }
 
-.directionalOverlay {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.18) 0%,
-    rgba(0, 0, 0, 0.10) 26%,
-    transparent 58%
-  );
+.backgroundImage {
+  object-fit: cover;
 }
 
 .content {
@@ -241,24 +230,9 @@
   filter: invert(1);
 }
 
-.anfac .logoImage,
-.abrafesc .logoImage,
-.linearGroup .logoImage {
-  filter: grayscale(1) invert(1) brightness(1.12);
-}
-
-.assertiva {
-  height: 42px;
-  overflow: hidden;
-}
-
 .assertiva .logoImage {
-  flex-shrink: 0;
-  width: 140%;
-  max-width: none;
+  width: 100%;
   height: auto;
-  aspect-ratio: 1;
-  filter: url("/images/logos/logo-filters.svg#assertiva");
 }
 
 .sinfac {
@@ -267,8 +241,6 @@
 
 .sinfac .logoImage {
   height: 52px;
-  filter: url("/images/logos/logo-filters.svg#sinfac");
-  clip-path: inset(0 4%);
 }
 
 .doordash {
@@ -429,8 +401,21 @@
 }
 
 @media (min-width: 768px) {
+  .backgroundMedia::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.18) 0%,
+      rgba(0, 0, 0, 0.10) 26%,
+      transparent 58%
+    );
+  }
+
   .backgroundImage {
     object-position: center;
+    transform: scale(1.015);
   }
 
   .content {
@@ -465,6 +450,17 @@
     flex-direction: column;
     height: auto;
     min-height: 100svh;
+    background: linear-gradient(115deg, #080d10, #111a20);
+  }
+
+  .backgroundMedia {
+    bottom: auto;
+    height: clamp(16rem, 53svh, 29rem);
+    mask-image: linear-gradient(to bottom, #000 36%, transparent);
+  }
+
+  .backgroundImage {
+    object-position: 48% center;
   }
 
   .contentInner {
@@ -482,7 +478,7 @@
     flex: 1 0 auto;
     height: auto;
     align-items: center;
-    padding: calc(5.75rem + env(safe-area-inset-top)) 1.25rem 1.25rem;
+    padding: calc(clamp(10.5rem, 33svh, 16rem) + env(safe-area-inset-top)) 1.25rem 1.25rem;
   }
 
   .lede {

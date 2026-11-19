@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import dtiLogo from "../../../../public/images/logos/dti_240x80.png";
+import sinfacLogo from "../../../../public/images/logos/sinfac-sp.png";
 import { SpecialistContactButton } from "../../contact/SpecialistContact";
 import { Navbar } from "../../layout/Navbar";
 import { siteContent } from "../../../data/home";
@@ -37,6 +38,33 @@ const customerLogos: CustomerLogo[] = [
     style: "rendimento",
     src: "/images/logos/rendimento-preto.png",
   },
+  {
+    name: "ANFAC",
+    label: "ANFAC Fomento Comercial",
+    style: "anfac",
+    src: "/images/logos/anfac.png",
+  },
+  {
+    name: "Assertiva",
+    style: "assertiva",
+    src: "/images/logos/assertiva.png",
+  },
+  {
+    name: "ABRAFESC",
+    style: "abrafesc",
+    src: "/images/logos/abrafesc.png",
+  },
+  {
+    name: "SINFAC-SP",
+    style: "sinfac",
+    src: sinfacLogo,
+  },
+  {
+    name: "Linear Group",
+    label: "Linear Group Auditores Independentes S/S",
+    style: "linearGroup",
+    src: "/images/logos/linear-group.png",
+  },
 ];
 
 export function Hero() {
@@ -55,16 +83,12 @@ export function Hero() {
         className={styles.backgroundImage}
         aria-hidden="true"
       />
-      <div className={styles.baseOverlay} aria-hidden="true" />
       <div className={styles.directionalOverlay} aria-hidden="true" />
 
       <Navbar />
 
       <div className={styles.content}>
         <div className={styles.contentInner}>
-          <span className={styles.compliance}>
-            {siteContent.hero.compliance}
-          </span>
           <h1
             id="hero-title"
             className={styles.title}
@@ -130,27 +154,32 @@ export function Hero() {
         </div>
       </div>
 
-      <div className={styles.reviewScore} aria-label="Avaliação de 4.9 de 5">
-        <span className={styles.stars} aria-hidden="true">
-          ★★★★★
+      <div className={styles.reviewDetails}>
+        <div className={styles.reviewScore} aria-label="Avaliação de 4.9 de 5">
+          <span className={styles.stars} aria-hidden="true">
+            ★★★★★
+          </span>
+          <span>5.0</span>
+          <span className={styles.reviewDivider} aria-hidden="true" />
+          <a
+            href="https://maps.app.goo.gl/BVcKheDrHqhPvkdB9"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.googleBusinessLink}
+            aria-label="Ver avaliações no Google Meu Negócio (abre em nova aba)"
+          >
+            <Image
+              src="/images/google-my-business.png"
+              alt="Google Meu Negócio"
+              width={24}
+              height={24}
+              className={styles.googleBusinessLogo}
+            />
+          </a>
+        </div>
+        <span className={styles.compliance}>
+          {siteContent.hero.compliance}
         </span>
-        <span>5.0</span>
-        <span className={styles.reviewDivider} aria-hidden="true" />
-        <a
-          href="https://maps.app.goo.gl/BVcKheDrHqhPvkdB9"
-          target="_blank"
-          rel="noreferrer"
-          className={styles.googleBusinessLink}
-          aria-label="Ver avaliações no Google Meu Negócio (abre em nova aba)"
-        >
-          <Image
-            src="/images/google-my-business.png"
-            alt="Google Meu Negócio"
-            width={24}
-            height={24}
-            className={styles.googleBusinessLogo}
-          />
-        </a>
       </div>
 
       <div

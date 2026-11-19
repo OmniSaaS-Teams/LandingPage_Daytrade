@@ -1,10 +1,10 @@
 import styles from "./Insights.module.css";
 
 const metrics = [
-  { value: "400+", label: "Clientes atendidos" },
-  { value: "R$ 647M+", label: "Em operações realizadas" },
-  { value: "151.000+", label: "Operações realizadas" },
-  { value: "4 passos", label: "Jornada simples" },
+  { value: "+24.000", label: "Empresas atendidas direta e indiretamente" },
+  { value: "R$ 600MM+", label: "Em operações realizadas" },
+  { value: "15.000+", label: "Operações realizadas" },
+  { value: "50MM", label: "em atividade" },
 ];
 
 const yearlyProjection = [

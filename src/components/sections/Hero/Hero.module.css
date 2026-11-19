@@ -17,19 +17,16 @@
   transform: scale(1.015);
 }
 
-.baseOverlay,
 .directionalOverlay {
   position: absolute;
   z-index: 1;
   inset: 0;
-}
-
-.baseOverlay {
-  background: rgba(0, 0, 0, 0.22);
-}
-
-.directionalOverlay {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.52) 32%, rgba(0, 0, 0, 0.2) 65%, rgba(0, 0, 0, 0.05) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.10) 26%,
+    transparent 58%
+  );
 }
 
 .content {
@@ -52,12 +49,11 @@
 }
 
 .compliance {
-  display: inline-flex;
-  margin-bottom: 34px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
   font-weight: 400;
   line-height: 1.25;
+  text-align: right;
 }
 
 .button:focus-visible {
@@ -227,7 +223,8 @@
 }
 
 .dti,
-.crdc {
+.crdc,
+.anfac {
   flex-basis: 150px;
 }
 
@@ -242,6 +239,36 @@
 
 .rendimento .logoImage {
   filter: invert(1);
+}
+
+.anfac .logoImage,
+.abrafesc .logoImage,
+.linearGroup .logoImage {
+  filter: grayscale(1) invert(1) brightness(1.12);
+}
+
+.assertiva {
+  height: 42px;
+  overflow: hidden;
+}
+
+.assertiva .logoImage {
+  flex-shrink: 0;
+  width: 140%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 1;
+  filter: url("/images/logos/logo-filters.svg#assertiva");
+}
+
+.sinfac {
+  flex-basis: 96px;
+}
+
+.sinfac .logoImage {
+  height: 52px;
+  filter: url("/images/logos/logo-filters.svg#sinfac");
+  clip-path: inset(0 4%);
 }
 
 .doordash {
@@ -344,11 +371,18 @@
   outline-offset: 4px;
 }
 
-.reviewScore {
+.reviewDetails {
   position: absolute;
   right: 100px;
-  bottom: 119px;
+  bottom: 108px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.reviewScore {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -411,10 +445,6 @@
   .customerCarousel {
     bottom: 0;
   }
-
-  .reviewScore {
-    bottom: 131px;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -431,18 +461,15 @@
 
 @media (max-width: 767px) {
   .hero {
-    height: 100svh;
-    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100svh;
   }
 
   .contentInner {
     margin-left: 0;
     transform: none;
-  }
-
-  .compliance {
-    margin-bottom: 14px;
-    font-size: 10px;
   }
 
   .title {
@@ -452,10 +479,10 @@
   }
 
   .content {
-    height: 100%;
-    min-height: 0;
+    flex: 1 0 auto;
+    height: auto;
     align-items: center;
-    padding: calc(5.75rem + env(safe-area-inset-top)) 1.25rem calc(4.75rem + env(safe-area-inset-bottom));
+    padding: calc(5.75rem + env(safe-area-inset-top)) 1.25rem 1.25rem;
   }
 
   .lede {
@@ -490,7 +517,7 @@
   }
 
   .customerCarousel {
-    bottom: 0;
+    position: relative;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 8px;
     min-height: 68px;
@@ -534,8 +561,10 @@
     justify-self: end;
   }
 
-  .reviewScore {
-    display: none;
+  .reviewDetails {
+    position: relative;
+    inset: auto;
+    margin: 0 1.25rem 0.875rem;
   }
 }
 
@@ -558,20 +587,13 @@
 @supports (height: 100dvh) {
   @media (max-width: 767px) {
     .hero {
-      height: 100dvh;
+      min-height: 100dvh;
     }
   }
 }
 
 @media (max-width: 767px) and (max-height: 600px) {
-  .hero {
-    height: auto;
-    min-height: 100svh;
-  }
-
   .content {
-    height: auto;
-    min-height: 100svh;
     align-items: flex-start;
   }
 }

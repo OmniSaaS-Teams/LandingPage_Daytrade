@@ -23,7 +23,7 @@ export const siteContent = {
     primary: "Start now",
   },
   hero: {
-    compliance: "CNPJ: 29.270.075/0001-74 - Daytrade Invest Securitizadora S/A",
+    compliance: "29.270.075/0001-74 - Daytrade Invest Securitizadora S/A",
     title: "Crédito Inteligente.",
     description:
       "Estruturamos soluções de crédito sob medida para empresas que buscam capital com agilidade, segurança e condições competitivas, do primeiro contato à liberação dos recursos.",

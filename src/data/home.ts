@@ -1,4 +1,4 @@
-import heroImage from "../../public/images/hero-office.png";
+import heroImage from "../../public/images/hero-home.png";
 
 export const siteContent = {
   brand: {

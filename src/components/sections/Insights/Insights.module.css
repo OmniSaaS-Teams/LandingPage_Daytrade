@@ -60,11 +60,34 @@
 
 .chart {
   width: 100%;
+  padding-left: 84px;
 }
 
 .chartGraphic {
   position: relative;
-  height: clamp(130px, 14vw, 210px);
+  height: clamp(240px, 21vw, 300px);
+}
+
+.chartAxisLabel {
+  position: absolute;
+  right: calc(100% + 10px);
+  color: #596575;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+.chartAxisLabel::after {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 5px);
+  width: 5px;
+  height: 1px;
+  background: #adb7c1;
+  content: "";
+  transform: translateY(-50%);
 }
 
 .chartSvg {
@@ -179,7 +202,6 @@
   }
 
   .chartGraphic {
-    height: clamp(125px, 20vw, 185px);
     margin-top: 6px;
   }
 }
@@ -211,9 +233,12 @@
     font-size: 12px;
   }
 
-  .chartGraphic {
-    height: 112px;
-    margin-top: 12px;
+  .chart {
+    padding-left: 68px;
+  }
+
+  .chartAxisLabel {
+    font-size: 11px;
   }
 
   .chartYears {
@@ -224,5 +249,11 @@
   .chartTooltip {
     padding: 7px 8px;
     font-size: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .chartYears span:nth-child(even) {
+    display: none;
   }
 }

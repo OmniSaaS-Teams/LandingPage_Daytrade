@@ -32,10 +32,18 @@ const chartBaseline = 244;
 const chartDrawableHeight = chartBaseline - chartPaddingTop;
 
 const highestProjection = yearlyProjection.at(-1)?.value ?? 1;
+const axisStep = 10_000_000;
+const axisStepCount = Math.max(1, Math.ceil(highestProjection / axisStep));
+const axisMaximum = axisStepCount * axisStep;
+const axisValues = Array.from({ length: axisStepCount + 1 }, (_, index) => index * axisStep);
+
+function chartY(value: number) {
+  return chartBaseline - (value / axisMaximum) * chartDrawableHeight;
+}
 
 const points = yearlyProjection.map(({ year, value }, index) => {
   const x = (index / (yearlyProjection.length - 1)) * chartWidth;
-  const y = chartBaseline - (value / highestProjection) * chartDrawableHeight;
+  const y = chartY(value);
 
   return { x, y, year, value };
 });
@@ -67,6 +75,18 @@ export function Insights() {
 
         <div className={styles.chart}>
           <div className={styles.chartGraphic}>
+            <div aria-hidden="true">
+              {axisValues.map((value) => (
+                <span
+                  key={value}
+                  className={styles.chartAxisLabel}
+                  style={{ top: `${(chartY(value) / chartHeight) * 100}%` }}
+                >
+                  {value === 0 ? "R$ 0" : `R$ ${value / 1_000_000} mi`}
+                </span>
+              ))}
+            </div>
+
             <svg
               className={styles.chartSvg}
               viewBox={`0 0 ${chartWidth} ${chartHeight}`}
@@ -81,6 +101,14 @@ export function Insights() {
                 </linearGradient>
               </defs>
               <path d={areaPath} fill="url(#insights-area)" />
+              <line
+                x1="0"
+                x2="0"
+                y1={chartPaddingTop}
+                y2={chartBaseline}
+                stroke="#adb7c1"
+                vectorEffect="non-scaling-stroke"
+              />
               <polyline
                 points={linePoints}
                 fill="none"

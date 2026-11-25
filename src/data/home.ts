@@ -17,6 +17,7 @@ export const siteContent = {
     { label: "Setores", type: "menu" },
     { label: "Carreira", type: "link", href: "/carreira" },
     { label: "Blog", type: "link", href: "/blog" },
+    { label: "Área do cliente", type: "link", href: "/area-do-cliente" },
   ],
   actions: {
     login: "Log in",

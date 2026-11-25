@@ -260,7 +260,6 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
               items: [
                 { label: "Sobre nós", href: "/sobre-nos" },
                 { label: "Parceiro indicador", href: "/parceiro-indicador" },
-                { label: "Área do cliente", href: "/area-do-cliente" },
               ],
             };
 

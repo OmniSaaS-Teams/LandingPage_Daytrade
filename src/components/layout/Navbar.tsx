@@ -248,7 +248,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
               description:
                 "Encontre caminhos financeiros alinhados aos desafios do seu mercado.",
               items: [
-                { label: "Agro", href: "/setores#agronegocio" },
+                { label: "Condomínios", href: "/setores#condominios" },
                 { label: "Indústria", href: "/setores#industria" },
                 { label: "Construtora", href: "/setores#construtora" },
               ],
@@ -358,7 +358,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
                   </p>
                 </div>
 
-                <div className={`grid ${menuKey === "Setores" ? "gap-4" : "gap-6"}`}>
+                <div className="grid content-start gap-4">
                   {menuContent.items.map((menuItem) =>
                     menuItem.href ? (
                       <Link
@@ -686,7 +686,7 @@ const navLinkClass =
 const lightNavLinkClass =
   "group inline-flex h-7 w-max items-center justify-center rounded-md bg-transparent px-2 py-1 text-left text-base font-normal text-zinc-950 transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-black/5 data-[state=open]:bg-black/5";
 const desktopDropdownItemClass =
-  "inline-flex w-fit items-center rounded-md px-1 py-0.5 text-left text-lg font-normal text-zinc-950 transition-colors hover:bg-zinc-100 hover:text-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950";
+  "inline-flex min-h-15 w-fit items-center rounded-md px-1 py-0.5 text-left text-lg font-normal text-zinc-950 transition-colors hover:bg-zinc-100 hover:text-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950";
 const mobileNavLinkClass =
   "group inline-flex min-h-11 w-full items-center justify-between rounded-md bg-transparent px-2.5 py-1 text-left text-xl font-normal text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 const formInputClass =

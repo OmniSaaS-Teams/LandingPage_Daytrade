@@ -1,30 +1,26 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import { InternalHero } from "../../components/layout/InternalHero";
 import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
+import { publicPageMetadata } from "../../lib/seo";
 import styles from "./Sectors.module.css";
 import careerStyles from "../carreira/Careers.module.css";
 
-export const metadata: Metadata = {
-  title: "Condomínios, Indústria e Construtora | Daytrade Invest",
-  description:
-    "Conheça as soluções financeiras da Daytrade para condomínios, indústrias e construtoras.",
-};
+export const metadata = publicPageMetadata("/setores");
 
 const sectors = [
   {
-    id: "condominios",
-    label: "Condomínios",
-    title: "Planejamento para cuidar do condomínio.",
+    id: "agronegocio",
+    label: "Agro",
+    title: "Recursos no ritmo da sua safra.",
     description:
-      "Soluções financeiras para as despesas do dia a dia e os próximos projetos do condomínio.",
-    image: "/images/setores-condominios.webp",
-    imageAlt: "Edifícios de um condomínio residencial vistos de um pátio arborizado",
+      "Planejamento e crédito para acompanhar cada ciclo, do plantio à expansão do negócio.",
+    image: "/images/setores-agro.png",
+    imageAlt: "Vista aérea de um trator pulverizando uma plantação",
     paragraphs: [
-      "Organize o fluxo de caixa para despesas recorrentes, como manutenção, segurança e conservação das áreas comuns. Um orçamento planejado ajuda a lidar com imprevistos e a manter os pagamentos em dia.",
-      "Para reformas e melhorias, converse com um especialista sobre alternativas de crédito que se encaixem no orçamento e no cronograma do condomínio.",
+      "Antecipe recebíveis da safra para ter capital para insumos, sementes e operação no momento certo. Com as entradas e saídas alinhadas ao calendário do campo, você reduz o descompasso entre gastos e recebimentos.",
+      "Para expandir seu negócio, conte com uma estrutura de crédito pensada para financiar máquinas, tecnologia e novas áreas.",
     ],
   },
   {
@@ -64,19 +60,19 @@ export default function SectorsPage() {
           id="sectors-title"
           className={styles.hero}
           fullBackground
-          title="Condomínios, Indústria e Construtora."
-          description="Soluções financeiras para a gestão de condomínios, a produção industrial e o andamento de obras."
+          title="Agro, Indústria e Construtora."
+          description="Soluções financeiras para planejar, produzir e construir os próximos passos do seu negócio."
           image="/images/setores-hero.png"
           imageAlt="Quatro profissionais conversando em um escritório"
         >
           <SpecialistContactButton>Fale com um especialista</SpecialistContactButton>
-          <a className={styles.sectorsLink} href="#condominios">Conheça os setores <span aria-hidden="true">↓</span></a>
+          <a className={styles.sectorsLink} href="#agronegocio">Conheça os setores <span aria-hidden="true">↓</span></a>
         </InternalHero>
 
         <section className={styles.intro} aria-labelledby="sectors-intro-title">
           <p className={styles.eyebrow}>Setores que movem negócios</p>
-          <h2 id="sectors-intro-title">Soluções para administrar,<br />produzir e <span>construir.</span></h2>
-          <p>{metadata.description}</p>
+          <h2 id="sectors-intro-title">Soluções para planejar,<br />produzir e <span>construir.</span></h2>
+          <p>Conheça as soluções financeiras da Daytrade para o agronegócio, a indústria e a construção em um só lugar.</p>
         </section>
 
         {sectors.map((sector, index) => (

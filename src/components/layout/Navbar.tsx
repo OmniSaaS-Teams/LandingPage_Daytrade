@@ -248,7 +248,7 @@ export function Navbar({ variant = "dark", background = "transparent" }: NavbarP
               description:
                 "Encontre caminhos financeiros alinhados aos desafios do seu mercado.",
               items: [
-                { label: "Condomínios", href: "/setores#condominios" },
+                { label: "Agro", href: "/setores#agronegocio" },
                 { label: "Indústria", href: "/setores#industria" },
                 { label: "Construtora", href: "/setores#construtora" },
               ],

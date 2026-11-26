@@ -76,7 +76,6 @@ export function Hero() {
         <Image
           src={siteContent.hero.image.src}
           alt={siteContent.hero.image.alt}
-          fill
           preload
           sizes="100vw"
           className={styles.backgroundImage}
@@ -153,7 +152,7 @@ export function Hero() {
       </div>
 
       <div className={styles.reviewDetails}>
-        <div className={styles.reviewScore} aria-label="Avaliação de 4.9 de 5">
+        <div className={styles.reviewScore}>
           <span className={styles.stars} aria-hidden="true">
             ★★★★★
           </span>
@@ -184,7 +183,7 @@ export function Hero() {
         className={styles.customerCarousel}
         aria-label="Empresas que confiam na plataforma"
       >
-        <div className={styles.logoViewport}>
+        <div id="customers" className={styles.logoViewport}>
           <div className={styles.logoTrack}>
             {[0, 1, 2].map((copyIndex) => (
               <div

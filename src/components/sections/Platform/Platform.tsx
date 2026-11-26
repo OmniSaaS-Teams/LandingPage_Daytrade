@@ -1,6 +1,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import creditImage from "../../../../public/images/features/credito-escritorio.webp";
+import exchangeImage from "../../../../public/images/features/cambio.webp";
+import bpoImage from "../../../../public/images/features/bpo.webp";
+import investmentImage from "../../../../public/images/features/investimento-executivo.webp";
 import styles from "./Features.module.css";
 
 type FeatureIconName = "credit" | "exchange" | "bpo" | "investment";
@@ -13,7 +17,7 @@ const features = [
     description:
       "Capital para impulsionar seus negócios e transformar oportunidades em crescimento.",
     className: "cardLarge",
-    image: "/images/features/credito-escritorio.png",
+    image: creditImage,
     icon: "credit" as const,
   },
   {
@@ -23,7 +27,7 @@ const features = [
     description:
       "Conecte seu negócio ao mundo com agilidade e eficiência.",
     className: "cardSmall",
-    image: "/images/features/cambio.png",
+    image: exchangeImage,
     icon: "exchange" as const,
   },
   {
@@ -33,7 +37,7 @@ const features = [
     description:
       "Mais controle, menos burocracia e uma gestão financeira eficiente.",
     className: "cardSmall",
-    image: "/images/features/bpo.png",
+    image: bpoImage,
     icon: "bpo" as const,
   },
   {
@@ -42,7 +46,7 @@ const features = [
     description:
       "Estratégia e inteligência para potencializar seus resultados.",
     className: "cardLarge",
-    image: "/images/features/investimento-executivo.png",
+    image: investmentImage,
     icon: "investment" as const,
   },
 ];
@@ -113,9 +117,9 @@ export function Features() {
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.badge}>Produtos e Serviços</span>
-          <p className={styles.subtitle}>
+          <h2 id="features-title" className={styles.subtitle}>
             Como a Daytrade pode te ajudar hoje?
-          </p>
+          </h2>
         </div>
 
         <div className={styles.grid}>
@@ -127,8 +131,9 @@ export function Features() {
               <Image
                 src={feature.image}
                 alt=""
-                fill
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 34vw"
+                sizes={feature.className === "cardLarge"
+                  ? "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 60vw"
+                  : "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 30vw"}
                 className={`${styles.cardImage} ${
                   feature.id === 1
                     ? styles.creditImage
@@ -162,7 +167,7 @@ export function Features() {
           ))}
         </div>
 
-        <a className={styles.productsLink} href="/portfolio">
+        <Link className={styles.productsLink} href="/portfolio">
           <span>Conheça todos os nossos produtos</span>
           <svg
             width="18"
@@ -178,7 +183,7 @@ export function Features() {
             <path d="M5 12h14" />
             <path d="m13 6 6 6-6 6" />
           </svg>
-        </a>
+        </Link>
       </div>
     </section>
   );

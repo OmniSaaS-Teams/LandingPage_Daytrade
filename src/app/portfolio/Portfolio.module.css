@@ -80,6 +80,10 @@
   row-gap: 76px;
 }
 
+.product[id] {
+  scroll-margin-top: 32px;
+}
+
 .product h3 {
   margin: 0 0 14px;
   color: #00213d;

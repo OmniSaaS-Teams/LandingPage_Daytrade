@@ -1,0 +1,27 @@
+# Daytrade Invest
+
+> A Daytrade Invest é uma securitizadora que oferece crédito para empresas, incluindo antecipação de recebíveis e capital de giro. O site apresenta soluções financeiras e atendimento em Sorocaba e região.
+
+A Daytrade Invest Securitizadora S/A tem CNPJ 29.270.075/0001-74. A contratação de crédito está sujeita à análise.
+
+## Empresa e atendimento
+
+- [Página inicial da Daytrade Invest](https://daytradeinvest.com.br/)
+- [Sobre a Daytrade Invest](https://daytradeinvest.com.br/sobre-nos)
+- [Etapas da solicitação de crédito](https://daytradeinvest.com.br/#process)
+- [Perguntas frequentes](https://daytradeinvest.com.br/#faq)
+
+## Produtos e serviços
+
+- [Crédito para empresas](https://daytradeinvest.com.br/portfolio#credito)
+- [Soluções de câmbio](https://daytradeinvest.com.br/portfolio#cambio)
+- [Terceirização da gestão financeira (BPO)](https://daytradeinvest.com.br/portfolio#bpo-financeiro)
+- [Soluções para o agronegócio, a indústria e a construção](https://daytradeinvest.com.br/setores)
+- [Informações para investidores](https://daytradeinvest.com.br/investidor)
+
+## Optional
+
+- [Área do cliente](https://daytradeinvest.com.br/area-do-cliente)
+- [Programa de parceiros indicadores](https://daytradeinvest.com.br/parceiro-indicador)
+- [Blog de finanças e negócios](https://daytradeinvest.com.br/blog)
+- [Carreira na Daytrade Invest](https://daytradeinvest.com.br/carreira)

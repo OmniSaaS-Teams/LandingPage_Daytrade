@@ -3,8 +3,11 @@ import { InternalHero } from "../../components/layout/InternalHero";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import { CallToAction } from "../../components/sections/CTA/cta";
+import { publicPageMetadata } from "../../lib/seo";
 import styles from "../setores/industria/Industry.module.css";
 import clientStyles from "./ClientArea.module.css";
+
+export const metadata = publicPageMetadata("/area-do-cliente");
 
 const capabilities = [
   "Visão financeira",

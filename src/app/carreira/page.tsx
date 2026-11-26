@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "../../components/layout/Navbar";
 import { Footer } from "../../components/layout/Footer";
 import { CareerForm } from "../../components/careers/CareerForm";
+import { publicPageMetadata } from "../../lib/seo";
 import { BrandWaves } from "../../components/ui/BrandWaves";
 import styles from "./Careers.module.css";
 
-export const metadata: Metadata = {
-  title: "Carreira | Daytrade Invest",
-  description: "Conheça a Daytrade e apresente sua trajetória. Envie seu currículo para futuras oportunidades em nosso time.",
-};
+export const metadata = publicPageMetadata("/carreira");
 
 const principles = [
   ["01", "Pessoas no centro", "Escutar com atenção, respeitar diferentes perspectivas e construir relações de confiança."],

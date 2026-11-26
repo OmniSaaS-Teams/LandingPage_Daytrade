@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
 import Image, { getImageProps } from "next/image";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
 import { partnerContent } from "../../data/partner";
+import { publicPageMetadata } from "../../lib/seo";
 import { PartnerForm } from "./PartnerForm";
 import styles from "./Partner.module.css";
 
-export const metadata: Metadata = {
-  title: "Parceiro Indicador | Daytrade",
-  description: "Conheça a parceria comercial Daytrade e cadastre seu interesse em fazer parte da nossa rede de parceiros.",
-};
+export const metadata = publicPageMetadata("/parceiro-indicador");
 
 const iconPaths = {
   clock: <><circle cx="24" cy="24" r="17" /><path d="M24 13v12l8 5M10 7 5 12m33-5 5 5" /></>,

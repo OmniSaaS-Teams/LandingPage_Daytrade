@@ -8,7 +8,6 @@ const publicPages = new Set([
   "/portfolio",
   "/setores",
   "/setores/agronegocio",
-  "/setores/condominios",
   "/setores/construtora",
   "/setores/industria",
   "/sobre-nos",

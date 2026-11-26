@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
 import { InternalHero } from "../../components/layout/InternalHero";
 import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
+import { publicPageMetadata } from "../../lib/seo";
 import styles from "./Portfolio.module.css";
 
-export const metadata: Metadata = {
-  title: "Portfólio de Produtos | Daytrade",
-  description:
-    "Conheça o portfólio de produtos da Daytrade e as soluções financeiras para sua empresa.",
-};
+export const metadata = publicPageMetadata("/portfolio");
 
 const exclusiveProducts = [
   {
@@ -26,16 +22,19 @@ const products = [
       "Pague parcelado o décimo terceiro salário dos seus funcionários, ganhe desconto na compra de sua matéria-prima, parcele a compra das suas máquinas e equipamentos.",
   },
   {
+    id: "comissaria",
     title: "Comissária",
     description:
       "Faça operações de antecipação de recebíveis para clientes que não aceitam pagar para terceiros, ou só pagam boletos em nome da sua empresa.",
   },
   {
+    id: "vendor",
     title: "Vendor",
     description:
       "Aumente seu faturamento tendo a possibilidade de vender mais para os seus clientes que possuem limite de crédito tomado na sua empresa.",
   },
   {
+    id: "escrow",
     title: "Escrow",
     description:
       "Tenha disponível uma conta-corrente para recebimento de clientes que não aceitam pagamento de terceiros. Desta forma, você pode concentrar um risco maior em operações de antecipação para esses clientes.",
@@ -61,6 +60,7 @@ const products = [
       "Obtenha capital de giro parcelado para sua empresa, colocando títulos em garantia e recebendo seu recurso à vista.",
   },
   {
+    id: "fomento",
     title: "Fomento",
     description:
       "Receba o recurso para a compra de matéria-prima e produza sua mercadoria.",
@@ -71,6 +71,7 @@ const products = [
       "Antecipe seus recebíveis sem a necessidade de sua mercadoria já estar entregue no seu cliente.",
   },
   {
+    id: "intercompany",
     title: "Intercompany",
     description: "Faça operações entre as empresas do mesmo grupo.",
   },
@@ -79,6 +80,7 @@ const products = [
     description: "Capital de giro com alíquota zero de IOF.",
   },
   {
+    id: "antecipacao-de-contratos",
     title: "Antecipação de Contratos",
     description:
       "Receba à vista os recebíveis futuros de contratos com prazos mais longos.",
@@ -154,7 +156,7 @@ export default function PortfolioPage() {
             <h2 id="credit-title">Crédito</h2>
             <div className={styles.productGrid}>
               {products.map((product) => (
-                <article key={product.title} className={styles.product}>
+                <article key={product.title} id={product.id} className={styles.product}>
                   <h3>{product.title}</h3>
                   <p>{product.description}</p>
                 </article>

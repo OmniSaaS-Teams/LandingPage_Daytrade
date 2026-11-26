@@ -1,10 +1,11 @@
-import heroImage from "../../public/images/hero-home.png";
+import heroImage from "../../public/images/hero-home.webp";
+import { brand } from "./brand";
 
 export const siteContent = {
   brand: {
     name: "Daytrade",
     logo: {
-      src: "/images/daytrade-logo-home.png",
+      src: brand.logo,
       alt: "Daytrade",
       width: 515,
       height: 167,
@@ -24,7 +25,7 @@ export const siteContent = {
     primary: "Start now",
   },
   hero: {
-    compliance: "29.270.075/0001-74 - Daytrade Invest Securitizadora S/A",
+    compliance: `${brand.cnpj} - ${brand.legalName}`,
     title: "Crédito Inteligente.",
     description:
       "Estruturamos soluções de crédito sob medida para empresas que buscam capital com agilidade, segurança e condições competitivas, do primeiro contato à liberação dos recursos.",

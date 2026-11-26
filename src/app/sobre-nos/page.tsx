@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { InternalHero } from "../../components/layout/InternalHero";
 import { SpecialistContactButton } from "../../components/contact/SpecialistContact";
 import { Footer } from "../../components/layout/Footer";
 import { Navbar } from "../../components/layout/Navbar";
+import { publicPageMetadata } from "../../lib/seo";
 import styles from "./About.module.css";
 
-export const metadata: Metadata = {
-  title: "Sobre nós | Daytrade Invest",
-  description: "Conheça a Daytrade Invest: nossa origem, a proximidade com cada cliente e as soluções de crédito e investimento que conectam histórias a novas possibilidades.",
-};
+export const metadata = publicPageMetadata("/sobre-nos");
 
 const solutions = [
   {

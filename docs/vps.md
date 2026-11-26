@@ -16,6 +16,11 @@ Copie `.env.example` para `.env`. Configure apenas os webhooks desejados; os dem
 podem ficar vazios. Não há senha padrão nem cadastro público de administradores.
 Não grave `ADMIN_PASSWORD` no arquivo permanente ou no Git.
 
+Confirme `NEXT_PUBLIC_SITE_URL` em `.env` antes de compilar. Use a origem HTTPS
+pública que o Nginx servirá, como `https://daytradeinvest.com.br`. Esse valor é
+incorporado no build e usado no canonical, no compartilhamento social e nos arquivos
+de rastreamento. Para mudar de domínio, atualize a variável e recompile a imagem.
+
 ```sh
 chmod 600 .env
 docker compose up -d --build
@@ -32,6 +37,18 @@ O único serviço `app` usa um volume persistente em `/app/data`, contendo:
 A porta no host é `127.0.0.1:3000`. Adapte `deploy/nginx.conf.example` ao domínio e
 certificado HTTPS. Preserve Host, X-Forwarded-Host e X-Forwarded-Proto para cookies
 e formulários administrativos. O proxy admite 6 MB para currículos de até 5 MB.
+
+## URLs da versão anterior
+
+Os redirecionamentos permanentes das URLs antigas estão em `next.config.ts`.
+Os destinos usam as páginas e seções existentes. As versões antigas com barra
+final passam primeiro pela normalização de URL do Next.js.
+
+O inventário usou a navegação pública e as páginas antigas ainda encontradas
+no índice, incluindo o [Informativo](https://daytradeinvest.com.br/informativo/).
+As páginas de segunda via de boleto, política de privacidade, crédito segurado,
+antecipação para empresas negativadas e os artigos antigos precisam de um
+destino equivalente antes de receber um redirecionamento.
 
 ## Monitoramento de acessos
 
@@ -56,6 +73,26 @@ Cada registro guarda o caminho da página, o IP quando disponível e a data. A
 coleta dispensa cookies próprios e evita parâmetros da URL. A consulta aos IPs
 exige sessão administrativa. O worker exclui registros com mais de 90 dias do
 banco ativo. Backups existentes seguem a política de retenção da organização.
+
+### Google Analytics (GA4)
+
+Copie o ID de métrica (`G-...`) do [fluxo Web do GA4](https://support.google.com/analytics/answer/9304153?hl=pt-BR)
+para `NEXT_PUBLIC_GA_MEASUREMENT_ID` em `.env` e recompile a imagem. O site
+envia uma visualização por navegação entre páginas públicas. No fluxo Web,
+desmarque **Alterações de página com base nos eventos do histórico do navegador**
+em **Medição otimizada → Visualizações de página** para evitar contagem dupla.
+Depois da publicação, abra o site, navegue entre páginas e confira `page_view`
+no relatório **Tempo real**. O painel **Acessos** continua usando sua própria coleta.
+
+### Google Search Console
+
+Para uma propriedade de domínio, siga a [verificação por DNS](https://support.google.com/webmasters/answer/9008080?hl=pt-BR)
+com o TXT fornecido pelo Search Console. Para uma propriedade de prefixo de URL
+verificada por tag HTML, coloque apenas o valor do atributo `content` em
+`GOOGLE_SITE_VERIFICATION` e recompile. Depois de verificar a propriedade e
+publicar o site, envie `https://daytradeinvest.com.br/sitemap.xml` no Search Console.
+
+O resumo para assistentes está em `public/llms.txt` e será servido em `/llms.txt`.
 
 ## Criar ou redefinir administrador
 
